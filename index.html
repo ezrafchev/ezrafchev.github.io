@@ -1,19 +1,31 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR" itemscope itemtype="http://schema.org/WebPage">
+<!-- Melhorias de SEO e acessibilidade -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="seu-código-de-verificação-aqui" />
+    <meta name="description" content="Celebrando o amor eterno entre Esdra e Maria Clara Casagrande de Mattos. Conheça nossa história de amor.">
+    <meta name="keywords" content="casamento, amor, Esdra, Maria Clara, história de amor">
+    <meta name="author" content="Esdra e Maria Clara">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ezrafchev.github.io/">
+    <title>Esdra ♥ Maria Clara - Nossa História de Amor</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="seu-código-de-verificação-aqui" />
     <title>Esdra ♥ Maria Clara - Nossa História de Amor</title>
     <meta name="description" content="Celebrando o amor eterno entre Esdra e Maria Clara Casagrande de Mattos">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <nav>
+        <nav aria-label="Navegação principal">
             <ul>
                 <li><a href="#home">Início</a></li>
                 <li><a href="#nossa-historia">Nossa História</a></li>
@@ -25,14 +37,14 @@
     </header>
 
     <main>
-        <section id="home">
+        <section id="home" class="fade-in">
             <div id="countdown"></div>
             <h1>Esdra & Maria Clara</h1>
             <p>Uma história de amor eterno</p>
             <a href="#nossa-historia" class="cta-button">Conheça Nossa História</a>
         </section>
 
-        <section id="nossa-historia">
+        <section id="nossa-historia" class="fade-in">
             <h2>Nossa História</h2>
             <div class="timeline">
                 <div class="timeline-item">
@@ -62,20 +74,20 @@
             </div>
         </section>
 
-        <section id="galeria">
+        <section id="galeria" class="fade-in">
             <h2>Galeria de Momentos</h2>
             <div class="gallery-container">
                 <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300?text=Primeiro+Encontro" alt="Nosso Primeiro Encontro">
+                    <img loading="lazy" src="https://via.placeholder.com/300x300?text=Primeiro+Encontro" alt="Nosso Primeiro Encontro">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300?text=Primeiro+Beijo" alt="Nosso Primeiro Beijo">
+                    <img loading="lazy" src="https://via.placeholder.com/300x300?text=Primeiro+Beijo" alt="Nosso Primeiro Beijo">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300?text=Pedido+de+Namoro" alt="Pedido de Namoro">
+                    <img loading="lazy" src="https://via.placeholder.com/300x300?text=Pedido+de+Namoro" alt="Pedido de Namoro">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300?text=Pedido+de+Casamento" alt="Pedido de Casamento">
+                    <img loading="lazy" src="https://via.placeholder.com/300x300?text=Pedido+de+Casamento" alt="Pedido de Casamento">
                 </div>
             </div>
             <h2>Galeria de Momentos</h2>
@@ -84,14 +96,14 @@
             </div>
         </section>
 
-        <section id="mensagens">
+        <section id="mensagens" class="fade-in">
             <h2>Mensagens de Amor</h2>
             <div class="quote-slider">
                 <blockquote>"Maria Clara, seu sorriso ilumina meus dias e seu amor fortalece meu coração."</blockquote>
                 <blockquote>"Cada dia ao seu lado é uma nova aventura, cheia de amor e felicidade."</blockquote>
                 <blockquote>"Meu amor por você cresce a cada dia, e sou grato por compartilhar minha vida com você."</blockquote>
             </div>
-            <form id="message-form">
+            <form id="message-form" aria-label="Formulário de mensagem">
                 <h3>Deixe sua mensagem</h3>
                 <input type="text" name="name" placeholder="Seu nome" required>
                 <textarea name="message" placeholder="Sua mensagem" required></textarea>
@@ -101,7 +113,7 @@
             <div class="quote-slider">
                 <!-- Adicionar citações aqui -->
             </div>
-            <form id="message-form">
+            <form id="message-form" aria-label="Formulário de mensagem">
                 <h3>Deixe sua mensagem</h3>
                 <!-- Adicionar campos do formulário aqui -->
             </form>
@@ -117,19 +129,19 @@
 
     <footer>
         <p>&copy; 2023 Esdra & Maria Clara. Todos os direitos reservados.</p>
-        <div class="social-links">
+        <div class="social-links" aria-label="Links de redes sociais">
             <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
             <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
         <a href="#home" class="back-to-top">↑</a>
         <p>&copy; 2023 Esdra & Maria Clara. Todos os direitos reservados.</p>
-        <div class="social-links">
+        <div class="social-links" aria-label="Links de redes sociais">
             <!-- Adicionar links de redes sociais aqui -->
         </div>
         <a href="#home" class="back-to-top">Voltar ao topo</a>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.min.js"></script>
 </body>
 </html>

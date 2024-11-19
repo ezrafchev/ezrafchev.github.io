@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
 
 :root {
-    --primary-color: #000;
+    --primary-color: #87CEFA;
     --secondary-color: #f4f4f4;
-    --accent-color: #e0c8b0;
+    --accent-color: #FFB6C1;
     --text-color: #333;
 }
 
@@ -42,7 +42,8 @@ nav {
 }
 
 .logo img {
-    height: 30px;
+    height: 50px;
+    width: 50px;
 }
 
 nav ul {
@@ -58,23 +59,14 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: var(--primary-color);
+    color: var(--text-color);
     font-weight: 500;
-    font-size: 14px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
+    font-size: 16px;
     transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: var(--accent-color);
-}
-
-nav ul li a img {
-    margin-right: 5px;
-    width: 20px;
-    height: 20px;
+    color: var(--primary-color);
 }
 
 .menu-toggle {
@@ -92,77 +84,30 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('https://via.placeholder.com/1920x1080?text=Esdra+e+Maria+Clara');
+    background-size: cover;
+    background-position: center;
     position: relative;
-    overflow: hidden;
-    background-color: var(--secondary-color);
 }
 
 .hero-content {
     text-align: center;
-    color: var(--primary-color);
+    color: #fff;
     z-index: 2;
-}
-
-.hero-images {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.hero-star, .hero-small-shape, .hero-large-shape {
-    position: absolute;
-    transition: transform 0.3s ease;
-}
-
-.hero-star {
-    top: 20%;
-    left: 10%;
-}
-
-.hero-small-shape {
-    bottom: 20%;
-    right: 10%;
-}
-
-.hero-large-shape {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 h1 {
-    font-size: 64px;
+    font-size: 48px;
     line-height: 1.2;
     margin-bottom: 10px;
 }
 
 .hero-content p {
-    font-size: 48px;
-    line-height: 1.2;
-}
-
-.scroll-down {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 24px;
-    color: var(--primary-color);
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-30px);
-    }
-    60% {
-        transform: translateY(-15px);
-    }
+    line-height: 1.2;
 }
 
 section {
@@ -173,41 +118,16 @@ h2 {
     font-size: 36px;
     margin-bottom: 40px;
     text-align: center;
+    color: var(--primary-color);
 }
 
 #about {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background-color: #fff;
 }
 
 .about-content {
-    width: 50%;
-}
-
-.about-content h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.about-content p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.about-images {
-    width: 50%;
-    position: relative;
-}
-
-.about-shape, .about-star, .about-ring {
-    position: absolute;
-}
-
-#gallery {
-    background-color: var(--secondary-color);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .gallery-grid {
@@ -227,87 +147,23 @@ h2 {
     transform: scale(1.05);
 }
 
-#pricing {
-    background-color: #fff;
+#messages {
+    background-color: var(--accent-color);
+    color: #fff;
 }
 
-.pricing-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.message-container {
     max-width: 800px;
     margin: 0 auto;
 }
 
-.pricing-item {
-    width: 45%;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.pricing-item h3 {
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-
-input[type="range"] {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.toggle-switch label {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 34px;
-}
-
-.toggle-switch label:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
-
-.toggle-switch input:checked + label {
-    background-color: var(--accent-color);
-}
-
-.toggle-switch input:checked + label:before {
-    transform: translateX(26px);
-}
-
-.total-price {
-    text-align: center;
-    font-size: 24px;
-    margin-top: 30px;
+.message-container p {
+    font-style: italic;
+    margin-bottom: 20px;
 }
 
 #contact {
-    background-color: var(--secondary-color);
+    background-color: #fff;
 }
 
 form {
@@ -331,9 +187,11 @@ input, textarea {
     color: #fff;
     padding: 12px 24px;
     text-decoration: none;
+    border: none;
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -341,27 +199,11 @@ input, textarea {
 }
 
 footer {
-    background-color: #fff;
-    color: var(--text-color);
+    background-color: var(--primary-color);
+    color: #fff;
     text-align: center;
-    padding: 40px 20px;
+    padding: 20px;
     font-size: 14px;
-}
-
-.social-links {
-    margin-top: 20px;
-}
-
-.social-icon {
-    display: inline-block;
-    margin: 0 10px;
-    color: var(--primary-color);
-    font-size: 24px;
-    transition: color 0.3s ease;
-}
-
-.social-icon:hover {
-    color: var(--accent-color);
 }
 
 @media (max-width: 768px) {
@@ -374,27 +216,15 @@ footer {
     }
 
     .hero-content h1 {
-        font-size: 48px;
-    }
-
-    .hero-content p {
         font-size: 36px;
     }
 
-    #about {
-        flex-direction: column;
-    }
-
-    .about-content, .about-images {
-        width: 100%;
+    .hero-content p {
+        font-size: 18px;
     }
 
     .gallery-grid {
         grid-template-columns: 1fr;
-    }
-
-    .pricing-item {
-        width: 100%;
     }
 }
 
@@ -416,26 +246,4 @@ footer {
 .animate-on-scroll.animated {
     opacity: 1;
     transform: translateY(0);
-}
-
-/* Scroll to top button */
-.scroll-top-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    cursor: pointer;
-    display: none;
-    transition: background-color 0.3s ease;
-    z-index: 1000;
-}
-
-.scroll-top-btn:hover {
-    background-color: var(--accent-color);
 }

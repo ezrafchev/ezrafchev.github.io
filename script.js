@@ -19,15 +19,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
-    // Parallax effect for hero section
+    // Add/remove scrolled class to header
     window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const heroImages = document.querySelectorAll('.hero-images img');
-        heroImages.forEach((img, index) => {
-            img.style.transform = `translate3d(0, ${scrolled * (0.1 * (index + 1))}px, 0)`;
-        });
-
-        // Add/remove scrolled class to header
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
@@ -54,39 +47,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
-    // Pricing calculator
-    const hoursInput = document.getElementById('hours');
-    const hoursValue = document.getElementById('hours-value');
-    const engagementShoot = document.getElementById('engagement-shoot');
-    const ceremonyVideo = document.getElementById('ceremony-video');
-    const filmDigital = document.getElementById('film-digital');
-    const totalPriceValue = document.getElementById('total-price-value');
-
-    function calculatePrice() {
-        let totalPrice = hoursInput.value * 250; // Base price per hour
-        if (engagementShoot.checked) totalPrice += 500;
-        if (ceremonyVideo.checked) totalPrice += 1000;
-        if (filmDigital.checked) totalPrice += 750;
-        totalPriceValue.textContent = totalPrice.toLocaleString();
-    }
-
-    hoursInput.addEventListener('input', () => {
-        hoursValue.textContent = hoursInput.value;
-        calculatePrice();
-    });
-
-    engagementShoot.addEventListener('change', calculatePrice);
-    ceremonyVideo.addEventListener('change', calculatePrice);
-    filmDigital.addEventListener('change', calculatePrice);
-
-    calculatePrice(); // Initial calculation
-
     // Form submission
     const form = document.querySelector('form');
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you for your message. We will get back to you soon!');
+            alert('Obrigado pela sua mensagem! Entraremos em contato em breve.');
             form.reset();
         });
     }

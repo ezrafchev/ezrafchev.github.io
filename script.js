@@ -13,13 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Parallax effect for hero section
+    // Header background change on scroll
     window.addEventListener('scroll', function() {
-        const parallax = document.querySelector('#hero');
-        let scrollPosition = window.pageYOffset;
-        parallax.style.backgroundPositionY = scrollPosition * 0.7 + 'px';
-
-        // Header background change on scroll
         if (window.scrollY > 50) {
             header.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
         } else {
@@ -27,57 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Message slider
-    let currentMessageIndex = 0;
-    const messages = document.querySelectorAll('.message');
-    const totalMessages = messages.length;
-
-    function showNextMessage() {
-        messages[currentMessageIndex].classList.remove('active');
-        currentMessageIndex = (currentMessageIndex + 1) % totalMessages;
-        messages[currentMessageIndex].classList.add('active');
-    }
-
-    setInterval(showNextMessage, 5000); // Change message every 5 seconds
-
-    // Form submission
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Obrigado pela sua mensagem! Entraremos em contato em breve.');
-        form.reset();
-    });
-
-    // Animate elements on scroll
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    function handleScrollAnimation() {
-        const elements = document.querySelectorAll('.animate-on-scroll');
-        elements.forEach(el => {
-            if (isElementInViewport(el)) {
-                el.classList.add('is-visible');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', handleScrollAnimation);
-    window.addEventListener('resize', handleScrollAnimation);
-    handleScrollAnimation(); // Check on page load
-
     // Mobile menu toggle
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
-            navUl.classList.toggle('show');
-        });
-    }
+    menuToggle.addEventListener('click', function() {
+        navUl.classList.toggle('show');
+    });
 
     // Close mobile menu when a link is clicked
     navUl.addEventListener('click', function(e) {
@@ -86,7 +34,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Gallery image lightbox
+    // Message slider
+    const messages = document.querySelectorAll('.message');
+    let currentMessageIndex = 0;
+
+    function showNextMessage() {
+        messages[currentMessageIndex].style.display = 'none';
+        currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+        messages[currentMessageIndex].style.display = 'block';
+    }
+
+    setInterval(showNextMessage, 5000);
+
+    // Form submission
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Obrigado pela sua mensagem! Entraremos em contato em breve.');
+        form.reset();
+    });
+
+    // Image gallery lightbox
     const galleryImages = document.querySelectorAll('.gallery-grid img');
     galleryImages.forEach(img => {
         img.addEventListener('click', function() {
@@ -104,4 +72,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+
+    // Animate elements on scroll
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        elements.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            const elementBottom = el.getBoundingClientRect().bottom;
+            if (elementTop < window.innerHeight && elementBottom > 0) {
+                el.classList.add('is-visible');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Run once on load
 });

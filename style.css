@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
-
 :root {
-    --primary-color: #87CEFA;
-    --secondary-color: #FFB6C1;
-    --background-color: #F8F8FF;
+    --primary-color: #FF69B4;
+    --secondary-color: #87CEFA;
+    --background-color: #FFF0F5;
     --text-color: #333;
-    --accent-color: #FF69B4;
+    --accent-color: #FF1493;
 }
 
 * {
@@ -33,7 +31,6 @@ header {
     width: 100%;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
 }
 
 nav {
@@ -43,13 +40,11 @@ nav {
     padding: 20px 0;
 }
 
-.logo img {
-    height: 40px;
-    transition: transform 0.3s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.1);
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
 }
 
 nav ul {
@@ -72,12 +67,17 @@ nav ul li a:hover {
     color: var(--accent-color);
 }
 
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 #hero {
     height: 100vh;
-    background-image: url('https://via.placeholder.com/1920x1080?text=Esdra+e+Maria+Clara');
+    background-image: url('https://source.unsplash.com/random/1600x900/?love,couple');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,6 +112,7 @@ h2 {
     font-size: 2.5rem;
     margin-bottom: 30px;
     text-align: center;
+    color: var(--primary-color);
 }
 
 section {
@@ -119,28 +120,8 @@ section {
 }
 
 .about-content {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-}
-
-.about-text {
-    flex: 1;
-}
-
-.about-image {
-    flex: 1;
-}
-
-.about-image img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.about-image img:hover {
-    transform: scale(1.05);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .gallery-grid {
@@ -171,12 +152,6 @@ section {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     margin: 20px 0;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.message.active {
-    opacity: 1;
 }
 
 form {
@@ -190,12 +165,6 @@ input, textarea {
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    transition: border-color 0.3s ease;
-}
-
-input:focus, textarea:focus {
-    border-color: var(--accent-color);
-    outline: none;
 }
 
 .btn {
@@ -206,12 +175,11 @@ input:focus, textarea:focus {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .btn:hover {
     background-color: var(--primary-color);
-    transform: translateY(-3px);
 }
 
 footer {
@@ -229,46 +197,20 @@ footer {
     color: white;
     font-size: 24px;
     margin: 0 10px;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .social-icon:hover {
-    color: var(--accent-color);
-    transform: scale(1.2);
-}
-
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.animate-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+    color: var(--secondary-color);
 }
 
 @media (max-width: 768px) {
-    h1 {
-        font-size: 3rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-
-    .about-content {
-        flex-direction: column;
-    }
-
     nav ul {
         display: none;
     }
 
     .menu-toggle {
         display: block;
-        font-size: 24px;
-        cursor: pointer;
     }
 
     nav ul.show {
@@ -290,5 +232,13 @@ footer {
     nav ul.show li a {
         display: block;
         padding: 10px;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
     }
 }

@@ -5,45 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esdra ♥ Maria Clara</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <nav>
-            <a href="/" class="logo">
-                <img src="https://via.placeholder.com/50x50/87CEFA/FFFFFF?text=🌙" alt="Lua Azul Bebê">
-            </a>
+            <a href="#" class="logo">E&M</a>
             <ul>
                 <li><a href="#about">Nossa História</a></li>
                 <li><a href="#gallery">Galeria</a></li>
                 <li><a href="#messages">Mensagens</a></li>
                 <li><a href="#contact">Contato</a></li>
             </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
         </nav>
     </header>
 
     <main>
         <section id="hero">
-            <div class="hero-content animate-on-scroll">
+            <div class="hero-content">
                 <h1>Esdra & Maria Clara</h1>
                 <p>Uma história de amor eterno</p>
-                <a href="#about" class="btn">Conheça Nossa História</a>
             </div>
         </section>
 
         <section id="about">
             <div class="container">
-                <h2 class="animate-on-scroll">Nossa História</h2>
+                <h2>Nossa História</h2>
                 <div class="about-content">
-                    <div class="about-text animate-on-scroll">
+                    <div class="about-text">
                         <p>Querida Maria Clara Casagrande de Mattos,</p>
                         <p>Este site é uma homenagem ao nosso amor. Desde o momento em que nos conhecemos, minha vida se encheu de luz e felicidade. Seu apoio incondicional, sua força e seu carinho são minha inspiração diária.</p>
                         <p>Cada momento ao seu lado é precioso, e sou eternamente grato por ter você em minha vida. Você é minha parceira, minha melhor amiga e meu amor eterno.</p>
                         <p>Com todo meu amor,</p>
                         <p>Esdra</p>
-                    </div>
-                    <div class="about-image animate-on-scroll">
-                        <img src="https://via.placeholder.com/400x600?text=Esdra+e+Maria+Clara" alt="Esdra e Maria Clara">
                     </div>
                 </div>
             </div>
@@ -51,27 +49,27 @@
 
         <section id="gallery">
             <div class="container">
-                <h2 class="animate-on-scroll">Nossos Momentos</h2>
+                <h2>Nossos Momentos</h2>
                 <div class="gallery-grid">
-                    <img src="https://via.placeholder.com/400x400?text=Momento+1" alt="Momento Especial 1" class="animate-on-scroll">
-                    <img src="https://via.placeholder.com/400x400?text=Momento+2" alt="Momento Especial 2" class="animate-on-scroll">
-                    <img src="https://via.placeholder.com/400x400?text=Momento+3" alt="Momento Especial 3" class="animate-on-scroll">
-                    <img src="https://via.placeholder.com/400x400?text=Momento+4" alt="Momento Especial 4" class="animate-on-scroll">
+                    <img src="https://via.placeholder.com/300x300?text=Momento+1" alt="Momento Especial 1">
+                    <img src="https://via.placeholder.com/300x300?text=Momento+2" alt="Momento Especial 2">
+                    <img src="https://via.placeholder.com/300x300?text=Momento+3" alt="Momento Especial 3">
+                    <img src="https://via.placeholder.com/300x300?text=Momento+4" alt="Momento Especial 4">
                 </div>
             </div>
         </section>
 
         <section id="messages">
             <div class="container">
-                <h2 class="animate-on-scroll">Mensagens de Amor</h2>
+                <h2>Mensagens de Amor</h2>
                 <div class="message-slider">
-                    <div class="message animate-on-scroll">
+                    <div class="message">
                         <p>"Maria Clara, seu sorriso ilumina meus dias e seu amor fortalece meu coração."</p>
                     </div>
-                    <div class="message animate-on-scroll">
+                    <div class="message">
                         <p>"Cada dia ao seu lado é uma nova aventura, cheia de amor e felicidade."</p>
                     </div>
-                    <div class="message animate-on-scroll">
+                    <div class="message">
                         <p>"Meu amor por você cresce a cada dia, e sou grato por compartilhar minha vida com você."</p>
                     </div>
                 </div>
@@ -80,8 +78,8 @@
 
         <section id="contact">
             <div class="container">
-                <h2 class="animate-on-scroll">Entre em Contato</h2>
-                <form action="https://formspree.io/f/your-formspree-endpoint" method="POST" class="animate-on-scroll">
+                <h2>Entre em Contato</h2>
+                <form id="contact-form">
                     <input type="text" name="name" placeholder="Seu Nome" required>
                     <input type="email" name="email" placeholder="Seu E-mail" required>
                     <textarea name="message" placeholder="Sua Mensagem" required></textarea>

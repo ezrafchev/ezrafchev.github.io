@@ -11,7 +11,7 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: var(--secondary-color);
+    background-color: #fff;
     color: var(--text-color);
     line-height: 1.6;
 }
@@ -27,7 +27,7 @@ header {
     right: 0;
     z-index: 1000;
     padding: 20px 5%;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #fff;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -42,8 +42,7 @@ nav {
 }
 
 .logo img {
-    height: 50px;
-    width: 50px;
+    height: 30px;
 }
 
 nav ul {
@@ -61,18 +60,16 @@ nav ul li a {
     text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
-    font-size: 16px;
-    transition: color 0.3s ease;
+    font-size: 14px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
 }
 
-nav ul li a:hover {
-    color: var(--primary-color);
-}
-
-.menu-toggle {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
+nav ul li a img {
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
 }
 
 main {
@@ -84,29 +81,54 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('https://via.placeholder.com/1920x1080?text=Esdra+e+Maria+Clara');
-    background-size: cover;
-    background-position: center;
     position: relative;
+    overflow: hidden;
+    background-color: var(--secondary-color);
 }
 
 .hero-content {
     text-align: center;
-    color: #fff;
+    color: var(--text-color);
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
+}
+
+.hero-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.hero-star, .hero-small-shape, .hero-large-shape {
+    position: absolute;
+    transition: transform 0.3s ease;
+}
+
+.hero-star {
+    top: 20%;
+    left: 10%;
+}
+
+.hero-small-shape {
+    bottom: 20%;
+    right: 10%;
+}
+
+.hero-large-shape {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 64px;
     line-height: 1.2;
     margin-bottom: 10px;
 }
 
 .hero-content p {
-    font-size: 24px;
+    font-size: 36px;
     line-height: 1.2;
 }
 
@@ -118,16 +140,41 @@ h2 {
     font-size: 36px;
     margin-bottom: 40px;
     text-align: center;
-    color: var(--primary-color);
 }
 
 #about {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #fff;
 }
 
 .about-content {
-    max-width: 800px;
-    margin: 0 auto;
+    width: 50%;
+}
+
+.about-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.about-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.about-images {
+    width: 50%;
+    position: relative;
+}
+
+.about-shape, .about-star, .about-ring {
+    position: absolute;
+}
+
+#gallery {
+    background-color: var(--secondary-color);
 }
 
 .gallery-grid {
@@ -148,8 +195,7 @@ h2 {
 }
 
 #messages {
-    background-color: var(--accent-color);
-    color: #fff;
+    background-color: #fff;
 }
 
 .message-container {
@@ -163,7 +209,7 @@ h2 {
 }
 
 #contact {
-    background-color: #fff;
+    background-color: var(--secondary-color);
 }
 
 form {
@@ -183,7 +229,7 @@ input, textarea {
 
 .btn {
     display: inline-block;
-    background-color: var(--primary-color);
+    background-color: var(--text-color);
     color: #fff;
     padding: 12px 24px;
     text-decoration: none;
@@ -191,16 +237,15 @@ input, textarea {
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
-    cursor: pointer;
 }
 
 .btn:hover {
-    background-color: var(--accent-color);
+    background-color: var(--primary-color);
 }
 
 footer {
-    background-color: var(--primary-color);
-    color: #fff;
+    background-color: #fff;
+    color: var(--text-color);
     text-align: center;
     padding: 20px;
     font-size: 14px;
@@ -211,16 +256,20 @@ footer {
         display: none;
     }
 
-    .menu-toggle {
-        display: block;
-    }
-
     .hero-content h1 {
-        font-size: 36px;
+        font-size: 48px;
     }
 
     .hero-content p {
-        font-size: 18px;
+        font-size: 24px;
+    }
+
+    #about {
+        flex-direction: column;
+    }
+
+    .about-content, .about-images {
+        width: 100%;
     }
 
     .gallery-grid {

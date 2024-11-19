@@ -26,6 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Parallax effect for hero section
+    window.addEventListener('scroll', function() {
+        const parallax = document.querySelector('.parallax-bg');
+        let scrollPosition = window.pageYOffset;
+        parallax.style.backgroundPositionY = scrollPosition * 0.7 + 'px';
+    });
+
     // Header background change on scroll
     function handleScroll() {
         if (window.scrollY > 50) {
@@ -181,4 +188,20 @@ document.addEventListener('DOMContentLoaded', function() {
     timelineItems.forEach(item => {
         timelineObserver.observe(item);
     });
+
+    // Typewriter effect for hero subtitle
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    const text = heroSubtitle.textContent;
+    heroSubtitle.textContent = '';
+    let i = 0;
+
+    function typeWriter() {
+        if (i < text.length) {
+            heroSubtitle.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        }
+    }
+
+    typeWriter();
 });

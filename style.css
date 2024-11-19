@@ -110,20 +110,27 @@ body {
     cursor: pointer;
 }
 
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .hero-section {
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/random/1920x1080/?love,couple');
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
+    position: relative;
 }
 
 .hero-content {
     max-width: 80rem;
+    z-index: 2;
 }
 
 .hero-title {
@@ -140,6 +147,16 @@ body {
     animation-fill-mode: both;
 }
 
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
 .section-title {
     font-family: var(--font-primary);
     font-size: 4rem;
@@ -153,8 +170,27 @@ body {
 }
 
 .about-content {
-    max-width: 80rem;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.rounded-image {
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.rounded-image:hover {
+    transform: scale(1.05);
 }
 
 .timeline {
@@ -255,13 +291,33 @@ body {
     transform: translateY(0);
 }
 
+.messages-section {
+    position: relative;
+    color: white;
+}
+
+.messages-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.messages-section .container {
+    position: relative;
+    z-index: 2;
+}
+
 .message-slider {
     max-width: 60rem;
     margin: 0 auto;
 }
 
 .message {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 3rem;
     border-radius: 0.5rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -295,6 +351,13 @@ body {
     border: 1px solid #ddd;
     border-radius: 0.5rem;
     font-size: 1.6rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
 }
 
 .btn {
@@ -312,6 +375,22 @@ body {
 .btn:hover, .btn:focus {
     background-color: var(--primary-color);
     transform: translateY(-3px);
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .site-footer {
@@ -371,6 +450,10 @@ body {
 
     .section-title {
         font-size: 3rem;
+    }
+
+    .about-content {
+        flex-direction: column;
     }
 
     .timeline::after {

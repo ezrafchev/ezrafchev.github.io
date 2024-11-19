@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mack & Pouya Photography</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -18,24 +19,30 @@
                 <li><a href="#pricing"><img src="https://cdn.prod.website-files.com/5fc3edc939e45606bb1beaed/5fc5b7d9d088cd3b91add7e7_nav-flower.svg" alt="Pricing">Pricing</a></li>
                 <li><a href="#contact"><img src="https://cdn.prod.website-files.com/5fc3edc939e45606bb1beaed/5fc5b7dabad27a31ffba4fc4_nav-shape.svg" alt="Contact">Contact</a></li>
             </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
         </nav>
     </header>
 
     <main>
         <section id="hero">
             <div class="hero-content">
-                <h1>We Capture</h1>
-                <p>All The Feels</p>
+                <h1 class="animate-on-scroll">We Capture</h1>
+                <p class="animate-on-scroll">All The Feels</p>
             </div>
             <div class="hero-images">
                 <img src="https://cdn.prod.website-files.com/5fc3edc939e45606bb1beaed/5fc5bd55d088cd01a7ade9a9_hero-star.svg" alt="Star" class="hero-star">
                 <img src="https://cdn.prod.website-files.com/5fc3edc939e45606bb1beaed/5fc5bd55a881e97f9c0ea6c6_hero-small-shape.svg" alt="Small Shape" class="hero-small-shape">
                 <img src="https://cdn.prod.website-files.com/5fc3edc939e45606bb1beaed/5fc5bd55289f5713c1684ca5_hero-large-shape.svg" alt="Large Shape" class="hero-large-shape">
             </div>
+            <a href="#about" class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </section>
 
         <section id="about">
-            <div class="about-content">
+            <div class="about-content animate-on-scroll">
                 <h2>Lovers of Love</h2>
                 <p>FINE ART Film Photographers</p>
                 <p>We're Mack and Pouya - professional cake tasters, wedding criers, and just outright lovers of love. In short, we're pretty big fans of marriage! Marriage is such a special commitment and your wedding marks the witness and celebration of this bond. We're super stoked for this amazing next chapter of your life. We wholeheartedly recommend it!</p>
@@ -50,25 +57,53 @@
         </section>
 
         <section id="gallery">
+            <h2 class="animate-on-scroll">Our Gallery</h2>
             <div class="gallery-grid">
-                <!-- Add more images here -->
-                <img src="https://cdn.prod.website-files.com/5fc5cccecf5884d730bdac08/5fcb3ffe91c8da1d2f1614f1_amy-scott-wedding-312%20(1).jpg" alt="Wedding Photo 1">
-                <img src="https://cdn.prod.website-files.com/5fc5cccecf5884d730bdac08/5fcb37527c071f03f345b017_1070677-R1-E001.jpg" alt="Wedding Photo 2">
-                <img src="https://cdn.prod.website-files.com/5fc5cccecf5884d730bdac08/5fcb3794a8a1625058bb6108_1070426-R1-E014.jpg" alt="Wedding Photo 3">
-                <img src="https://cdn.prod.website-files.com/5fc5cccecf5884d730bdac08/62b633564a31973a4c2451f0_RESIZEDKennedyAlexWedding421.jpg" alt="Wedding Photo 4">
+                <img src="https://cdn.prod.website-files.com/5fc5cccecf5884d730bdac08/5fcb3ffe91c8da1d2f1614f1_amy-scott-wedding-312%20(1).jpg" alt="Wedding Photo 1" class="animate-on-scroll">
+                <img src="https://cdn.prod.website-files.com/5fc5cccecf5884d730bdac08/5fcb37527c071f03f345b017_1070677-R1-E001.jpg" alt="Wedding Photo 2" class="animate-on-scroll">
+                <img src="https://cdn.prod.website-files.com/5fc5cccecf5884d730bdac08/5fcb3794a8a1625058bb6108_1070426-R1-E014.jpg" alt="Wedding Photo 3" class="animate-on-scroll">
+                <img src="https://cdn.prod.website-files.com/5fc5cccecf5884d730bdac08/62b633564a31973a4c2451f0_RESIZEDKennedyAlexWedding421.jpg" alt="Wedding Photo 4" class="animate-on-scroll">
             </div>
         </section>
 
         <section id="pricing">
-            <h2>Build your own Package</h2>
+            <h2 class="animate-on-scroll">Build your own Package</h2>
             <div class="pricing-container">
-                <!-- Add pricing options here -->
+                <div class="pricing-item animate-on-scroll">
+                    <h3>Total Hours</h3>
+                    <input type="range" id="hours" min="1" max="12" value="8">
+                    <span id="hours-value">8</span>
+                </div>
+                <div class="pricing-item animate-on-scroll">
+                    <h3>Engagement Shoot</h3>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="engagement-shoot">
+                        <label for="engagement-shoot"></label>
+                    </div>
+                </div>
+                <div class="pricing-item animate-on-scroll">
+                    <h3>Ceremony Video</h3>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="ceremony-video">
+                        <label for="ceremony-video"></label>
+                    </div>
+                </div>
+                <div class="pricing-item animate-on-scroll">
+                    <h3>Film + Digital</h3>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="film-digital">
+                        <label for="film-digital"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="total-price animate-on-scroll">
+                <h3>Total: $<span id="total-price-value">0</span></h3>
             </div>
         </section>
 
         <section id="contact">
-            <h2>Check for your date</h2>
-            <form>
+            <h2 class="animate-on-scroll">Check for your date</h2>
+            <form class="animate-on-scroll">
                 <input type="text" placeholder="Name" required>
                 <input type="email" placeholder="Email" required>
                 <input type="date" placeholder="Wedding Date" required>
@@ -82,9 +117,9 @@
         <p>&copy; 2023 All Rights Reserved.</p>
         <p>Website by <a href="https://www.tricksdesign.com/">T.RICKS</a></p>
         <div class="social-links">
-            <a href="#" class="social-icon"><img src="https://cdn.prod.website-files.com/5fc3edc939e45606bb1beaed/5fca1a6d65765e6aade3737f_facebook.svg" alt="Facebook"></a>
-            <a href="#" class="social-icon"><img src="https://cdn.prod.website-files.com/5fc3edc939e45606bb1beaed/5fca1a6e24622cfcec9bcb64_instagram.svg" alt="Instagram"></a>
-            <a href="#" class="social-icon"><img src="https://cdn.prod.website-files.com/5fc3edc939e45606bb1beaed/5fca1a6ef9f03cfe4654e621_email.svg" alt="Email"></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="far fa-envelope"></i></a>
         </div>
     </footer>
 

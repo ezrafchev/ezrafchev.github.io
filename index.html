@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" itemscope itemtype="http://schema.org/WebPage">
 <head>
@@ -7,182 +8,126 @@
     <meta name="description" content="Celebrando o amor eterno entre Esdra e Maria Clara Casagrande de Mattos">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous" defer></script>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
-    
-    <header class="site-header" role="banner">
-        <div class="container">
-            <nav class="main-navigation" role="navigation" aria-label="Menu principal">
-                <a href="#" class="logo" aria-label="Início">E&M</a>
-                <ul id="primary-menu">
-                    <li><a href="#about">Nossa História</a></li>
-                    <li><a href="#timeline">Linha do Tempo</a></li>
-                    <li><a href="#gallery">Galeria</a></li>
-                    <li><a href="#messages">Mensagens</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
-                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-                    <span class="screen-reader-text">Menu</span>
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
-            </nav>
-        </div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#nossa-historia">Nossa História</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#mensagens">Mensagens</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main id="main-content" role="main">
-        <section id="hero" class="hero-section parallax-bg">
-            <div class="hero-content">
-                <h1 class="hero-title">Esdra & Maria Clara</h1>
-                <p class="hero-subtitle">Uma história de amor eterno</p>
-                <a href="#about" class="btn btn-primary pulse">Conheça Nossa História</a>
-            </div>
-            <div class="hero-overlay"></div>
+    <main>
+        <section id="home">
+            <div id="countdown"></div>
+            <h1>Esdra & Maria Clara</h1>
+            <p>Uma história de amor eterno</p>
+            <a href="#nossa-historia" class="cta-button">Conheça Nossa História</a>
         </section>
 
-        <section id="about" class="about-section">
-            <div class="container">
-                <h2 class="section-title">Nossa História</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>Querida Maria Clara Casagrande de Mattos,</p>
-                        <p>Este site é uma homenagem ao nosso amor. Desde o momento em que nos conhecemos, minha vida se encheu de luz e felicidade. Seu apoio incondicional, sua força e seu carinho são minha inspiração diária.</p>
-                        <p>Cada momento ao seu lado é precioso, e sou eternamente grato por ter você em minha vida. Você é minha parceira, minha melhor amiga e meu amor eterno.</p>
-                        <p>Com todo meu amor,</p>
-                        <p>Esdra</p>
-                    </div>
-                    <div class="about-image">
-                        <img src="https://via.placeholder.com/400x600?text=Esdra+e+Maria+Clara" alt="Esdra e Maria Clara" class="rounded-image">
-                    </div>
+        <section id="nossa-historia">
+            <h2>Nossa História</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Primeiro Encontro</h3>
+                    <p>15 de Janeiro de 2020</p>
+                    <p>Nos conhecemos em uma cafeteria local. Foi amor à primeira vista!</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Primeiro Beijo</h3>
+                    <p>14 de Fevereiro de 2020</p>
+                    <p>No Dia dos Namorados, trocamos nosso primeiro beijo sob as estrelas.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Pedido de Namoro</h3>
+                    <p>1 de Maio de 2020</p>
+                    <p>Em um piquenique no parque, pedi Maria Clara em namoro com um anel de promessa.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Pedido de Casamento</h3>
+                    <p>25 de Dezembro de 2021</p>
+                    <p>No Natal, pedi Maria Clara em casamento. Ela disse sim, fazendo deste o melhor presente de todos!</p>
                 </div>
             </div>
+            <h2>Nossa História</h2>
+            <div class="timeline">
+                <!-- Adicionar eventos da linha do tempo aqui -->
+            </div>
         </section>
 
-        <section id="timeline" class="timeline-section">
-            <div class="container">
-                <h2 class="section-title">Nossa Linha do Tempo</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Primeiro Encontro</h3>
-                            <p class="timeline-date">15 de Janeiro de 2020</p>
-                            <p>Nos conhecemos em uma cafeteria local. Foi amor à primeira vista!</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Primeiro Beijo</h3>
-                            <p class="timeline-date">14 de Fevereiro de 2020</p>
-                            <p>No Dia dos Namorados, trocamos nosso primeiro beijo sob as estrelas.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Pedido de Namoro</h3>
-                            <p class="timeline-date">1 de Maio de 2020</p>
-                            <p>Em um piquenique no parque, pedi Maria Clara em namoro com um anel de promessa.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Primeira Viagem Juntos</h3>
-                            <p class="timeline-date">10 de Julho de 2020</p>
-                            <p>Passamos um fim de semana romântico na praia, fortalecendo ainda mais nosso amor.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Pedido de Casamento</h3>
-                            <p class="timeline-date">25 de Dezembro de 2021</p>
-                            <p>No Natal, pedi Maria Clara em casamento. Ela disse sim, fazendo deste o melhor presente de todos!</p>
-                        </div>
-                    </div>
+        <section id="galeria">
+            <h2>Galeria de Momentos</h2>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x300?text=Primeiro+Encontro" alt="Nosso Primeiro Encontro">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x300?text=Primeiro+Beijo" alt="Nosso Primeiro Beijo">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x300?text=Pedido+de+Namoro" alt="Pedido de Namoro">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x300?text=Pedido+de+Casamento" alt="Pedido de Casamento">
                 </div>
             </div>
-        </section>
-
-        <section id="gallery" class="gallery-section">
-            <div class="container">
-                <h2 class="section-title">Nossos Momentos</h2>
-                <div class="gallery-grid" itemscope itemtype="http://schema.org/ImageGallery">
-                    <figure class="gallery-item" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                        <img src="https://via.placeholder.com/300x300?text=Primeiro+Encontro" alt="Nosso Primeiro Encontro" itemprop="contentUrl" loading="lazy">
-                        <figcaption itemprop="caption description">Nosso Primeiro Encontro</figcaption>
-                    </figure>
-                    <figure class="gallery-item" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                        <img src="https://via.placeholder.com/300x300?text=Primeiro+Beijo" alt="Nosso Primeiro Beijo" itemprop="contentUrl" loading="lazy">
-                        <figcaption itemprop="caption description">Nosso Primeiro Beijo</figcaption>
-                    </figure>
-                    <figure class="gallery-item" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                        <img src="https://via.placeholder.com/300x300?text=Pedido+de+Namoro" alt="Pedido de Namoro" itemprop="contentUrl" loading="lazy">
-                        <figcaption itemprop="caption description">Pedido de Namoro</figcaption>
-                    </figure>
-                    <figure class="gallery-item" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                        <img src="https://via.placeholder.com/300x300?text=Pedido+de+Casamento" alt="Pedido de Casamento" itemprop="contentUrl" loading="lazy">
-                        <figcaption itemprop="caption description">Pedido de Casamento</figcaption>
-                    </figure>
-                </div>
+            <h2>Galeria de Momentos</h2>
+            <div class="gallery-container">
+                <!-- Adicionar imagens da galeria aqui -->
             </div>
         </section>
 
-        <section id="messages" class="messages-section parallax-bg">
-            <div class="container">
-                <h2 class="section-title">Mensagens de Amor</h2>
-                <div class="message-slider">
-                    <div class="message">
-                        <blockquote>
-                            <p>"Maria Clara, seu sorriso ilumina meus dias e seu amor fortalece meu coração."</p>
-                        </blockquote>
-                    </div>
-                    <div class="message">
-                        <blockquote>
-                            <p>"Cada dia ao seu lado é uma nova aventura, cheia de amor e felicidade."</p>
-                        </blockquote>
-                    </div>
-                    <div class="message">
-                        <blockquote>
-                            <p>"Meu amor por você cresce a cada dia, e sou grato por compartilhar minha vida com você."</p>
-                        </blockquote>
-                    </div>
-                </div>
+        <section id="mensagens">
+            <h2>Mensagens de Amor</h2>
+            <div class="quote-slider">
+                <blockquote>"Maria Clara, seu sorriso ilumina meus dias e seu amor fortalece meu coração."</blockquote>
+                <blockquote>"Cada dia ao seu lado é uma nova aventura, cheia de amor e felicidade."</blockquote>
+                <blockquote>"Meu amor por você cresce a cada dia, e sou grato por compartilhar minha vida com você."</blockquote>
             </div>
-            <div class="overlay"></div>
+            <form id="message-form">
+                <h3>Deixe sua mensagem</h3>
+                <input type="text" name="name" placeholder="Seu nome" required>
+                <textarea name="message" placeholder="Sua mensagem" required></textarea>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+            <h2>Mensagens de Amor</h2>
+            <div class="quote-slider">
+                <!-- Adicionar citações aqui -->
+            </div>
+            <form id="message-form">
+                <h3>Deixe sua mensagem</h3>
+                <!-- Adicionar campos do formulário aqui -->
+            </form>
         </section>
 
-        <section id="contact" class="contact-section">
-            <div class="container">
-                <h2 class="section-title">Entre em Contato</h2>
-                <form id="contact-form" class="contact-form" action="https://formspree.io/f/your-formspree-id" method="POST">
-                    <div class="form-group">
-                        <label for="name">Seu Nome</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Seu E-mail</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Sua Mensagem</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-                </form>
-            </div>
+        <section id="contato">
+            <h2>Entre em Contato</h2>
+            <form id="contact-form">
+                <!-- Adicionar campos do formulário de contato aqui -->
+            </form>
         </section>
     </main>
 
-    <footer class="site-footer" role="contentinfo">
-        <div class="container">
-            <p>&copy; 2023 Esdra & Maria Clara. Todos os direitos reservados.</p>
-            <div class="social-links">
-                <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                <a href="#" class="social-icon" aria-label="E-mail"><i class="far fa-envelope" aria-hidden="true"></i></a>
-            </div>
+    <footer>
+        <p>&copy; 2023 Esdra & Maria Clara. Todos os direitos reservados.</p>
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
+        <a href="#home" class="back-to-top">↑</a>
+        <p>&copy; 2023 Esdra & Maria Clara. Todos os direitos reservados.</p>
+        <div class="social-links">
+            <!-- Adicionar links de redes sociais aqui -->
+        </div>
+        <a href="#home" class="back-to-top">Voltar ao topo</a>
     </footer>
 
     <script src="script.js"></script>

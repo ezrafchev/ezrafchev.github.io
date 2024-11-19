@@ -1,41 +1,35 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Blog posts
-    const blogPosts = [
-        { title: 'Nosso Primeiro Post', content: 'Bem-vindos ao nosso blog!' },
-        { title: 'Momentos Especiais', content: 'Compartilhando alguns momentos especiais...' }
-    ];
-
-    const blogPostsContainer = document.getElementById('blog-posts');
-    blogPosts.forEach(post => {
-        const article = document.createElement('article');
-        article.innerHTML = `
-            <h3>${post.title}</h3>
-            <p>${post.content}</p>
-        `;
-        blogPostsContainer.appendChild(article);
-    });
-
-    // Contact form
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const formData = new FormData(form);
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(response => {
-            if (response.ok) {
-                alert('Mensagem enviada com sucesso!');
-                form.reset();
-            } else {
-                alert('Ocorreu um erro. Por favor, tente novamente.');
-            }
-        }).catch(error => {
-            alert('Ocorreu um erro. Por favor, tente novamente.');
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
         });
     });
+
+    // Form submission
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message. We will get back to you soon!');
+            form.reset();
+        });
+    }
+
+    // Lazy loading for images (if any)
+    if ('loading' in HTMLImageElement.prototype) {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach(img => {
+            img.src = img.dataset.src;
+        });
+    } else {
+        // Fallback for browsers that don't support lazy loading
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+        document.body.appendChild(script);
+    }
 });

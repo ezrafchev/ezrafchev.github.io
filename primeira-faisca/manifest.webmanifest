@@ -1,15 +1,13 @@
 {
   "name": "Primeira Faísca — por Esdra Felipe",
   "short_name": "Faísca",
-  "description": "Jornada inteligente para casais com cinco etapas, dealer e mediadora por IA Gemini, dados, trilha Spotify e Tarô Cigano contextual.",
+  "description": "Jornada inteligente e sequencial para casais com dealer Gemini, perguntas guiadas, ritual, Tarô Cigano contextual e encerramento estruturado.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#08080a",
-  "theme_color": "#08080a",
+  "background_color": "#050506",
+  "theme_color": "#050506",
   "categories": ["entertainment", "lifestyle", "games"],
-  "icons": [
-    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
-  ]
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }

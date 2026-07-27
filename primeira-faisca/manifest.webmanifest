@@ -1,0 +1,13 @@
+{
+  "name": "Primeira Faísca",
+  "short_name": "Faísca",
+  "description": "Jogo para primeiros encontros com perguntas, conexão, flerte e desafios.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d0617",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "name": "Primeira Faísca — por Esdra Felipe",
   "short_name": "Faísca",
-  "description": "Jornada premium para casais com perguntas auditadas em cinco etapas, dados, kit 3D, trilha Spotify e Tarô Cigano com leitura estruturada por IA.",
+  "description": "Jornada inteligente para casais com cinco etapas, dealer e mediadora por IA Gemini, dados, trilha Spotify e Tarô Cigano contextual.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

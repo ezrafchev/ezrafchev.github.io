@@ -1,12 +1,14 @@
 {
-  "name": "Primeira Faísca",
+  "name": "Primeira Faísca — por Esdra Felipe",
   "short_name": "Faísca",
-  "description": "Jogo para primeiros encontros com perguntas, conexão, flerte e desafios.",
+  "description": "Jogo híbrido para primeiros encontros com perguntas, dados, desafios de contato carinhoso e kit 3D. Criado por Esdra Felipe.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#0d0617",
+  "orientation": "any",
+  "background_color": "#09050f",
   "theme_color": "#7c3aed",
+  "categories": ["entertainment", "lifestyle", "games"],
   "icons": [
     {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
   ]

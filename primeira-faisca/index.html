@@ -4,22 +4,23 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <meta name="theme-color" content="#08080a"/>
-  <meta name="description" content="Primeira Faísca, criado por Esdra Felipe: jogo premium para casais com perguntas auditadas, desafios românticos, dados, Tarô Cigano com IA e trilha sonora Spotify."/>
+  <meta name="description" content="Primeira Faísca, criado por Esdra Felipe: jornada premium para casais com perguntas auditadas, desafios românticos, dados, música e Tarô Cigano interpretado por IA."/>
   <title>Primeira Faísca — Esdra Felipe</title>
   <link rel="manifest" href="manifest.webmanifest"/>
   <link rel="icon" href="icon.svg"/>
-  <link rel="stylesheet" href="style-v4.css"/>
+  <link rel="stylesheet" href="style-v5.css"/>
 </head>
 <body>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
 <div class="app">
   <header class="topbar">
-    <div class="brand">
-      <div class="brandmark" aria-hidden="true"><svg fill="none" viewBox="0 0 24 24"><path d="M12 20.2S3.5 15.1 3.5 8.8A4.5 4.5 0 0 1 12 6.7a4.5 4.5 0 0 1 8.5 2.1c0 6.3-8.5 11.4-8.5 11.4Z" fill="white"/></svg></div>
-      <div class="brandtext"><b>Primeira Faísca</b><small>criado por Esdra Felipe</small></div>
-    </div>
+    <button class="brand navbtnBrand" data-view="home" aria-label="Ir para o início">
+      <span class="brandmark" aria-hidden="true"><svg fill="none" viewBox="0 0 24 24"><path d="M12 20.2S3.5 15.1 3.5 8.8A4.5 4.5 0 0 1 12 6.7a4.5 4.5 0 0 1 8.5 2.1c0 6.3-8.5 11.4-8.5 11.4Z" fill="white"/></svg></span>
+      <span class="brandtext"><b>Primeira Faísca</b><small>criado por Esdra Felipe</small></span>
+    </button>
     <nav class="nav" aria-label="Navegação principal">
       <button class="navbtn active" data-view="home">Início</button>
-      <button class="navbtn" data-view="setup">Jogar</button>
+      <button class="navbtn" data-view="setup">Jornada</button>
       <button class="navbtn" data-view="tarot">Tarô IA</button>
       <button class="navbtn" data-view="dice">Dados</button>
       <button class="navbtn" data-view="kit">Kit 3D</button>
@@ -30,19 +31,19 @@
   <main>
     <section class="view" id="home">
       <div class="hero">
-        <div class="eyebrow">✦ Edição Couple · v4.0</div>
+        <div class="eyebrow">✦ Edição Couple · v5.0</div>
         <h1 class="gradient">Primeira<br/>Faísca</h1>
-        <p class="lead">Uma experiência premium para casais: perguntas claras, desafios românticos, dados físicos, trilha sonora e um Tarô Cigano interpretado por inteligência artificial.</p>
+        <p class="lead">Uma jornada guiada para transformar conversa, descoberta, proximidade e reflexão em uma experiência coerente do início ao fim.</p>
         <div class="heroActions">
-          <button class="btn primary" data-go="setup">Começar a experiência</button>
-          <button class="btn secondary" data-go="tarot">Abrir o Tarô com IA</button>
+          <button class="btn primary" data-go="setup">Começar a jornada</button>
+          <button class="btn secondary" data-go="how">Entender como funciona</button>
           <button class="btn good hidden" id="installBtn">Instalar aplicativo</button>
         </div>
       </div>
 
       <section class="panel soundtrack" aria-label="Trilha sonora do encontro">
         <div class="soundHead">
-          <div><span class="eyebrow">♫ Trilha oficial</span><h3>Som ambiente sincronizado</h3><p>A playlist é carregada ao abrir. O site tenta iniciar a reprodução automaticamente e repete a tentativa no primeiro toque quando o navegador bloquear áudio.</p></div>
+          <div><span class="eyebrow">♫ Trilha oficial</span><h3>Atmosfera desde o primeiro instante</h3><p>A playlist é carregada ao abrir. O player tenta iniciar automaticamente e repete a tentativa no primeiro toque permitido pelo navegador.</p></div>
           <button class="btn spotify" id="musicToggle">Ativar trilha</button>
         </div>
         <div id="spotifyEmbed" class="spotifyEmbed" aria-label="Playlist do Spotify"></div>
@@ -50,126 +51,119 @@
       </section>
 
       <div class="metrics">
-        <div class="metric"><strong>60+</strong><span>cartas editoriais</span></div>
-        <div class="metric"><strong>36</strong><span>cartas do Baralho Cigano</span></div>
-        <div class="metric"><strong>IA</strong><span>interpretação contextual</span></div>
-        <div class="metric"><strong>3</strong><span>dados físicos ou virtuais</span></div>
+        <div class="metric"><strong>5</strong><span>etapas conectadas</span></div>
+        <div class="metric"><strong>60+</strong><span>cartas auditadas</span></div>
+        <div class="metric"><strong>36</strong><span>cartas ciganas</span></div>
+        <div class="metric"><strong>IA</strong><span>leitura estruturada</span></div>
       </div>
 
-      <div class="sectionHead"><h2>Design que desaparece.<br/>A conexão fica.</h2><p>Interface refinada, respostas orientadas, música integrada e leitura de relacionamento construída com o contexto real da partida.</p></div>
-      <div class="grid grid2">
-        <article class="panel feature"><div class="featureIcon">⌁</div><div><h3>Perguntas auditadas</h3><p>Cada carta explica o que está perguntando, por que importa e como responder com clareza.</p></div></article>
-        <article class="panel feature"><div class="featureIcon">✦</div><div><h3>Tarô com Gemini</h3><p>A IA recebe pergunta, cartas, posições e sinais da rodada para produzir uma leitura única e coerente.</p></div></article>
-        <article class="panel feature"><div class="featureIcon">♫</div><div><h3>Atmosfera musical</h3><p>A playlist escolhida fica incorporada ao jogo e pode acompanhar toda a experiência.</p></div></article>
-        <article class="panel feature"><div class="featureIcon">⬡</div><div><h3>Kit físico 3D</h3><p>Dados, peões, fichas, marcador, roleta, bandeja e suporte de celular completam a mesa.</p></div></article>
-      </div>
+      <section id="how" class="sectionBlock">
+        <div class="sectionHead"><span class="eyebrow">Lógica da experiência</span><h2>Uma etapa prepara a próxima.</h2><p>Nada aparece solto. Cada mecanismo coleta um sinal da experiência e entrega contexto ao seguinte.</p></div>
+        <div class="journeyFlow">
+          <article class="flowCard"><span>01</span><div><b>Preparação</b><p>Nomes, duração e intensidade definem o ritmo da jornada.</p></div></article>
+          <article class="flowCard"><span>02</span><div><b>Conversa guiada</b><p>As cartas avançam em ordem: abertura, descoberta, conexão, romance e experiência.</p></div></article>
+          <article class="flowCard"><span>03</span><div><b>Insights</b><p>O casal pode registrar frases importantes sem armazená-las fora do dispositivo.</p></div></article>
+          <article class="flowCard"><span>04</span><div><b>Dados da Faísca</b><p>Transformam o clima construído em uma proposta simples de proximidade.</p></div></article>
+          <article class="flowCard"><span>05</span><div><b>Tarô com IA</b><p>Cartas, pergunta, insights e estatísticas são reunidos em uma leitura robusta.</p></div></article>
+          <article class="flowCard"><span>06</span><div><b>Fechamento</b><p>A leitura termina com pontos de atenção, ações concretas e uma pergunta para o casal.</p></div></article>
+        </div>
+      </section>
     </section>
 
     <section class="view hidden" id="setup">
-      <div class="sectionHead"><h2>Preparar a rodada</h2><p>Escolham o ritmo. As cartas serão filtradas pelo nível e organizadas para criar uma progressão natural.</p></div>
+      <div class="sectionHead"><span class="eyebrow">Etapa 1 · Preparação</span><h2>Configure a jornada</h2><p>O jogo monta uma sequência progressiva. As perguntas não serão misturadas sem critério.</p></div>
       <div class="grid grid2">
         <div class="panel">
-          <div class="field"><label for="p1">Nome da primeira pessoa</label><input id="p1" maxlength="24" placeholder="Nome ou apelido"/></div>
-          <div class="field"><label for="p2">Nome da segunda pessoa</label><input id="p2" maxlength="24" placeholder="Nome ou apelido"/></div>
-          <div class="field"><label for="duration">Duração</label><select id="duration"><option value="12">12 cartas · aproximadamente 20 min</option><option selected value="18">18 cartas · aproximadamente 35 min</option><option value="24">24 cartas · aproximadamente 50 min</option></select></div>
+          <div class="field"><label for="p1">Primeira pessoa</label><input id="p1" maxlength="24" placeholder="Nome ou apelido"/></div>
+          <div class="field"><label for="p2">Segunda pessoa</label><input id="p2" maxlength="24" placeholder="Nome ou apelido"/></div>
+          <div class="field"><label for="duration">Duração</label><select id="duration"><option value="12">Essencial · 12 cartas · cerca de 25 min</option><option selected value="18">Completa · 18 cartas · cerca de 40 min</option><option value="24">Profunda · 24 cartas · cerca de 60 min</option></select></div>
         </div>
         <div class="panel">
-          <b>Intensidade</b>
+          <b>Intensidade máxima</b>
           <div class="optionGrid" id="levels">
-            <button class="option" data-value="1"><b>Leve</b><small>Conversa, humor e descoberta.</small></button>
-            <button class="option on" data-value="2"><b>Conexão</b><small>Afeto, vínculo e romance.</small></button>
+            <button class="option" data-value="1"><b>Leve</b><small>Humor, rotina e descoberta.</small></button>
+            <button class="option on" data-value="2"><b>Conexão</b><small>Afeto, confiança e romance.</small></button>
             <button class="option" data-value="3"><b>Faísca</b><small>Flerte e proximidade não explícita.</small></button>
           </div>
-          <div class="audit" style="margin-top:14px"><span>✓</span><div><b>Auditoria editorial concluída</b><span>Uma ideia por carta, linguagem direta, explicação objetiva e instrução clara de resposta.</span></div></div>
+          <div class="audit"><span>✓</span><div><b>Sequência editorial controlada</b><span>Cada etapa possui objetivo, categorias próprias e transição lógica.</span></div></div>
         </div>
       </div>
-      <button class="btn primary wide" id="startGame" style="margin-top:14px">Iniciar rodada</button>
-      <p id="setupError" style="color:#ff9a91;text-align:center"></p>
+      <div class="panel journeyPreview">
+        <b>Ordem da experiência</b>
+        <div class="miniSteps"><span>Abertura</span><i>→</i><span>Descoberta</span><i>→</i><span>Conexão</span><i>→</i><span>Romance</span><i>→</i><span>Experiência</span></div>
+      </div>
+      <button class="btn primary wide" id="startGame">Montar e iniciar jornada</button>
+      <p id="setupError" class="errorText"></p>
     </section>
 
     <section class="view hidden" id="game">
-      <div class="gameTop"><button aria-label="Sair da partida" class="btn subtle" id="exitGame">Fechar</button><div class="progress"><div class="progressBar" id="progressBar"></div></div><div class="roundMeta" id="roundMeta"></div></div>
+      <div class="gameTop"><button class="btn subtle" id="exitGame">Fechar</button><div class="progress"><div class="progressBar" id="progressBar"></div></div><div class="roundMeta" id="roundMeta"></div></div>
+      <div class="phaseRail" id="phaseRail" aria-label="Etapas da jornada"></div>
+      <section class="phaseIntro"><span class="phaseIcon" id="phaseIcon">○</span><div><b id="phaseTitle">Abertura</b><p id="phaseDescription"></p></div></section>
       <article class="panel gameCard">
         <div class="cardTop"><span class="badge" id="categoryBadge"></span><span class="badge level" id="levelBadge"></span><button aria-label="Favoritar" class="fav" id="favorite">♡</button></div>
         <div class="turn" id="turn"></div>
         <div class="question" id="question"></div>
-        <div class="explainGrid"><div class="explain"><b>◎ Por que essa carta?</b><p id="why"></p></div><div class="explain"><b>→ Como responder</b><p id="how"></p></div></div>
+        <div class="explainGrid">
+          <div class="explain"><b>◎ Por que essa carta?</b><p id="why"></p></div>
+          <div class="explain"><b>→ Como responder</b><p id="how"></p></div>
+        </div>
         <div class="consentNote" id="consentNote"></div>
+        <details class="insightBox"><summary>Registrar um insight desta carta</summary><div class="insightRow"><input id="insightInput" maxlength="180" placeholder="Ex.: Percebemos que valorizamos programas simples."/><button class="btn secondary" id="saveInsight">Guardar</button></div><small>Fica apenas na memória desta página e será usado para contextualizar o Tarô.</small></details>
       </article>
-      <div class="gameActions"><button class="btn danger" id="skip">Prefiro não responder</button><button class="btn secondary" id="adapt">Adaptar a pergunta</button><button class="btn primary" id="answer">Respondido · próxima carta</button></div>
+      <div class="gameActions"><button class="btn danger" id="skip">Prefiro não responder</button><button class="btn secondary" id="adapt">Adaptar</button><button class="btn primary" id="answer">Respondido · continuar</button></div>
     </section>
 
     <section class="view hidden" id="result">
-      <div class="sectionHead"><h2>Rodada concluída</h2><p id="resultText"></p></div>
-      <div class="metrics"><div class="metric"><strong id="answeredStat">0</strong><span>respondidas</span></div><div class="metric"><strong id="skippedStat">0</strong><span>alternativas</span></div><div class="metric"><strong id="favStat">0</strong><span>favoritas</span></div><div class="metric"><strong id="sparkStat">0</strong><span>pontos de faísca</span></div></div>
-      <div class="grid grid2" style="margin-top:14px"><button class="btn primary wide" data-go="tarot">Finalizar com Tarô IA</button><button class="btn secondary wide" id="playAgain">Jogar novamente</button></div>
-    </section>
-
-    <section class="view hidden" id="tarot">
-      <div class="sectionHead"><h2>Tarô Cigano com IA</h2><p>Tiragem de três cartas interpretada pelo Gemini a partir da pergunta, das posições e dos sinais da partida.</p></div>
-      <div class="tarotHero">
-        <div class="panel tarotVisual"><div class="orbit"></div><div class="orbit two"></div><div class="moon">☾</div></div>
-        <div class="panel tarotIntro">
-          <span class="badge aiBadge">Gemini · contexto completo</span>
-          <h3 style="font-size:32px;margin:15px 0 8px;letter-spacing:-1px">Uma leitura construída para este encontro.</h3>
-          <p>A IA interpreta o Baralho Cigano como linguagem simbólica de reflexão. Ela não declara sentimentos de terceiros ou acontecimentos futuros como fatos.</p>
-          <div class="field"><label for="tarotQuestion">Pergunta para a leitura</label><input id="tarotQuestion" maxlength="240" placeholder="Ex.: O que podemos compreender melhor sobre nossa conexão?"/></div>
-        </div>
+      <div class="sectionHead"><span class="eyebrow">Etapa concluída</span><h2>Mapa da jornada</h2><p id="resultText"></p></div>
+      <div class="metrics"><div class="metric"><strong id="answeredStat">0</strong><span>respondidas</span></div><div class="metric"><strong id="skippedStat">0</strong><span>alternativas</span></div><div class="metric"><strong id="favStat">0</strong><span>favoritas</span></div><div class="metric"><strong id="sparkStat">0</strong><span>faíscas</span></div></div>
+      <div class="grid grid2 resultGrid">
+        <div class="panel"><h3>Etapas percorridas</h3><div id="phaseSummary" class="phaseSummary"></div></div>
+        <div class="panel"><h3>Insights guardados</h3><div id="insightSummary" class="insightSummary"></div></div>
       </div>
-
-      <section class="panel aiSetup" aria-label="Configuração da inteligência artificial">
-        <div class="aiTitle"><div><span class="eyebrow">Inteligência externa</span><h3>Conectar Gemini gratuito</h3><p>A chave permanece somente na memória desta página e desaparece ao fechá-la. Ela não é gravada no GitHub.</p></div><span class="aiState" id="aiState">Não conectado</span></div>
-        <div class="aiGrid">
-          <div class="field"><label for="geminiKey">Chave da API Gemini</label><input id="geminiKey" type="password" autocomplete="off" placeholder="Cole sua chave do Google AI Studio"/></div>
-          <div class="field"><label for="geminiModel">Modelo</label><select id="geminiModel"><option value="gemini-3.6-flash" selected>Gemini 3.6 Flash · recomendado</option><option value="gemini-3.5-flash">Gemini 3.5 Flash · alternativa</option></select></div>
-        </div>
-        <div class="aiActions"><button class="btn primary" id="connectAI">Conectar IA</button><a class="btn secondary linkBtn" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Criar chave gratuita</a><button class="btn subtle" id="disconnectAI">Desconectar</button></div>
-        <p class="securityNote">Para um site público de produção, o ideal é usar um backend protegido. Nesta edição pessoal, a chave é fornecida por quem está jogando e não é salva pelo aplicativo.</p>
-      </section>
-
-      <div class="tarotControls"><button class="btn primary" id="drawTarot">Tirar três cartas e interpretar</button><button class="btn secondary" id="clearTarot">Limpar</button></div>
-      <div class="spread" id="spread"></div>
-      <div class="panel reading hidden" id="reading">
-        <div class="readingHead"><h3>Leitura integrada</h3><span id="readingEngine" class="badge">Motor local</span></div>
-        <div id="readingLoading" class="readingLoading hidden"><span class="spinner"></span><span>A IA está relacionando as cartas com a pergunta e a partida…</span></div>
-        <div id="readingText" class="readingText"></div>
-        <div class="readingPrompt"><b>Pergunta para o casal</b><span id="readingPrompt"></span></div>
-        <p class="disclaimer">Leitura simbólica para entretenimento e reflexão. Não prevê o futuro nem substitui comunicação, consentimento ou decisões reais.</p>
-      </div>
+      <div class="panel nextFlow"><span class="eyebrow">Próxima sequência recomendada</span><h3>1. Dados → 2. Tarô IA</h3><p>Os dados criam um último momento compartilhado. Depois, o Tarô sintetiza toda a jornada, incluindo o resultado dos dados.</p><div class="grid grid2"><button class="btn primary wide" data-go="dice">Rolar os dados</button><button class="btn secondary wide" data-go="tarot">Ir direto ao Tarô</button></div></div>
+      <button class="btn subtle wide" id="playAgain">Reiniciar a jornada</button>
     </section>
 
     <section class="view hidden" id="dice">
-      <div class="sectionHead"><h2>Dados da Faísca</h2><p>Os três dados criam uma proposta de proximidade: ação, duração e clima. O resultado pode ser aceito, adaptado ou trocado.</p></div>
+      <div class="sectionHead"><span class="eyebrow">Etapa 4 · Ritual da Faísca</span><h2>Dados da Faísca</h2><p>Os dados não são uma atividade isolada: o resultado pode ser salvo e entregue ao Tarô como o último símbolo da experiência.</p></div>
       <div class="diceGrid"><div class="die" id="dieAction"><span class="dieNum">1</span><small>Ação</small><b>Dar as mãos</b></div><div class="die" id="dieTime"><span class="dieNum">1</span><small>Duração</small><b>5 segundos</b></div><div class="die" id="dieMood"><span class="dieNum">1</span><small>Clima</small><b>Divertido</b></div></div>
-      <div class="panel" style="margin-top:14px"><div class="combo" id="diceCombo">Dar as mãos por 5 segundos, de modo divertido.</div><p style="color:var(--muted);line-height:1.6">A proposta só acontece quando os dois concordarem. Adaptar a ação ou escolher outra combinação também faz parte do jogo.</p><button class="btn primary wide" id="rollDice">Rolar os três dados</button></div>
+      <div class="panel diceResult"><div class="combo" id="diceCombo">Dar as mãos por 5 segundos, de modo divertido.</div><p>A proposta pode ser aceita, adaptada ou trocada. O valor do mecanismo está na escolha conjunta.</p><div class="grid grid2"><button class="btn primary wide" id="rollDice">Rolar os três dados</button><button class="btn secondary wide" id="saveDice">Guardar para o Tarô</button></div><div id="diceSaved" class="savedStatus"></div></div>
+    </section>
+
+    <section class="view hidden" id="tarot">
+      <div class="sectionHead"><span class="eyebrow">Etapa 5 · Síntese</span><h2>Tarô Cigano com IA</h2><p>A leitura combina simbolismo Lenormand com o contexto real produzido pela jornada. Ela é reflexiva e não afirma conhecer pensamentos secretos ou o futuro como fatos.</p></div>
+      <div class="tarotLogic panel">
+        <div><b>O que entra na leitura</b><p>Pergunta, cartas e posições, nomes, intensidade, etapas, participação, favoritas, insights e resultado dos dados.</p></div><div class="logicArrow">→</div><div><b>O que sai da leitura</b><p>Visão geral, três posições, combinação, dimensões da relação, resposta à pergunta, atenção, plano prático e pergunta final.</p></div>
+      </div>
+      <section class="panel aiSetup" aria-label="Configuração da inteligência artificial">
+        <div class="aiTitle"><div><span class="eyebrow">Motor externo</span><h3>Conectar Gemini</h3><p>A chave permanece somente na memória da página. O aplicativo consulta a lista de modelos disponíveis e seleciona um modelo Flash compatível.</p></div><span class="aiState" id="aiState">Não conectado</span></div>
+        <div class="aiGrid"><div class="field"><label for="geminiKey">Chave da API Gemini</label><input id="geminiKey" type="password" autocomplete="off" placeholder="Cole sua chave do Google AI Studio"/></div><div class="field"><label for="geminiModel">Modelo disponível</label><select id="geminiModel"><option value="gemini-3.6-flash">Gemini 3.6 Flash</option><option value="gemini-3.5-flash">Gemini 3.5 Flash</option></select></div></div>
+        <div class="aiActions"><button class="btn primary" id="connectAI">Verificar e conectar</button><a class="btn secondary linkBtn" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Criar chave</a><button class="btn subtle" id="disconnectAI">Desconectar</button></div>
+        <p class="securityNote">Para publicação comercial, use um backend protegido. Nesta edição pessoal, nenhuma chave é salva pelo site.</p>
+      </section>
+      <div class="grid grid2 tarotInputs">
+        <div class="panel"><div class="field"><label for="tarotQuestion">Pergunta principal</label><textarea id="tarotQuestion" maxlength="500" rows="5" placeholder="Ex.: O que esta experiência revela sobre a forma como construímos conexão?"></textarea></div></div>
+        <div class="panel"><div class="field"><label for="tarotContext">Contexto adicional opcional</label><textarea id="tarotContext" maxlength="900" rows="5" placeholder="Registre algo que apareceu na conversa e deve ser considerado na leitura."></textarea></div><div id="autoContext" class="autoContext"></div></div>
+      </div>
+      <div class="tarotControls"><button class="btn primary" id="drawTarot">Tirar três cartas e gerar leitura completa</button><button class="btn secondary hidden" id="retryTarot">Tentar novamente</button><button class="btn subtle" id="clearTarot">Limpar</button></div>
+      <div class="spread" id="spread"></div>
+      <div class="panel reading hidden" id="reading"><div class="readingHead"><div><h3>Leitura completa</h3><small id="readingMeta"></small></div><span id="readingEngine" class="badge">Motor local</span></div><div id="readingLoading" class="readingLoading hidden"><span class="spinner"></span><span>A IA está cruzando cartas, posições e contexto da jornada…</span></div><div id="readingSections" class="readingSections"></div><p class="disclaimer">Leitura simbólica para entretenimento e reflexão. Não prevê o futuro nem substitui comunicação, consentimento ou decisões reais.</p></div>
     </section>
 
     <section class="view hidden" id="kit">
-      <div class="sectionHead"><h2>Kit físico para impressão 3D</h2><p>Peças dimensionadas para uma mesa compacta e compatíveis com impressão em PLA.</p></div>
-      <div class="panel kitList">
-        <div class="kitItem"><div class="qty">3</div><div><b>Dados D6 temáticos</b><p>Ação, duração e clima.</p></div><div class="spec">24–26 mm</div></div>
-        <div class="kitItem"><div class="qty">18</div><div><b>Fichas de Faísca</b><p>Pontuação e memória visual da rodada.</p></div><div class="spec">30 × 3,2 mm</div></div>
-        <div class="kitItem"><div class="qty">2</div><div><b>Peões de casal</b><p>Indicam turno e identidade dos jogadores.</p></div><div class="spec">35–40 mm</div></div>
-        <div class="kitItem"><div class="qty">6</div><div><b>Fichas de decisão</b><p>Aceitar, adaptar e escolher alternativa.</p></div><div class="spec">32 × 3,2 mm</div></div>
-        <div class="kitItem"><div class="qty">1</div><div><b>Marcador de turno</b><p>Coração ampliado e visível.</p></div><div class="spec">45–55 mm</div></div>
-        <div class="kitItem"><div class="qty">1</div><div><b>Suporte de celular</b><p>Posiciona o aplicativo no centro da mesa.</p></div><div class="spec">90 mm</div></div>
-        <div class="kitItem"><div class="qty">1</div><div><b>Bandeja e roleta</b><p>Organização das fichas e seleção de categoria.</p></div><div class="spec">180 × 120 mm</div></div>
-      </div>
-      <div class="panel" style="margin-top:14px"><b>Configuração recomendada</b><p style="color:var(--muted);line-height:1.65">PLA · camada de 0,20 mm · três paredes · preenchimento de 15% a 20% · suportes normalmente desnecessários.</p><button class="btn secondary wide" id="kitInfo">Ver orientação do pacote 3D</button></div>
+      <div class="sectionHead"><span class="eyebrow">Extensão física</span><h2>Kit para impressão 3D</h2><p>As peças representam mecanismos já presentes no fluxo digital, evitando acessórios sem função.</p></div>
+      <div class="panel kitList"><div class="kitItem"><div class="qty">3</div><div><b>Dados D6 temáticos</b><p>Ação, duração e clima da etapa Ritual da Faísca.</p></div><div class="spec">24–26 mm</div></div><div class="kitItem"><div class="qty">18</div><div><b>Fichas de Faísca</b><p>Materializam a participação da jornada.</p></div><div class="spec">30 × 3,2 mm</div></div><div class="kitItem"><div class="qty">2</div><div><b>Peões do casal</b><p>Representam turnos e identidade.</p></div><div class="spec">35–40 mm</div></div><div class="kitItem"><div class="qty">6</div><div><b>Fichas de decisão</b><p>Aceitar, adaptar e escolher alternativa.</p></div><div class="spec">32 × 3,2 mm</div></div><div class="kitItem"><div class="qty">1</div><div><b>Marcador de etapa</b><p>Acompanha a progressão da jornada.</p></div><div class="spec">45–55 mm</div></div><div class="kitItem"><div class="qty">1</div><div><b>Suporte de celular</b><p>Centraliza o aplicativo na mesa.</p></div><div class="spec">90 mm</div></div><div class="kitItem"><div class="qty">1</div><div><b>Bandeja e roleta</b><p>Organizam fichas e decisões.</p></div><div class="spec">180 × 120 mm</div></div></div>
+      <div class="panel" style="margin-top:14px"><b>Configuração recomendada</b><p class="muted">PLA · camada de 0,20 mm · três paredes · preenchimento de 15% a 20% · suportes normalmente desnecessários.</p><button class="btn secondary wide" id="kitInfo">Ver orientação do pacote 3D</button></div>
     </section>
 
-    <section class="view hidden" id="credits">
-      <div class="credits"><div class="eyebrow">Criação original</div><div class="signature">Esdra Felipe</div><p>Conceito, direção criativa e autoria de Primeira Faísca. Edição Couple v4.0 com jogo híbrido, perguntas editoriais, dados, kit físico, música integrada e Tarô Cigano interpretado por IA.</p><span class="version">Primeira Faísca · 2026</span></div>
-    </section>
+    <section class="view hidden" id="credits"><div class="credits"><div class="eyebrow">Criação original</div><div class="signature">Esdra Felipe</div><p>Conceito, direção criativa e autoria de Primeira Faísca. Edição Couple v5.0 com jornada progressiva, perguntas auditadas, dados, kit físico, música integrada e Tarô Cigano interpretado por IA.</p><span class="version">Primeira Faísca · 2026</span></div></section>
   </main>
-
-  <footer class="footer">Primeira Faísca · Criado por Esdra Felipe · Chaves de IA não são armazenadas</footer>
+  <footer class="footer">Primeira Faísca · Criado por Esdra Felipe · Chaves e insights não são armazenados</footer>
 </div>
 
-<div class="modal hidden" id="skipModal" role="dialog" aria-modal="true" aria-labelledby="skipTitle">
-  <div class="modalBox"><h3 id="skipTitle">Alternativa da rodada</h3><p>Caso prefira não responder, escolha uma prenda previamente combinada ou cumpra uma alternativa escolhida em conjunto.</p><div class="alternative" id="alternative"></div><div class="modalActions"><button class="btn secondary" id="newAlternative">Sortear outra</button><button class="btn primary" id="acceptAlternative">Usar esta alternativa</button></div><button class="btn subtle wide" id="cancelSkip" style="margin-top:9px">Voltar à pergunta</button></div>
-</div>
+<div class="modal hidden" id="skipModal" role="dialog" aria-modal="true" aria-labelledby="skipTitle"><div class="modalBox"><h3 id="skipTitle">Alternativa da rodada</h3><p>Caso prefira não responder, escolha uma prenda previamente combinada ou cumpra uma alternativa escolhida em conjunto.</p><div class="alternative" id="alternative"></div><div class="modalActions"><button class="btn secondary" id="newAlternative">Sortear outra</button><button class="btn primary" id="acceptAlternative">Usar esta alternativa</button></div><button class="btn subtle wide" id="cancelSkip">Voltar à pergunta</button></div></div>
 <div aria-live="polite" class="toast" id="toast"></div>
-<script src="app-v4.js"></script>
+<script src="app-v5.js"></script>
 </body>
 </html>

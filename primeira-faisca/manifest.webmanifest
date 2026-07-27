@@ -1,7 +1,7 @@
 {
   "name": "Primeira Faísca — por Esdra Felipe",
   "short_name": "Faísca",
-  "description": "Jogo premium para casais com perguntas auditadas, dados, kit 3D, trilha Spotify e Tarô Cigano interpretado por IA Gemini.",
+  "description": "Jornada premium para casais com perguntas auditadas em cinco etapas, dados, kit 3D, trilha Spotify e Tarô Cigano com leitura estruturada por IA.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

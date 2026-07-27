@@ -1,4 +1,4 @@
-const CACHE='primeira-faisca-v7';
+const CACHE='primeira-faisca-v7-1';
 const ASSETS=['./','./index.html','./manifest.webmanifest','./icon.svg','./style-v7.css','./style-v7-core.css','./style-v7-ui.css','./app-v7.js','./data-cards-v3.js','./data-tarot-v3.js','./core-v7-1.js','./core-v7-2.js','./core-v7-3.js','./core-v7-4.js'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));

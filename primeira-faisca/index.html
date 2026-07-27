@@ -4,157 +4,48 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#050506">
-  <meta name="description" content="Primeira Faísca v7 — jornada inteligente para casais, criada por Esdra Felipe, com dealer Gemini, perguntas guiadas, dados e Tarô Cigano contextual.">
+  <meta name="description" content="Primeira Faísca v8 — experiência inteligente para casais, criada por Esdra Felipe.">
   <title>Primeira Faísca — Esdra Felipe</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg">
-  <link rel="stylesheet" href="style-v7.css">
+  <link rel="stylesheet" href="style-v8.css">
+  <script defer src="data-cards-v3.js?v=8.0.1"></script>
+  <script defer src="data-tarot-v3.js?v=8.0.1"></script>
+  <script defer src="app-v8.js?v=8.0.1"></script>
 </head>
 <body>
   <div class="aurora aurora-a"></div><div class="aurora aurora-b"></div>
-  <div class="appShell">
+  <div class="app-shell">
     <header class="topbar">
-      <button class="brand" data-view="home" aria-label="Início">
-        <span class="brandIcon">♥</span>
-        <span><b>Primeira Faísca</b><small>por Esdra Felipe</small></span>
-      </button>
-      <div class="journeyStatus" aria-label="Progresso da experiência">
-        <span id="globalStep">Início</span>
-        <div class="globalTrack"><i id="globalProgress"></i></div>
-      </div>
-      <div class="topActions">
-        <button class="iconBtn" id="musicToggle" aria-label="Ativar música">♫</button>
-        <button class="statusPill" id="openAIConfig"><span id="aiDot"></span><span id="aiTopStatus">IA local</span></button>
-      </div>
+      <button class="brand" data-action="go-home" aria-label="Ir para o início"><span class="brand-mark">♥</span><span><b>Primeira Faísca</b><small>por Esdra Felipe</small></span></button>
+      <div class="global-progress"><span id="globalStep">Início</span><div><i id="globalBar"></i></div></div>
+      <div class="top-actions"><button class="icon-btn" id="musicToggle" data-action="toggle-music" aria-label="Ativar música">♫</button><button class="status-pill" data-action="open-ai"><span id="aiDot"></span><span id="aiTopStatus">Motor local</span></button></div>
     </header>
-
-    <aside class="hostBar" id="hostBar" aria-live="polite">
-      <div class="hostOrb">✦</div>
-      <div class="hostCopy"><div class="hostLabel"><b id="hostRole">Dealer da experiência</b><span id="hostMode">modo local</span></div><p id="hostMessage">Eu organizo cada etapa e explico por que ela vem agora.</p></div>
-      <button class="ghostBtn compact" id="askHost">Perguntar</button>
-    </aside>
-
+    <aside class="hostbar" id="hostbar" aria-live="polite"><span class="host-orb">✦</span><div><div class="host-meta"><b id="hostRole">Anfitriã da experiência</b><small id="hostMode">motor local</small></div><p id="hostMessage">Eu conduzo cada etapa e mantenho a sequência clara.</p></div><button class="btn ghost compact" data-action="open-host">Perguntar</button></aside>
     <main>
-      <section class="view" id="home">
-        <div class="hero">
-          <span class="eyebrow">Couple Experience · v7.0</span>
-          <h1>Uma conversa.<br><span>Uma jornada inteira.</span></h1>
-          <p>Um roteiro vivo que conduz o casal da curiosidade ao fechamento, com perguntas claras, mediação inteligente, ritual, Tarô Cigano e um final estruturado.</p>
-          <div class="heroActions"><button class="primaryBtn" data-view="setup">Começar a experiência</button><button class="ghostBtn" data-scroll="instructions">Ver como funciona</button></div>
-        </div>
-
-        <section class="soundPanel">
-          <div><span class="eyebrow">Trilha oficial</span><h2>Atmosfera contínua</h2><p>A playlist acompanha toda a jornada. O navegador pode exigir o primeiro toque para liberar o áudio.</p></div>
-          <div id="spotifyEmbed" class="spotifyEmbed"></div>
-          <div class="soundStatus" id="musicStatus">Carregando o Spotify…</div>
-        </section>
-
-        <section class="route" id="instructions">
-          <div class="sectionTitle"><span class="eyebrow">Sequência obrigatória</span><h2>Nada aparece sem motivo.</h2><p>Cada mecanismo recebe informações do anterior e prepara o próximo.</p></div>
-          <div class="routeGrid">
-            <article><span>01</span><b>Preparação</b><p>Nomes, intensidade, duração e estilo da anfitriã.</p></article>
-            <article><span>02</span><b>Jornada</b><p>Abertura, descoberta, conexão, romance e experiência.</p></article>
-            <article><span>03</span><b>Mapa</b><p>Participação, favoritas, insights e síntese do percurso.</p></article>
-            <article><span>04</span><b>Ritual</b><p>Dados criam ação, duração e clima para fechar o encontro.</p></article>
-            <article><span>05</span><b>Tarô</b><p>As cartas interpretam o conjunto, não um fragmento isolado.</p></article>
-            <article><span>06</span><b>Encerramento</b><p>Clareza, conversas pendentes, próximo passo e memória final.</p></article>
-          </div>
-        </section>
-
-        <section class="intelligence">
-          <div class="sectionTitle"><span class="eyebrow">Inteligência orquestrada</span><h2>Uma IA, cinco papéis.</h2></div>
-          <div class="roleGrid">
-            <article><span>♠</span><div><b>Dealer</b><p>Controla ritmo e transições.</p></div></article>
-            <article><span>◇</span><div><b>Mediadora</b><p>Adapta perguntas com precisão.</p></div></article>
-            <article><span>○</span><div><b>Diretora</b><p>Analisa o percurso sem diagnosticar.</p></div></article>
-            <article><span>☾</span><div><b>Cigana simbólica</b><p>Interpreta o Lenormand.</p></div></article>
-            <article><span>✦</span><div><b>Editora final</b><p>Constrói um encerramento coerente.</p></div></article>
-          </div>
-        </section>
+      <section class="view" id="view-home">
+        <div class="hero"><span class="eyebrow">Couple Experience · v8.0</span><h1>Uma conversa.<br><em>Uma experiência inteira.</em></h1><p>Uma jornada viva e coerente: preparação, descoberta, conexão, Momento da Química, Tarô Cigano e encerramento estruturado.</p><div class="button-row"><button class="btn primary" data-action="go-setup">Começar</button><button class="btn ghost" data-action="scroll-instructions">Como funciona</button></div></div>
+        <section class="surface soundtrack"><div><span class="eyebrow">Trilha oficial</span><h2>Atmosfera contínua</h2><p>A playlist acompanha a experiência. O navegador pode exigir o primeiro toque para liberar o áudio.</p></div><div id="spotifyEmbed" class="spotify-embed"></div><small id="musicStatus">Carregando o Spotify…</small></section>
+        <section class="instructions" id="instructions"><div class="section-title"><span class="eyebrow">Sequência completa</span><h2>Cada etapa prepara a próxima.</h2></div><div class="route-grid"><article><span>01</span><b>Preparação</b><p>Nomes, duração, intensidade e estilo.</p></article><article><span>02</span><b>Jornada</b><p>Cinco fases editoriais em ordem.</p></article><article><span>03</span><b>Mapa</b><p>Síntese, favoritas e insights.</p></article><article><span>04</span><b>Momento da Química</b><p>Ação, duração e clima escolhidos pelos dados.</p></article><article><span>05</span><b>Tarô</b><p>Leitura simbólica ligada ao percurso.</p></article><article><span>06</span><b>Encerramento</b><p>Clareza, continuidade e memória final.</p></article></div><div class="notice"><b>Regra central</b><p>Responder, adaptar, escolher alternativa ou interromper são escolhas válidas. Nenhuma atividade exige justificativa.</p></div></section>
       </section>
-
-      <section class="view hidden" id="setup">
-        <div class="pageHead"><span class="eyebrow">Etapa 1 de 6</span><h2>Preparar a experiência</h2><p>As escolhas abaixo determinam o ritmo, a profundidade e a atuação da anfitriã.</p></div>
-        <div class="twoCol">
-          <div class="surface">
-            <label>Primeira pessoa<input id="p1" maxlength="28" placeholder="Nome ou apelido"></label>
-            <label>Segunda pessoa<input id="p2" maxlength="28" placeholder="Nome ou apelido"></label>
-            <label>Duração<select id="duration"><option value="12">Essencial · 12 cartas</option><option value="18" selected>Completa · 18 cartas</option><option value="24">Profunda · 24 cartas</option></select></label>
-          </div>
-          <div class="surface">
-            <fieldset><legend>Intensidade máxima</legend><div class="segmented" id="levels"><button data-value="1">Leve</button><button data-value="2" class="active">Conexão</button><button data-value="3">Faísca</button></div></fieldset>
-            <label>Personalidade da anfitriã<select id="hostStyle"><option value="elegante">Elegante e precisa</option><option value="leve">Leve e divertida</option><option value="mistica">Mística e contemplativa</option></select></label>
-            <label>Autonomia<select id="autonomy"><option value="guided">Guiada · age quando solicitada</option><option value="active" selected>Maestro · age nas transições e sínteses</option></select></label>
-            <p class="microcopy">O modo Maestro não remove limites da API ou do navegador; ele remove limites artificiais do jogo e atua sempre que há ganho real de experiência.</p>
-          </div>
-        </div>
-
-        <section class="surface aiConfig" id="aiConfig">
-          <div class="aiHeader"><div><span class="eyebrow">Gemini</span><h3>Conectar inteligência externa</h3><p>A chave permanece somente na memória da página e não é salva no repositório.</p></div><span class="connectionState" id="aiState">Não conectado</span></div>
-          <div class="aiFields"><label>Chave da API<input id="geminiKey" type="password" autocomplete="off" placeholder="Cole a chave do Google AI Studio"></label><label>Modelo<select id="geminiModel"><option value="">Conecte para listar modelos</option></select></label></div>
-          <div class="buttonRow"><button class="primaryBtn" id="connectAI">Conectar</button><a class="ghostBtn linkButton" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Criar chave</a><button class="textBtn" id="disconnectAI">Desconectar</button></div>
-          <p class="microcopy">A aplicação tenta primeiro a API Interactions e usa <code>generateContent</code> como transporte reserva. A cota pertence à conta Gemini utilizada.</p>
-        </section>
-        <p class="errorText" id="setupError"></p>
-        <button class="primaryBtn wide" id="startJourney">Montar jornada inteligente</button>
+      <section class="view hidden" id="view-setup">
+        <div class="page-head"><span class="eyebrow">Etapa 1 de 6</span><h2>Preparar a experiência</h2><p>As escolhas abaixo definem o ritmo e a profundidade.</p></div>
+        <div class="two-col"><section class="surface form-stack"><label>Primeira pessoa<input id="p1" maxlength="28" placeholder="Nome ou apelido"></label><label>Segunda pessoa<input id="p2" maxlength="28" placeholder="Nome ou apelido"></label><label>Duração<select id="duration"><option value="12">Essencial · 12 cartas</option><option value="18" selected>Completa · 18 cartas</option><option value="24">Profunda · 24 cartas</option></select></label></section><section class="surface form-stack"><fieldset><legend>Intensidade máxima</legend><div class="segmented" id="levels"><button type="button" data-level="1">Leve</button><button type="button" data-level="2" class="active">Conexão</button><button type="button" data-level="3">Faísca</button></div></fieldset><label>Personalidade da anfitriã<select id="hostStyle"><option value="elegante">Elegante e precisa</option><option value="leve">Leve e divertida</option><option value="mistica">Mística e contemplativa</option></select></label><label>Atuação<select id="autonomy"><option value="guided">Guiada · somente quando solicitada</option><option value="active" selected>Maestro · transições automáticas locais</option></select></label></section></div>
+        <section class="surface ai-panel" id="aiPanel"><div class="ai-head"><div><span class="eyebrow">Inteligência opcional</span><h3>Motor local ilimitado + Gemini opcional</h3><p>O motor local funciona sem chave e sem limite de tokens. O Gemini apenas aprofunda algumas respostas e possui cotas próprias.</p></div><span class="connection" id="aiState">Motor local ativo</span></div><div class="ai-fields"><label>Chave Gemini<input id="geminiKey" type="password" autocomplete="off" placeholder="Opcional: cole a chave do Google AI Studio"></label><label>Modelo<select id="geminiModel"><option value="">Conecte para listar modelos</option></select></label></div><div class="button-row"><button class="btn secondary" data-action="connect-ai">Conectar Gemini</button><button class="btn text" data-action="disconnect-ai">Usar somente motor local</button></div><small id="aiHelp">Nenhuma API externa gratuita é ilimitada. A experiência nunca depende da API para continuar.</small></section>
+        <p class="error" id="setupError"></p><button class="btn primary wide" data-action="start">Montar jornada</button>
       </section>
-
-      <section class="view hidden" id="session">
-        <div class="sessionTop"><button class="textBtn" data-view="setup">Sair</button><div class="sessionProgress"><i id="sessionProgress"></i></div><b id="cardCounter">1 de 18</b></div>
-        <div class="phaseTimeline" id="phaseTimeline"></div>
-        <div class="phaseBanner"><span id="phaseSymbol">○</span><div><b id="phaseName">Abertura</b><p id="phaseDescription"></p></div></div>
-        <article class="questionCard">
-          <div class="cardMeta"><span id="categoryBadge"></span><span id="levelBadge"></span><button class="heartBtn" id="favorite" aria-label="Favoritar">♡</button></div>
-          <div class="turnLabel" id="turnLabel"></div>
-          <h2 id="questionText"></h2>
-          <div class="explainGrid"><div><span>POR QUE ESTA CARTA?</span><p id="cardReason"></p></div><div><span>COMO RESPONDER</span><p id="answerGuide"></p></div></div>
-          <div class="guidance" id="cardGuidance"></div>
-          <div class="insightRow"><input id="insightInput" maxlength="200" placeholder="Guarde uma descoberta desta conversa"><button class="ghostBtn compact" id="saveInsight">Guardar</button></div>
-        </article>
-        <div class="actionGrid"><button class="dangerBtn" id="alternativeBtn">Alternativa</button><button class="ghostBtn" id="adaptBtn">Adaptar com a mediadora</button><button class="primaryBtn" id="answeredBtn">Respondido · continuar</button></div>
-      </section>
-
-      <section class="view hidden" id="map">
-        <div class="pageHead"><span class="eyebrow">Etapa 3 de 6</span><h2>Mapa da jornada</h2><p>Antes do ritual, o sistema organiza o que aconteceu sem transformar participação em diagnóstico.</p></div>
-        <div class="metricGrid"><article><strong id="answeredMetric">0</strong><span>respondidas</span></article><article><strong id="skippedMetric">0</strong><span>alternativas</span></article><article><strong id="favoriteMetric">0</strong><span>favoritas</span></article><article><strong id="sparkMetric">0</strong><span>faíscas</span></article></div>
-        <div class="twoCol"><section class="surface"><h3>Etapas percorridas</h3><div id="phaseSummary"></div></section><section class="surface"><h3>Memória da sessão</h3><div id="insightSummary"></div></section></div>
-        <section class="surface synthesis"><span class="eyebrow">Diretora da experiência</span><h3>Síntese do percurso</h3><div id="journeySynthesis">A síntese aparecerá ao concluir a jornada.</div><button class="ghostBtn" id="regenerateSynthesis">Aprofundar com IA</button></section>
-        <button class="primaryBtn wide" data-view="ritual">Continuar para o ritual</button>
-      </section>
-
-      <section class="view hidden" id="ritual">
-        <div class="pageHead"><span class="eyebrow">Etapa 4 de 6</span><h2>Ritual da Faísca</h2><p>Os dados transformam o clima da conversa em um símbolo compartilhado que será levado ao Tarô.</p></div>
-        <div class="diceGrid"><article id="dieAction"><span>1</span><small>Ação</small><b>Dar as mãos</b></article><article id="dieTime"><span>1</span><small>Duração</small><b>5 segundos</b></article><article id="dieMood"><span>1</span><small>Clima</small><b>Divertido</b></article></div>
-        <section class="surface ritualResult"><h3 id="diceCombo">Dar as mãos por 5 segundos, de modo divertido.</h3><p id="diceMeaning">Role os dados para construir o símbolo final.</p><div class="buttonRow"><button class="primaryBtn" id="rollDice">Rolar</button><button class="ghostBtn" id="saveDice">Guardar no contexto</button></div><small id="diceSaved"></small></section>
-        <button class="primaryBtn wide" data-view="tarot">Continuar para o Tarô</button>
-      </section>
-
-      <section class="view hidden" id="tarot">
-        <div class="pageHead"><span class="eyebrow">Etapa 5 de 6</span><h2>Tarô Cigano contextual</h2><p>A leitura considera a pergunta, as três posições e tudo o que foi construído nas etapas anteriores.</p></div>
-        <div class="twoCol"><section class="surface"><label>Pergunta principal<textarea id="tarotQuestion" rows="5" maxlength="600" placeholder="O que esta experiência nos ajuda a compreender sobre nossa conexão?"></textarea></label></section><section class="surface"><label>Contexto adicional<textarea id="tarotContext" rows="5" maxlength="1000" placeholder="Algo importante que surgiu na conversa"></textarea></label><p class="autoContext" id="autoContext"></p></section></div>
-        <div class="buttonRow"><button class="primaryBtn" id="drawTarot">Tirar três cartas e interpretar</button><button class="ghostBtn hidden" id="retryTarot">Tentar novamente</button><button class="textBtn" id="clearTarot">Limpar</button></div>
-        <div class="spread" id="spread"></div>
-        <section class="surface reading hidden" id="reading"><div class="readingHead"><div><span class="eyebrow">Leitura completa</span><h3 id="readingTitle">Síntese Lenormand</h3><small id="readingMeta"></small></div><span class="connectionState" id="readingEngine">Motor local</span></div><div class="loading hidden" id="readingLoading"><i></i><span>Relacionando cartas, posições e percurso…</span></div><div id="readingSections"></div></section>
-        <button class="primaryBtn wide hidden" id="toClosing">Construir encerramento</button>
-      </section>
-
-      <section class="view hidden" id="closing">
-        <div class="pageHead"><span class="eyebrow">Etapa 6 de 6</span><h2>Encerramento estruturado</h2><p>O final transforma a experiência em clareza, continuidade e uma memória compartilhada.</p></div>
-        <div class="closingGrid" id="closingGrid"></div>
-        <section class="finalMoment"><span>✦</span><h3 id="finalPhrase">A experiência termina, a conversa continua.</h3><p id="finalInstruction"></p></section>
-        <div class="buttonRow"><button class="ghostBtn" id="regenerateClosing">Refazer encerramento</button><button class="primaryBtn" id="restart">Nova jornada</button></div>
-      </section>
-
-      <section class="view hidden" id="kit"><div class="pageHead"><span class="eyebrow">Extensão física</span><h2>Kit 3D</h2><p>Dados, fichas, marcador, peões, bandeja e suporte de celular correspondem aos mecanismos digitais.</p></div><section class="surface"><div class="kitList"><p><b>3 dados temáticos</b><span>Ação, duração e clima</span></p><p><b>18 fichas de Faísca</b><span>Pontuação e memória visual</span></p><p><b>2 peões</b><span>Turnos do casal</span></p><p><b>6 fichas de decisão</b><span>Responder, adaptar e alternativa</span></p><p><b>1 suporte de celular</b><span>Centro da mesa</span></p></div></section></section>
-      <section class="view hidden" id="credits"><div class="credits"><span class="eyebrow">Criação original</span><h2>Esdra Felipe</h2><p>Conceito, direção criativa e autoria de Primeira Faísca. Edição v7 com jornada sequencial, IA orquestrada, ritual, Tarô contextual e encerramento estruturado.</p></div></section>
+      <section class="view hidden" id="view-session"><div class="session-top"><button class="btn text" data-action="go-setup">Sair</button><div class="session-track"><i id="sessionBar"></i></div><b id="cardCounter">1 de 18</b></div><div class="phase-timeline" id="phaseTimeline"></div><div class="phase-banner"><span id="phaseSymbol">○</span><div><b id="phaseName">Abertura</b><p id="phaseDescription"></p></div></div><article class="question-card"><div class="card-meta"><span id="categoryBadge"></span><span id="levelBadge"></span><button class="heart-btn" id="favorite" data-action="favorite" aria-label="Favoritar">♡</button></div><div class="turn-label" id="turnLabel"></div><h2 id="questionText"></h2><div class="explain-grid"><div><span>POR QUE ESTA CARTA?</span><p id="cardReason"></p></div><div><span>COMO RESPONDER</span><p id="answerGuide"></p></div></div><div class="guidance" id="cardGuidance"></div><div class="insight-row"><input id="insightInput" maxlength="200" placeholder="Guarde uma descoberta desta conversa"><button class="btn ghost compact" data-action="save-insight">Guardar</button></div></article><div class="action-grid"><button class="btn danger" data-action="alternative">Alternativa</button><button class="btn ghost" data-action="adapt">Adaptar</button><button class="btn primary" data-action="answer">Respondido · continuar</button></div></section>
+      <section class="view hidden" id="view-map"><div class="page-head"><span class="eyebrow">Etapa 3 de 6</span><h2>Mapa da jornada</h2><p>O percurso é organizado antes do próximo momento.</p></div><div class="metric-grid"><article><strong id="answeredMetric">0</strong><span>respondidas</span></article><article><strong id="skippedMetric">0</strong><span>alternativas</span></article><article><strong id="favoriteMetric">0</strong><span>favoritas</span></article><article><strong id="sparkMetric">0</strong><span>faíscas</span></article></div><div class="two-col"><section class="surface"><h3>Etapas percorridas</h3><div id="phaseSummary"></div></section><section class="surface"><h3>Memória da sessão</h3><div id="insightSummary"></div></section></div><section class="surface synthesis"><span class="eyebrow">Diretora da experiência</span><h3>Síntese do percurso</h3><div id="journeySynthesis"></div><button class="btn ghost" data-action="refine-synthesis">Aprofundar com Gemini</button></section><button class="btn primary wide" data-action="go-chemistry">Continuar para o Momento da Química</button></section>
+      <section class="view hidden" id="view-chemistry"><div class="page-head"><span class="eyebrow">Etapa 4 de 6</span><h2>Momento da Química</h2><p>Os dados criam uma proposta romântica, leve e escolhida pelos dois.</p></div><div class="dice-grid"><article id="dieAction"><span>1</span><small>Ação</small><b>Dar as mãos</b></article><article id="dieTime"><span>1</span><small>Duração</small><b>5 segundos</b></article><article id="dieMood"><span>1</span><small>Clima</small><b>Divertido</b></article></div><section class="surface chemistry-result"><h3 id="diceCombo">Role os dados para criar o momento.</h3><p id="diceMeaning">O resultado poderá ser aceito, adaptado ou rolado novamente.</p><div class="button-row"><button class="btn secondary" data-action="roll">Rolar os dados</button><button class="btn primary" id="continueTarot" data-action="continue-tarot" disabled>Guardar momento e continuar</button></div><small id="diceSaved">Role os dados para liberar a continuação.</small></section></section>
+      <section class="view hidden" id="view-tarot"><div class="page-head"><span class="eyebrow">Etapa 5 de 6</span><h2>Tarô Cigano contextual</h2><p>A leitura considera a pergunta, as cartas e o percurso completo.</p></div><div class="two-col"><section class="surface"><label>Pergunta principal<textarea id="tarotQuestion" rows="5" maxlength="600" placeholder="O que esta experiência nos ajuda a compreender sobre nossa conexão?"></textarea></label></section><section class="surface"><label>Contexto adicional<textarea id="tarotContext" rows="5" maxlength="1000" placeholder="Algo importante que surgiu na conversa"></textarea></label><p class="auto-context" id="autoContext"></p></section></div><div class="button-row"><button class="btn primary" id="drawTarot" data-action="draw-tarot">Tirar três cartas e interpretar</button><button class="btn ghost hidden" id="retryTarot" data-action="retry-tarot">Tentar Gemini novamente</button><button class="btn text" data-action="clear-tarot">Limpar</button></div><div class="spread" id="spread"></div><section class="surface reading hidden" id="reading"><div class="reading-head"><div><span class="eyebrow">Leitura completa</span><h3>Síntese Lenormand</h3><small id="readingMeta"></small></div><span class="connection" id="readingEngine">Motor local</span></div><div class="loading hidden" id="readingLoading"><i></i><span>Aprofundando a interpretação…</span></div><div id="readingSections"></div></section><button class="btn primary wide hidden" id="toClosing" data-action="build-closing">Construir encerramento</button></section>
+      <section class="view hidden" id="view-closing"><div class="page-head"><span class="eyebrow">Etapa 6 de 6</span><h2>Encerramento estruturado</h2><p>O final transforma a experiência em clareza, continuidade e memória.</p></div><div class="closing-grid" id="closingGrid"></div><section class="final-moment"><span>✦</span><h3 id="finalPhrase"></h3><p id="finalInstruction"></p></section><div class="button-row"><button class="btn ghost" data-action="refine-closing">Aprofundar com Gemini</button><button class="btn primary" data-action="restart">Nova jornada</button></div></section>
+      <section class="view hidden" id="view-kit"><div class="page-head"><span class="eyebrow">Extensão física</span><h2>Kit 3D</h2><p>Dados, fichas, marcador, peões, bandeja e suporte correspondem aos mecanismos digitais.</p></div><section class="surface kit-list"><p><b>3 dados temáticos</b><span>Ação, duração e clima</span></p><p><b>18 fichas de Faísca</b><span>Pontuação e memória</span></p><p><b>2 peões</b><span>Turnos do casal</span></p><p><b>6 fichas de decisão</b><span>Responder, adaptar e alternativa</span></p></section></section>
+      <section class="view hidden" id="view-credits"><div class="credits"><span class="eyebrow">Criação original</span><h2>Esdra Felipe</h2><p>Conceito, direção criativa e autoria de Primeira Faísca. Edição v8 com motor local ilimitado, Gemini opcional, sequência auditada e encerramento completo.</p></div></section>
     </main>
-
-    <nav class="bottomNav"><button data-view="home">Início</button><button data-view="setup">Jornada</button><button data-view="tarot">Tarô</button><button data-view="kit">Kit 3D</button><button data-view="credits">Créditos</button></nav>
+    <nav class="bottom-nav"><button data-action="go-home">Início</button><button data-action="go-setup">Jornada</button><button data-action="go-current">Continuar</button><button data-action="go-kit">Kit 3D</button><button data-action="go-credits">Créditos</button></nav>
   </div>
-
-  <div class="modal hidden" id="hostModal"><div class="modalCard"><div class="modalHead"><div><span class="eyebrow">Anfitriã</span><h3>Pergunte sobre a experiência</h3></div><button class="closeBtn" data-close="hostModal">×</button></div><textarea id="hostQuestion" rows="5" maxlength="600" placeholder="Ex.: O que devemos observar nesta etapa?"></textarea><button class="primaryBtn wide" id="sendHostQuestion">Perguntar</button><div class="hostReply" id="hostReply">A resposta aparecerá aqui.</div></div></div>
-  <div class="modal hidden" id="alternativeModal"><div class="modalCard"><div class="modalHead"><div><span class="eyebrow">Alternativa da rodada</span><h3>Trocar sem quebrar o ritmo</h3></div><button class="closeBtn" data-close="alternativeModal">×</button></div><p>Caso prefira não responder, escolha uma prenda previamente combinada ou cumpra uma alternativa escolhida em conjunto.</p><div class="alternative" id="alternativeText"></div><div class="buttonRow"><button class="ghostBtn" id="newAlternative">Sortear outra</button><button class="primaryBtn" id="useAlternative">Usar alternativa</button></div></div></div>
+  <div class="modal hidden" id="hostModal"><div class="modal-card"><div class="modal-head"><div><span class="eyebrow">Anfitriã</span><h3>Pergunte sobre a experiência</h3></div><button class="close" data-action="close-host">×</button></div><textarea id="hostQuestion" rows="5" maxlength="600" placeholder="Ex.: O que devemos observar nesta etapa?"></textarea><button class="btn primary wide" data-action="ask-host">Perguntar</button><div class="host-reply" id="hostReply">A resposta aparecerá aqui.</div></div></div>
+  <div class="modal hidden" id="alternativeModal"><div class="modal-card"><div class="modal-head"><div><span class="eyebrow">Alternativa</span><h3>Trocar sem quebrar o ritmo</h3></div><button class="close" data-action="close-alternative">×</button></div><p>Caso prefira não responder, escolha uma prenda previamente combinada ou cumpra uma alternativa escolhida em conjunto.</p><div class="alternative" id="alternativeText"></div><div class="button-row"><button class="btn ghost" data-action="new-alternative">Sortear outra</button><button class="btn primary" data-action="use-alternative">Usar alternativa</button></div></div></div>
   <div class="toast" id="toast" aria-live="polite"></div>
-  <script src="app-v7.js"></script>
 </body>
 </html>

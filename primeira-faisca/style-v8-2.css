@@ -1,0 +1,20 @@
+/* Primeira Faísca v8.2 — acabamento editorial e compatibilidade */
+.readingSection{padding:28px 0;border-top:1px solid var(--line)}
+.readingSection:first-child{border-top:0;padding-top:8px}
+.readingSection h4{font-size:clamp(20px,2.5vw,28px);margin:0 0 14px;letter-spacing:-.02em}
+.readingSection>p,.readingSection li{line-height:1.75;color:#d4d4d8}
+.readingSection ol{display:grid;gap:10px;padding-left:24px}
+.positionGrid,.dimensionGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.positionBox,.dimensionBox{padding:20px;border-radius:20px;background:rgba(255,255,255,.035);border:1px solid var(--line)}
+.positionBox b,.dimensionBox b{display:block;color:#fff;margin-bottom:10px}
+.positionBox p,.dimensionBox p{font-size:14px;line-height:1.65;color:#d4d4d8;margin:8px 0}
+.guidance{position:relative;overflow:hidden;border:1px solid rgba(216,180,254,.16);background:linear-gradient(100deg,rgba(124,58,237,.12),rgba(236,72,153,.06));color:#ddd6fe;font-weight:650;letter-spacing:.01em}
+.guidance::before{content:'✦';margin-right:9px;color:var(--accent)}
+.question-card{transition:border-color .25s ease,transform .25s ease}
+.question-card:hover{border-color:rgba(216,180,254,.2)}
+.reading{background:radial-gradient(circle at 90% 0,rgba(124,58,237,.1),transparent 30%),linear-gradient(145deg,rgba(20,20,23,.98),rgba(9,9,11,.98))}
+.reading-head{position:sticky;top:104px;z-index:3;padding:12px 0;background:linear-gradient(180deg,rgba(16,16,18,.98),rgba(16,16,18,.88),transparent);backdrop-filter:blur(8px)}
+.connection{max-width:320px;overflow:hidden;text-overflow:ellipsis}
+.route-grid article,.question-card,.surface,.lenormand{transform:translateZ(0)}
+@media(max-width:900px){.positionGrid,.dimensionGrid{grid-template-columns:1fr}.reading-head{position:static}.guidance{font-size:14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}

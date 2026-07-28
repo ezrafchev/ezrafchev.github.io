@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" fill="none">
+  <defs>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientTransform="translate(350 350) rotate(90) scale(300)"><stop stop-color="#A78BFA" stop-opacity=".24"/><stop offset=".6" stop-color="#7C3AED" stop-opacity=".05"/><stop offset="1" stop-opacity="0"/></radialGradient>
+    <linearGradient id="orbit" x1="108" y1="116" x2="603" y2="575" gradientUnits="userSpaceOnUse"><stop stop-color="#67E8F9" stop-opacity=".8"/><stop offset=".45" stop-color="#A78BFA"/><stop offset="1" stop-color="#FB7185" stop-opacity=".82"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <circle cx="350" cy="350" r="300" fill="url(#halo)"/>
+  <ellipse cx="350" cy="350" rx="278" ry="166" transform="rotate(-18 350 350)" stroke="url(#orbit)" stroke-width="2" stroke-dasharray="5 12" opacity=".65"/>
+  <ellipse cx="350" cy="350" rx="230" ry="300" transform="rotate(38 350 350)" stroke="url(#orbit)" stroke-width="1.5" opacity=".42"/>
+  <circle cx="350" cy="350" r="182" stroke="url(#orbit)" stroke-width="1" stroke-dasharray="2 10" opacity=".55"/>
+  <circle cx="148" cy="252" r="9" fill="#67E8F9" filter="url(#glow)"/>
+  <circle cx="542" cy="202" r="7" fill="#D8B4FE" filter="url(#glow)"/>
+  <circle cx="563" cy="480" r="10" fill="#FB7185" filter="url(#glow)"/>
+  <circle cx="260" cy="606" r="5" fill="#C4B5FD" filter="url(#glow)"/>
+  <path d="M350 84V114M350 586V616M84 350H114M586 350H616" stroke="#fff" stroke-opacity=".38" stroke-linecap="round"/>
+</svg>

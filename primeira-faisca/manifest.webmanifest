@@ -1,7 +1,7 @@
 {
   "name": "Primeira Faísca — por Esdra Felipe",
   "short_name": "Faísca",
-  "description": "Experiência para casais com 96 cartas, motor local, Gemini, Hugging Face, Momento da Química, Tarô Cigano e encerramento estruturado.",
+  "description": "Experiência para casais com 96 cartas, IA local sem cota de chamadas, Momento da Química, Tarô Cigano e encerramento estruturado.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

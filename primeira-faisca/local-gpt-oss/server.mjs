@@ -12,7 +12,9 @@ function cors(req, res) {
   res.setHeader('Access-Control-Allow-Origin', allowed && origin ? origin : ALLOWED_ORIGIN);
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Private-Network', 'true');
+  res.setHeader('Access-Control-Max-Age', '600');
+  res.setHeader('Vary', 'Origin, Access-Control-Request-Private-Network');
   res.setHeader('Cache-Control', 'no-store');
   return allowed;
 }

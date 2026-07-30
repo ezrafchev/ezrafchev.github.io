@@ -45,9 +45,9 @@
       })
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data?.error?.message || data?.error || `gpt‑oss respondeu ${response.status}.`);
+    if (!response.ok) throw new Error(data?.error?.message || data?.error || `Modelo local respondeu ${response.status}.`);
     const text = String(data?.choices?.[0]?.message?.content || data?.text || '').trim();
-    if (!text) throw new Error('O gpt‑oss local não retornou texto.');
+    if (!text) throw new Error('O modelo local não retornou texto.');
     return responseJson({ candidates:[{ content:{ parts:[{ text }] }, finishReason:'STOP' }], modelVersion:model() });
   }
 
@@ -58,12 +58,12 @@
     if (!enabled() || !localRequest) return originalFetch(input, init);
 
     if (url.includes('/v1beta/models') && !url.includes(':generateContent')) {
-      return responseJson({ models:[{ name:'models/local-webllm', displayName:`OpenAI ${model()} local`, supportedGenerationMethods:['generateContent'] }] });
+      return responseJson({ models:[{ name:'models/local-webllm', displayName:`Modelo local · ${model()}`, supportedGenerationMethods:['generateContent'] }] });
     }
     if (url.includes(':generateContent')) {
       try { return await callLocal(JSON.parse(init.body || '{}')); }
       catch (error) {
-        console.warn('gpt‑oss local indisponível; retornando ao motor WebGPU.', error);
+        console.warn('Modelo local indisponível; retornando ao motor WebGPU.', error);
         return originalFetch(input, init);
       }
     }

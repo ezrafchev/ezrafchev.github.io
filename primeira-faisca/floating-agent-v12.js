@@ -168,7 +168,7 @@ async function askLocal(question, article, requestId) {
   const context = collectContext();
   const messages = [
     { role:'system', content:SYSTEM },
-    ...history.slice(-12).map((item) => ({ role:item.role, content:item.content })),
+    ...history.slice(0, -1).slice(-11).map((item) => ({ role:item.role, content:item.content })),
     { role:'user', content:`CONTEXTO OPCIONAL DO SITE:\n${context}\n\nPERGUNTA ATUAL:\n${question}` }
   ];
   const stream = await localEngine.chat.completions.create({
@@ -200,7 +200,7 @@ async function askOpenAI(question, article) {
     method:'POST',
     headers:{ 'Content-Type':'application/json' },
     body:JSON.stringify({
-      messages:[...history.slice(-12), { role:'user', content:question }],
+      messages:history.slice(-12),
       context:collectContext()
     })
   });

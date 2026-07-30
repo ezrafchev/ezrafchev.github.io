@@ -1,0 +1,44 @@
+/* Primeira Faísca · Engine Studio 13.1 */
+html[data-pf13="1"] .pf13-settings{padding:24px 24px 110px;scrollbar-gutter:stable}
+html[data-pf13="1"] .pf13-settings-title{position:sticky;top:0;z-index:5;margin:-24px -24px 20px;padding:21px 24px 17px;background:linear-gradient(180deg,rgba(7,7,12,.99) 72%,rgba(7,7,12,.72),transparent);backdrop-filter:blur(24px)}
+html[data-pf13="1"] .pf13-settings-title small{letter-spacing:.22em;color:#9b87f5}
+html[data-pf13="1"] .pf13-settings-title h3{font-size:clamp(28px,4vw,40px);letter-spacing:-.045em;margin-top:5px}
+html[data-pf13="1"] .pf13-settings-block{position:relative;margin-top:16px;padding:20px;border:1px solid rgba(255,255,255,.09);border-radius:23px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.014));box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 18px 55px rgba(0,0,0,.22);overflow:hidden}
+html[data-pf13="1"] .pf13-settings-block::before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--pf13-stage-a),var(--pf13-stage-b),transparent);opacity:.48}
+html[data-pf13="1"] .pf13-settings-block>span{display:block;margin-bottom:16px;font-size:10px;font-weight:800;letter-spacing:.2em;color:#b7abc9}
+html[data-pf13="1"] .pf13-token-vault{background:radial-gradient(500px circle at 90% 0%,rgba(110,231,242,.07),transparent 50%),linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.014))}
+html[data-pf13="1"] .pf13-model-studio{background:radial-gradient(520px circle at 88% -10%,rgba(155,135,245,.11),transparent 50%),linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.014))}
+html[data-pf13="1"] .pf13-secret-row{display:grid;grid-template-columns:1fr 46px;gap:8px;margin-top:8px}
+html[data-pf13="1"] .pf13-secret-row input{margin:0}
+html[data-pf13="1"] .pf13-secret-row button{border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.035);color:#d8d4e5;font-size:16px;transition:.2s}
+html[data-pf13="1"] .pf13-secret-row button:hover{border-color:rgba(155,135,245,.4);background:rgba(155,135,245,.08)}
+html[data-pf13="1"] .pf13-inline-actions{display:flex;flex-wrap:wrap;gap:8px;margin:13px 0}
+html[data-pf13="1"] .pf13-inline-actions button,html[data-pf13="1"] .pf13-test{min-height:42px;padding:10px 13px;border:1px solid rgba(255,255,255,.1);border-radius:13px;background:rgba(255,255,255,.035);color:#e9e7ef;font-size:12px;font-weight:750;transition:.22s}
+html[data-pf13="1"] .pf13-inline-actions button:first-child,html[data-pf13="1"] #pf13DownloadModel{background:linear-gradient(135deg,rgba(110,231,242,.15),rgba(155,135,245,.17));border-color:rgba(155,135,245,.31)}
+html[data-pf13="1"] .pf13-inline-actions button:hover,html[data-pf13="1"] .pf13-test:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.24);filter:brightness(1.1)}
+html[data-pf13="1"] .pf13-inline-actions button:disabled{opacity:.38;transform:none;cursor:not-allowed}
+html[data-pf13="1"] #pf13TokenStatus{display:flex;align-items:center;gap:8px;margin:10px 0 16px;padding:10px 12px;border:1px solid rgba(255,255,255,.075);border-radius:13px;background:rgba(0,0,0,.18);color:#9996a7;font-size:11px}
+html[data-pf13="1"] #pf13TokenStatus::before{content:"";width:7px;height:7px;border-radius:50%;background:#777381;box-shadow:0 0 0 5px rgba(255,255,255,.025)}
+html[data-pf13="1"] #pf13TokenStatus[data-state="ready"]{color:#9fe8b4;border-color:rgba(134,239,172,.17);background:rgba(34,197,94,.035)}
+html[data-pf13="1"] #pf13TokenStatus[data-state="ready"]::before{background:#86efac;box-shadow:0 0 16px rgba(134,239,172,.55)}
+html[data-pf13="1"] .pf13-model-description{display:grid;gap:5px;margin:12px 0 14px;padding:15px;border:1px solid rgba(255,255,255,.075);border-radius:16px;background:rgba(0,0,0,.19)}
+html[data-pf13="1"] .pf13-model-description b{font-size:13px;color:#f1eff8}
+html[data-pf13="1"] .pf13-model-description span{font-size:12px;color:#aaa7b5;line-height:1.5}
+html[data-pf13="1"] .pf13-model-description small{font-size:10px;color:#76727f;letter-spacing:.02em}
+html[data-pf13="1"] .pf13-download-track{height:7px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.42)}
+html[data-pf13="1"] .pf13-download-track i{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#6ee7f2,#9b87f5 50%,#ff718b);box-shadow:0 0 22px rgba(155,135,245,.5);transition:width .25s ease}
+html[data-pf13="1"] #pf13SettingsNote{position:sticky;bottom:0;z-index:4;margin:18px -24px -110px;padding:15px 24px 27px;border-top:1px solid rgba(255,255,255,.075);background:linear-gradient(0deg,rgba(7,7,12,.99) 72%,rgba(7,7,12,.75),transparent);backdrop-filter:blur(22px);color:#9c98a7;font-size:11px;line-height:1.5}
+html[data-pf13="1"] #pf13SettingsNote[data-state="ready"]{color:#9fe8b4}
+html[data-pf13="1"] #pf13SettingsNote[data-state="error"]{color:#fca5a5}
+html[data-pf13="1"] .pf13-settings code{padding:2px 5px;border:1px solid rgba(255,255,255,.08);border-radius:6px;background:rgba(0,0,0,.25);color:#c7c2d5;font-size:.92em}
+html[data-pf13="1"] .pf13-check{display:grid!important;grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:12px;border:1px solid rgba(255,255,255,.075);border-radius:14px;background:rgba(255,255,255,.02)}
+html[data-pf13="1"] .pf13-check input{width:17px;height:17px;margin:2px 0 0}
+html[data-pf13="1"] .pf13-settings-actions{position:relative;z-index:2;display:grid;grid-template-columns:1.35fr .65fr;gap:9px;margin-top:18px}
+html[data-pf13="1"] .pf13-settings-actions button{min-height:48px;border-radius:15px}
+@media(max-width:600px){
+  html[data-pf13="1"] .pf13-settings{padding:18px 16px 106px}
+  html[data-pf13="1"] .pf13-settings-title{margin:-18px -16px 16px;padding:18px 16px 14px}
+  html[data-pf13="1"] #pf13SettingsNote{margin:16px -16px -106px;padding:14px 16px 24px}
+  html[data-pf13="1"] .pf13-settings-block{padding:16px;border-radius:19px}
+  html[data-pf13="1"] .pf13-settings-actions{grid-template-columns:1fr}
+}

@@ -26,19 +26,23 @@
   window.fetch = async (input, init = {}) => {
     let nextInit = init;
     const url = typeof input === 'string' ? input : input?.url || '';
+    let aiPayload = false;
 
-    if (init?.body && typeof init.body === 'string' && /openai|chat|agent/i.test(url)) {
+    if (init?.body && typeof init.body === 'string') {
       try {
         const payload = JSON.parse(init.body);
-        if (Array.isArray(payload.messages)) payload.messages = dedupeMessages(payload.messages);
-        nextInit = { ...init, body: JSON.stringify(payload) };
+        if (Array.isArray(payload.messages)) {
+          payload.messages = dedupeMessages(payload.messages);
+          nextInit = { ...init, body: JSON.stringify(payload) };
+          aiPayload = true;
+        }
       } catch {}
     }
 
     try {
       return await upstream(input, nextInit);
     } catch (error) {
-      if (/openai|chat|agent/i.test(url)) {
+      if (aiPayload || /openai|chat|agent|generativelanguage/i.test(url)) {
         throw new Error(error?.name === 'AbortError'
           ? 'O motor de IA demorou além do limite configurado.'
           : 'Não foi possível alcançar o motor de IA.');

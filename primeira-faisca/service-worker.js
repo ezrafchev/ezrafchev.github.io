@@ -1,9 +1,9 @@
-const CACHE='primeira-faisca-v15-0';
+const CACHE='primeira-faisca-v15-1';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./icon.svg',
   './style-v8.css?v=8.5','./style-v8-2.css?v=8.5','./style-v15.css?v=15.0',
   './data-cards-v3.js?v=8.5','./data-tarot-v3.js?v=8.5','./app-v8.js?v=8.5',
-  './local-ai-v8-5.js?v=8.5','./app-v15.js?v=15.0'
+  './local-ai-v8-5.js?v=8.5','./app-v15.js?v=15.1'
 ];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const cache=await caches.open(CACHE);

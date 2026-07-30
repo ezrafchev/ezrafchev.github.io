@@ -32,13 +32,21 @@ function send(res, status, data) {
 
 function normalizeMessages(messages) {
   if (!Array.isArray(messages)) return [];
-  return messages
+  const normalized = messages
     .slice(-MAX_MESSAGES)
     .map((item) => ({
       role: item?.role === 'assistant' ? 'assistant' : 'user',
       content: String(item?.content || '').trim().slice(0, 2200)
     }))
     .filter((item) => item.content);
+
+  const compact = [];
+  for (const item of normalized) {
+    const previous = compact.at(-1);
+    if (previous && previous.role === item.role && previous.content === item.content) continue;
+    compact.push(item);
+  }
+  return compact;
 }
 
 function extractOutputText(payload) {
@@ -63,7 +71,10 @@ async function moderate(apiKey, input) {
   });
   if (!response.ok) return { flagged: false, unavailable: true };
   const data = await response.json();
-  return { flagged: Boolean(data?.results?.[0]?.flagged), categories: data?.results?.[0]?.categories || {} };
+  return {
+    flagged: Boolean(data?.results?.[0]?.flagged),
+    categories: data?.results?.[0]?.categories || {}
+  };
 }
 
 export default async function handler(req, res) {
@@ -90,23 +101,15 @@ export default async function handler(req, res) {
     });
   }
 
-  const requestInput = [
-    ...messages.map((item) => ({
-      role: item.role,
-      content: [{ type: 'input_text', text: item.content }]
-    })),
-    {
-      role: 'user',
-      content: [{
-        type: 'input_text',
-        text: `CONTEXTO ATUAL DO JOGO:\n${context || 'Nenhum contexto adicional disponível.'}\n\nResponda à mensagem mais recente considerando este contexto.`
-      }]
-    }
-  ];
+  const requestInput = messages.map((item) => ({
+    role: item.role,
+    content: [{ type: 'input_text', text: item.content }]
+  }));
 
   const model = process.env.OPENAI_MODEL || 'gpt-5-mini';
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 45_000);
+  const contextualInstructions = `${SYSTEM}\n\nCONTEXTO ATUAL DO JOGO:\n${context || 'Nenhum contexto adicional disponível.'}\n\nUse esse contexto apenas quando ele for relevante à mensagem mais recente.`;
 
   try {
     const response = await fetch(OPENAI_URL, {
@@ -119,7 +122,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model,
-        instructions: SYSTEM,
+        instructions: contextualInstructions,
         input: requestInput,
         max_output_tokens: 900,
         store: false

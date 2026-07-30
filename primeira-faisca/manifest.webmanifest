@@ -1,7 +1,7 @@
 {
   "name": "Primeira Faísca — Intelligence Experience",
   "short_name": "Faísca AI",
-  "description": "Experiência premium para casais com 96 cartas, OpenAI GPT-5.6, gpt-oss local, IA WebGPU, Tarô narrativo e agente multimotor.",
+  "description": "Experiência premium para casais com 96 cartas, modelos locais baixados diretamente no navegador, OpenAI por conexão segura, Tarô narrativo e agente multimotor.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

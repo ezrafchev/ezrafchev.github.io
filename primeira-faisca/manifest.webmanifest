@@ -1,14 +1,14 @@
 {
-  "name": "Primeira Faísca — Couple Experience",
-  "short_name": "Faísca",
-  "description": "Experiência premium para casais com 96 cartas, Tarô narrativo, IA local privada, anfitriã flutuante e integração segura com OpenAI.",
+  "name": "Primeira Faísca — Intelligence Experience",
+  "short_name": "Faísca AI",
+  "description": "Experiência premium para casais com 96 cartas, OpenAI GPT-5.6, gpt-oss local, IA WebGPU, Tarô narrativo e agente multimotor.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#030307",
-  "theme_color": "#080810",
-  "categories": ["entertainment", "lifestyle", "games"],
+  "background_color": "#020204",
+  "theme_color": "#050508",
+  "categories": ["entertainment", "lifestyle", "games", "productivity"],
   "icons": [
     {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
   ]

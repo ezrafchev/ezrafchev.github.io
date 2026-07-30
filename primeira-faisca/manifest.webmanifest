@@ -1,13 +1,15 @@
 {
-  "name": "Primeira Faísca — por Esdra Felipe",
+  "name": "Primeira Faísca — Couple Experience",
   "short_name": "Faísca",
-  "description": "Experiência premium para casais com 96 cartas, IA local agêntica, Tarô Cigano contextual e encerramento estruturado.",
+  "description": "Experiência premium para casais com 96 cartas, Tarô narrativo, IA local privada, anfitriã flutuante e integração segura com OpenAI.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#050508",
-  "theme_color": "#050508",
+  "background_color": "#030307",
+  "theme_color": "#080810",
   "categories": ["entertainment", "lifestyle", "games"],
-  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
 }

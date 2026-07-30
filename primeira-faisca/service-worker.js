@@ -1,10 +1,10 @@
-const CACHE='primeira-faisca-v11-0';
+const CACHE='primeira-faisca-v11-1';
 const ASSETS=[
   './','./index.html','./manifest.webmanifest','./icon.svg',
   './style-v8.css?v=8.5','./style-v8-2.css?v=8.5','./visual-v9.css?v=10.0','./design-v11.css?v=11.0',
   './assets/spark-orbit.svg?v=9.0','./assets/grain-v9.svg',
   './data-cards-v3.js?v=8.5','./data-tarot-v3.js?v=8.5','./app-v8.js?v=8.5',
-  './local-ai-v8-5.js?v=8.5','./agent-v10.js?v=11.0','./design-v11.js?v=11.0','./floating-agent-v11.js?v=11.0'
+  './local-ai-v8-5.js?v=8.5','./agent-v10.js?v=11.0','./design-v11.js?v=11.0','./floating-agent-v11.js?v=11.0','./ai-transport-guard-v11.js?v=11.0'
 ];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const cache=await caches.open(CACHE);

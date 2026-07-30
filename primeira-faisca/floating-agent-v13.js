@@ -16,9 +16,21 @@
   const DEFAULT_OSS_ENDPOINT = 'http://127.0.0.1:8787/v1/chat/completions';
   const SYSTEM = `Você é Faísca, uma assistente de IA completa e generalista integrada ao Primeira Faísca. Responda em português do Brasil com precisão, naturalidade e profundidade proporcional à pergunta. Você pode explicar assuntos gerais, escrever, revisar, raciocinar, programar, planejar, analisar o contexto da experiência e interpretar simbolicamente Lenormand. Use o contexto do site apenas quando ele for relevante; nunca force relacionamento em perguntas gerais. Não invente fatos atuais. Em temas românticos, preserve consentimento e conteúdo não explícito. Em Tarô e Lenormand, diferencie interpretação simbólica, hipótese e comportamento observável. Evite bordões, respostas genéricas e Markdown excessivo.`;
 
+  const FALLBACK_CATALOG = [
+    { id:'gpt-oss:20b', family:'OpenAI', name:'gpt-oss 20B', size:'14 GB', memory:'aprox. 16 GB', tier:'Mais capaz da OpenAI para PC', description:'Raciocínio local avançado e uso sem cobrança por token de API.' },
+    { id:'gpt-oss:120b', family:'OpenAI', name:'gpt-oss 120B', size:'65 GB', memory:'GPU com cerca de 80 GB', tier:'Máxima capacidade local', description:'Versão para hardware de classe datacenter.' },
+    { id:'qwen3:8b', family:'Qwen', name:'Qwen3 8B', size:'5,2 GB', memory:'aprox. 8 GB', tier:'Melhor equilíbrio', description:'Boa qualidade multilíngue e raciocínio.' },
+    { id:'qwen3:4b', family:'Qwen', name:'Qwen3 4B', size:'2,5 GB', memory:'aprox. 5 GB', tier:'PCs intermediários', description:'Rápido e competente em português.' },
+    { id:'phi4-mini', family:'Microsoft', name:'Phi-4 Mini', size:'2,5 GB', memory:'aprox. 5 GB', tier:'Raciocínio leve', description:'Compacto para instruções, matemática e análise.' },
+    { id:'gemma3:4b', family:'Google', name:'Gemma 3 4B', size:'3,3 GB', memory:'aprox. 6 GB', tier:'Multilíngue', description:'Modelo compacto com contexto amplo.' },
+    { id:'llama3.2:3b', family:'Meta', name:'Llama 3.2 3B', size:'2,0 GB', memory:'aprox. 4 GB', tier:'Mais leve', description:'Alternativa pequena com suporte ao português.' }
+  ];
+
   let history = loadHistory();
   let busy = false;
   let generation = 0;
+  let catalog = FALLBACK_CATALOG.map((item) => ({ ...item, installed:false }));
+  let tokenConnected = false;
 
   function loadHistory() {
     try {
@@ -33,7 +45,7 @@
     const text = String(content || '').trim();
     if (!text) return;
     const previous = history.at(-1);
-    if (!previous || previous.role !== role || previous.content !== text) history.push({ role, content: text });
+    if (!previous || previous.role !== role || previous.content !== text) history.push({ role, content:text });
     history = history.slice(-MAX_HISTORY);
     saveHistory();
   }
@@ -77,10 +89,19 @@
     ].filter(Boolean).join('\n');
   }
   function setting(name, fallback = '') { return (localStorage.getItem(name) || fallback).trim(); }
+  function bridgeBase() {
+    const endpoint = setting(STORE.ossEndpoint, DEFAULT_OSS_ENDPOINT);
+    return endpoint.replace(/\/v1\/chat\/completions\/?$/i, '').replace(/\/$/, '');
+  }
+  function bridgeUrl(path) { return `${bridgeBase()}${path.startsWith('/') ? path : `/${path}`}`; }
   function setStatus(text, state = 'idle') {
     if ($('pf13Status')) $('pf13Status').textContent = text;
     if ($('pf13EngineLine')) $('pf13EngineLine').textContent = text;
     if ($('pf13Dot')) $('pf13Dot').dataset.state = state;
+  }
+  function setSettingsNote(text, state = '') {
+    const note = $('pf13SettingsNote');
+    if (note) { note.textContent = text; note.dataset.state = state; }
   }
   function render(role, text, engine = '', streaming = false) {
     const list = $('pf13Messages');
@@ -104,7 +125,7 @@
     if (!list) return;
     list.innerHTML = '';
     if (!history.length) {
-      render('assistant', 'Sou a Faísca. Posso responder perguntas gerais, escrever, analisar, programar, conversar sobre a experiência ou interpretar a tiragem. O modo automático escolhe entre GPT‑5.6, gpt‑oss local e IA do navegador.', 'orquestrador v13');
+      render('assistant', 'Sou a Faísca. Posso responder perguntas gerais, escrever, analisar, programar, conversar sobre a experiência ou interpretar a tiragem. O modo automático escolhe entre GPT‑5.6, modelos locais baixados e IA do navegador.', 'orquestrador v13.1');
       return;
     }
     history.forEach((item) => render(item.role, item.content, item.role === 'assistant' ? 'histórico' : ''));
@@ -119,7 +140,7 @@
   async function fetchWithTimeout(url, options, timeoutMs) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
-    try { return await fetch(url, { ...options, signal: controller.signal }); }
+    try { return await fetch(url, { ...options, signal:controller.signal }); }
     finally { clearTimeout(timer); }
   }
   async function parseOpenAIStream(response, article, requestId) {
@@ -157,17 +178,16 @@
     const model = setting(STORE.ossModel, 'gpt-oss:20b');
     setStatus(`Conectando ao ${model} local…`, 'loading');
     const response = await fetchWithTimeout(endpoint, {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json' },
+      method:'POST', headers:{ 'Content-Type':'application/json' },
       body:JSON.stringify({ model, messages:messagesFor(question), temperature:.64, top_p:.92, max_tokens:1800, stream:true })
     }, 180_000);
     if (!response.ok) {
       const data = await response.json().catch(() => ({}));
-      throw new Error(data?.error?.message || data?.error || `gpt‑oss local respondeu ${response.status}.`);
+      throw new Error(data?.error?.message || data?.error || `Motor local respondeu ${response.status}.`);
     }
     const text = await parseOpenAIStream(response, article, requestId);
-    if (!text) throw new Error('O gpt‑oss local não retornou texto.');
-    return { text, engine:`OpenAI gpt‑oss · ${model}` };
+    if (!text) throw new Error('O modelo local não retornou texto.');
+    return { text, engine:`local · ${model}` };
   }
   function cloudModelFor(question) {
     const chosen = setting(STORE.cloudModel, 'auto');
@@ -177,14 +197,14 @@
       : 'gpt-5.6-luna';
   }
   async function askCloud(question, article) {
-    const endpoint = setting(STORE.cloudEndpoint);
-    if (!endpoint) throw new Error('O endpoint seguro da OpenAI não foi configurado.');
+    const configured = setting(STORE.cloudEndpoint);
+    const endpoint = configured || bridgeUrl('/v1/openai/responses');
     const model = cloudModelFor(question);
     setStatus(`OpenAI ${model}…`, 'loading');
     const response = await fetchWithTimeout(endpoint, {
       method:'POST', headers:{ 'Content-Type':'application/json' },
-      body:JSON.stringify({ messages:history.slice(-14), context:context(), model, reasoning_effort:model.endsWith('sol') ? 'high' : 'medium', use_web:false })
-    }, 90_000);
+      body:JSON.stringify({ messages:history.slice(-14), context:context(), model, reasoning_effort:model === 'gpt-5.6-sol' ? 'high' : 'medium', use_web:false })
+    }, 100_000);
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(data?.error || data?.message || `OpenAI respondeu ${response.status}.`);
     const text = cleanText(data?.text || data?.output_text || '');
@@ -236,10 +256,10 @@
     if (preference === 'browser') return askBrowser(question, article);
 
     const errors = [];
-    if (setting(STORE.cloudEndpoint)) {
+    if (setting(STORE.cloudEndpoint) || tokenConnected) {
       try { return await askCloud(question, article); } catch (error) { errors.push(`OpenAI: ${error.message}`); }
     }
-    try { return await askGptOss(question, article, requestId); } catch (error) { errors.push(`gpt‑oss: ${error.message}`); }
+    try { return await askGptOss(question, article, requestId); } catch (error) { errors.push(`local: ${error.message}`); }
     try { return await askBrowser(question, article); } catch (error) { errors.push(`WebGPU: ${error.message}`); }
     throw new Error(errors.join(' | ') || 'Nenhum motor avançado respondeu.');
   }
@@ -263,7 +283,7 @@
       remember('assistant', answer.text);
       setStatus(answer.engine, 'ready');
     } catch (error) {
-      const text = `Nenhum motor avançado conseguiu responder nesta tentativa. Abra as configurações e escolha: OpenAI por backend seguro, gpt‑oss local ou IA WebGPU.\n\nDetalhe técnico: ${error?.message || error}`;
+      const text = `Nenhum motor avançado conseguiu responder nesta tentativa. Abra as configurações e escolha: OpenAI por token temporário, um modelo local baixado ou IA WebGPU.\n\nDetalhe técnico: ${error?.message || error}`;
       update(article, text);
       article?.classList.remove('streaming');
       remember('assistant', text);
@@ -274,20 +294,157 @@
       input?.focus();
     }
   }
-  async function testGptOss() {
-    const note = $('pf13SettingsNote');
-    if (note) note.textContent = 'Testando o motor local…';
+
+  function modelLabel(item) {
+    return `${item.installed ? '✓ ' : ''}${item.name} · ${item.size} · ${item.tier}`;
+  }
+  function populateModelControls() {
+    const run = $('pf13OssModel');
+    const download = $('pf13CatalogSelect');
+    if (run) {
+      const current = setting(STORE.ossModel, 'gpt-oss:20b');
+      run.innerHTML = catalog.map((item) => `<option value="${escapeHtml(item.id)}">${escapeHtml(modelLabel(item))}</option>`).join('');
+      run.value = catalog.some((item) => item.id === current) ? current : catalog[0]?.id || '';
+    }
+    if (download) {
+      download.innerHTML = catalog.map((item) => `<option value="${escapeHtml(item.id)}">${escapeHtml(`${item.family} · ${item.name} · ${item.size}${item.installed ? ' · instalado' : ''}`)}</option>`).join('');
+      download.dispatchEvent(new Event('change'));
+    }
+  }
+  function updateCatalogDetails() {
+    const model = catalog.find((item) => item.id === $('pf13CatalogSelect')?.value) || catalog[0];
+    if (!model) return;
+    if ($('pf13ModelDescription')) $('pf13ModelDescription').innerHTML = `<b>${escapeHtml(model.tier)}</b><span>${escapeHtml(model.description)}</span><small>Download: ${escapeHtml(model.size)} · memória: ${escapeHtml(model.memory)}${model.installed ? ' · já instalado' : ''}</small>`;
+    if ($('pf13DownloadModel')) $('pf13DownloadModel').textContent = model.installed ? 'Reinstalar / atualizar' : 'Baixar modelo';
+    if ($('pf13DeleteModel')) $('pf13DeleteModel').disabled = !model.installed;
+  }
+  async function refreshBridge() {
+    setSettingsNote('Verificando bridge local, modelos e token…');
+    try {
+      const [catalogResponse, keyResponse] = await Promise.all([
+        fetchWithTimeout(bridgeUrl('/models/catalog'), { method:'GET' }, 12_000),
+        fetchWithTimeout(bridgeUrl('/session/openai-key'), { method:'GET' }, 12_000)
+      ]);
+      if (!catalogResponse.ok) throw new Error(`Catálogo HTTP ${catalogResponse.status}`);
+      const data = await catalogResponse.json();
+      catalog = Array.isArray(data?.models) && data.models.length ? data.models : catalog;
+      if (keyResponse.ok) tokenConnected = Boolean((await keyResponse.json())?.connected);
+      populateModelControls();
+      updateTokenStatus();
+      setSettingsNote('Bridge conectado. Escolha um modelo para baixar ou usar.', 'ready');
+    } catch (error) {
+      populateModelControls();
+      updateTokenStatus();
+      setSettingsNote(`Bridge local não encontrado: ${error?.message || error}. Inicie o servidor local para baixar modelos ou conectar o token.`, 'error');
+    }
+  }
+  function updateTokenStatus() {
+    const node = $('pf13TokenStatus');
+    if (node) {
+      node.textContent = tokenConnected ? 'Token conectado ao bridge local e mantido somente na memória.' : 'Nenhum token conectado.';
+      node.dataset.state = tokenConnected ? 'ready' : 'idle';
+    }
+  }
+  async function connectToken() {
+    const input = $('pf13ApiToken');
+    const token = String(input?.value || '').trim();
+    if (!token) { setSettingsNote('Cole um token da OpenAI antes de conectar.', 'error'); return; }
+    setSettingsNote('Entregando o token ao cofre temporário local…');
+    try {
+      const response = await fetchWithTimeout(bridgeUrl('/session/openai-key'), {
+        method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ token })
+      }, 15_000);
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data?.error || `HTTP ${response.status}`);
+      tokenConnected = true;
+      if (input) input.value = '';
+      updateTokenStatus();
+      setSettingsNote('Token conectado. Ele não foi salvo no navegador e será apagado quando o bridge for encerrado.', 'ready');
+    } catch (error) { setSettingsNote(`Não foi possível conectar o token: ${error?.message || error}`, 'error'); }
+  }
+  async function clearToken() {
+    try {
+      const response = await fetchWithTimeout(bridgeUrl('/session/openai-key'), { method:'DELETE' }, 10_000);
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data?.error || `HTTP ${response.status}`);
+      tokenConnected = false;
+      updateTokenStatus();
+      setSettingsNote('Token removido da memória do bridge.', 'ready');
+    } catch (error) { setSettingsNote(`Não foi possível remover o token: ${error?.message || error}`, 'error'); }
+  }
+  async function downloadModel() {
+    const model = $('pf13CatalogSelect')?.value;
+    if (!model) return;
+    const button = $('pf13DownloadModel');
+    if (button) button.disabled = true;
+    const bar = $('pf13DownloadBar');
+    if (bar) bar.style.width = '2%';
+    setSettingsNote(`Iniciando download de ${model}…`);
+    try {
+      const response = await fetch(bridgeUrl('/models/pull'), {
+        method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ model })
+      });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data?.error || `HTTP ${response.status}`);
+      }
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      if (reader) {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream:true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          for (const line of lines) {
+            if (!line.trim()) continue;
+            try {
+              const event = JSON.parse(line);
+              const total = Number(event?.total || 0);
+              const completed = Number(event?.completed || 0);
+              const progress = total > 0 ? Math.max(0.02, Math.min(1, completed / total)) : 0.08;
+              if (bar) bar.style.width = `${progress * 100}%`;
+              setSettingsNote(`${event?.status || 'Baixando'}${total > 0 ? ` · ${Math.round(progress * 100)}%` : ''}`);
+            } catch {}
+          }
+        }
+      }
+      if (bar) bar.style.width = '100%';
+      localStorage.setItem(STORE.ossModel, model);
+      setSettingsNote(`${model} foi instalado e selecionado como motor local.`, 'ready');
+      await refreshBridge();
+    } catch (error) {
+      if (bar) bar.style.width = '0%';
+      setSettingsNote(`Falha ao baixar ${model}: ${error?.message || error}`, 'error');
+    } finally { if (button) button.disabled = false; }
+  }
+  async function deleteModel() {
+    const model = $('pf13CatalogSelect')?.value;
+    if (!model) return;
+    setSettingsNote(`Removendo ${model}…`);
+    try {
+      const response = await fetchWithTimeout(bridgeUrl('/models'), {
+        method:'DELETE', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ model })
+      }, 60_000);
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data?.error || `HTTP ${response.status}`);
+      setSettingsNote(`${model} foi removido do computador.`, 'ready');
+      await refreshBridge();
+    } catch (error) { setSettingsNote(`Não foi possível remover o modelo: ${error?.message || error}`, 'error'); }
+  }
+  async function testLocalModel() {
+    setSettingsNote('Testando o modelo local selecionado…');
     try {
       const endpoint = setting(STORE.ossEndpoint, DEFAULT_OSS_ENDPOINT);
       const response = await fetchWithTimeout(endpoint, {
         method:'POST', headers:{ 'Content-Type':'application/json' },
-        body:JSON.stringify({ model:setting(STORE.ossModel,'gpt-oss:20b'), messages:[{ role:'user', content:'Responda apenas: motor local pronto.' }], max_tokens:20, stream:false })
-      }, 25_000);
+        body:JSON.stringify({ model:$('pf13OssModel')?.value || setting(STORE.ossModel,'gpt-oss:20b'), messages:[{ role:'user', content:'Responda apenas: motor local pronto.' }], max_tokens:20, stream:false })
+      }, 40_000);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      if (note) note.textContent = 'gpt‑oss local conectado e pronto.';
-    } catch (error) {
-      if (note) note.textContent = `Não foi possível conectar: ${error?.message || error}. Inicie o bridge local e o runtime do gpt‑oss.`;
-    }
+      setSettingsNote('Modelo local conectado e pronto.', 'ready');
+    } catch (error) { setSettingsNote(`Não foi possível conectar: ${error?.message || error}. Confirme se o bridge e o Ollama estão ativos.`, 'error'); }
   }
   function saveSettings() {
     const engine = $('pf13EngineSelect')?.value || 'auto';
@@ -297,7 +454,7 @@
     const ossModel = $('pf13OssModel')?.value || 'gpt-oss:20b';
     const global = $('pf13OssGlobal')?.checked ? '1' : '0';
     if (cloudEndpoint && !/^https:\/\//i.test(cloudEndpoint) && !cloudEndpoint.startsWith('/')) {
-      $('pf13SettingsNote').textContent = 'O endpoint da OpenAI precisa usar HTTPS ou caminho relativo.';
+      setSettingsNote('O endpoint remoto da OpenAI precisa usar HTTPS ou caminho relativo.', 'error');
       return;
     }
     localStorage.setItem(STORE.engine, engine);
@@ -307,10 +464,18 @@
     localStorage.setItem(STORE.ossModel, ossModel);
     localStorage.setItem(STORE.ossGlobal, global);
     window.dispatchEvent(new CustomEvent('pf13:gptoss-config'));
-    $('pf13SettingsNote').textContent = 'Configuração salva neste navegador. Nenhuma chave foi armazenada no frontend.';
-    setStatus(engine === 'cloud' ? 'OpenAI cloud' : engine === 'gptoss' ? 'gpt‑oss local' : engine === 'browser' ? 'IA WebGPU' : 'Automático', 'ready');
+    setSettingsNote('Configuração salva. O token da API nunca é persistido pelo site.', 'ready');
+    setStatus(engine === 'cloud' ? 'OpenAI cloud' : engine === 'gptoss' ? `Local · ${ossModel}` : engine === 'browser' ? 'IA WebGPU' : 'Automático', 'ready');
+  }
+  function ensureExtraStyles() {
+    if (document.querySelector('link[href*="design-v13-1.css"]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'design-v13-1.css?v=13.1';
+    document.head.appendChild(link);
   }
   function createUI() {
+    ensureExtraStyles();
     document.querySelectorAll('.pf-agent-launcher,.pf-agent-shell,#pf12Launcher,#pf12Shell').forEach((node) => node.remove());
     if ($('pf13Launcher')) return;
     const launcher = document.createElement('button');
@@ -329,7 +494,7 @@
         <div><b>Faísca AI</b><small id="pf13Status">Orquestrador inteligente</small></div>
         <div class="pf13-head-actions"><button id="pf13Reset" aria-label="Reiniciar">↻</button><button id="pf13Settings" aria-label="Configurar">⌘</button><button id="pf13Close" aria-label="Fechar">×</button></div>
       </header>
-      <div class="pf13-contextbar"><span id="pf13Dot" data-state="idle"></span><span id="pf13EngineLine">Automático · Sol / gpt‑oss / WebGPU</span><b>${escapeHtml(currentView())}</b></div>
+      <div class="pf13-contextbar"><span id="pf13Dot" data-state="idle"></span><span id="pf13EngineLine">Automático · OpenAI / local / WebGPU</span><b>${escapeHtml(currentView())}</b></div>
       <div class="pf13-messages" id="pf13Messages"></div>
       <div class="pf13-compose">
         <div class="pf13-suggestions"><button>Explique o que está acontecendo nesta etapa</button><button>Faça uma análise profunda</button><button>Ajude a escrever uma resposta</button><button>Interprete as cartas abertas</button></div>
@@ -337,12 +502,33 @@
         <small>Enter envia · Shift+Enter quebra linha · Ctrl/⌘+K abre</small>
       </div>
       <section class="pf13-settings" id="pf13SettingsPanel">
-        <div class="pf13-settings-title"><div><small>ENGINE STUDIO</small><h3>Motores de inteligência</h3></div><button id="pf13SettingsClose">×</button></div>
-        <label>Orquestração<select id="pf13EngineSelect"><option value="auto">Automático · melhor motor disponível</option><option value="cloud">OpenAI GPT‑5.6 cloud</option><option value="gptoss">OpenAI gpt‑oss local</option><option value="browser">IA WebGPU no navegador</option></select></label>
-        <div class="pf13-settings-block"><span>OPENAI CLOUD</span><label>Endpoint seguro<input id="pf13CloudEndpoint" type="url" placeholder="https://seu-backend/api/openai-chat"></label><label>Modelo<select id="pf13CloudModel"><option value="auto">Automático · Sol para complexas, Luna para rápidas</option><option value="gpt-5.6-sol">GPT‑5.6 Sol · máxima capacidade</option><option value="gpt-5.6-terra">GPT‑5.6 Terra · equilíbrio</option><option value="gpt-5.6-luna">GPT‑5.6 Luna · menor custo</option></select></label><p>A chave fica somente no backend. Incentivos de tokens gratuitos dependem da elegibilidade da conta e não são garantidos.</p></div>
-        <div class="pf13-settings-block"><span>OPENAI LOCAL · SEM CUSTO POR TOKEN</span><label>Endpoint local<input id="pf13OssEndpoint" type="url" value="${DEFAULT_OSS_ENDPOINT}"></label><label>Modelo<select id="pf13OssModel"><option value="gpt-oss:20b">gpt‑oss‑20b · recomendado · ~16 GB</option><option value="gpt-oss:120b">gpt‑oss‑120b · máxima capacidade · GPU de classe datacenter</option></select></label><label class="pf13-check"><input id="pf13OssGlobal" type="checkbox">Usar gpt‑oss também no Tarô, síntese e encerramento</label><button class="pf13-test" id="pf13TestOss">Testar motor local</button></div>
+        <div class="pf13-settings-title"><div><small>ENGINE STUDIO 13.1</small><h3>Motores de inteligência</h3></div><button id="pf13SettingsClose">×</button></div>
+        <label>Orquestração<select id="pf13EngineSelect"><option value="auto">Automático · melhor motor disponível</option><option value="cloud">OpenAI pela API</option><option value="gptoss">Modelo local instalado</option><option value="browser">IA WebGPU no navegador</option></select></label>
+
+        <div class="pf13-settings-block pf13-token-vault">
+          <span>OPENAI API · TOKEN TEMPORÁRIO</span>
+          <label>API token<div class="pf13-secret-row"><input id="pf13ApiToken" type="password" autocomplete="off" spellcheck="false" placeholder="sk-proj-…"><button type="button" id="pf13ToggleToken" aria-label="Mostrar ou ocultar token">◉</button></div></label>
+          <div class="pf13-inline-actions"><button type="button" id="pf13ConnectToken">Conectar token</button><button type="button" id="pf13ClearToken">Remover token</button></div>
+          <p id="pf13TokenStatus" data-state="idle">Nenhum token conectado.</p>
+          <label>Modelo OpenAI<select id="pf13CloudModel"><option value="auto">Automático · Sol para complexas, Luna para rápidas</option><option value="gpt-5.6-sol">GPT‑5.6 Sol · máxima capacidade</option><option value="gpt-5.6-terra">GPT‑5.6 Terra · equilíbrio</option><option value="gpt-5.6-luna">GPT‑5.6 Luna · menor custo</option><option value="chat-latest">Chat Latest · modelo Instant atual do ChatGPT</option></select></label>
+          <label>Backend remoto opcional<input id="pf13CloudEndpoint" type="url" placeholder="Vazio = usar o bridge local com o token acima"></label>
+          <p>O token é enviado somente ao bridge em <code>127.0.0.1</code>, mantido na memória e apagado ao encerrar o bridge. Ele não entra no GitHub nem no armazenamento do navegador.</p>
+        </div>
+
+        <div class="pf13-settings-block pf13-model-studio">
+          <span>MODELOS LOCAIS GRATUITOS · DOWNLOAD</span>
+          <label>Catálogo<select id="pf13CatalogSelect"></select></label>
+          <div id="pf13ModelDescription" class="pf13-model-description"></div>
+          <div class="pf13-download-track"><i id="pf13DownloadBar"></i></div>
+          <div class="pf13-inline-actions"><button type="button" id="pf13DownloadModel">Baixar modelo</button><button type="button" id="pf13DeleteModel">Remover</button><button type="button" id="pf13RefreshModels">Atualizar lista</button></div>
+          <label>Modelo ativo<select id="pf13OssModel"></select></label>
+          <label>Endpoint local<input id="pf13OssEndpoint" type="url" value="${DEFAULT_OSS_ENDPOINT}"></label>
+          <label class="pf13-check"><input id="pf13OssGlobal" type="checkbox">Usar o modelo local também no Tarô, síntese e encerramento</label>
+          <button class="pf13-test" id="pf13TestOss" type="button">Testar modelo selecionado</button>
+        </div>
+
         <div class="pf13-settings-actions"><button id="pf13Save">Salvar configuração</button><button id="pf13Back">Voltar</button></div>
-        <p id="pf13SettingsNote">O gpt‑oss não usa tokens da API, mas exige processamento e memória no computador.</p>
+        <p id="pf13SettingsNote">Inicie o bridge local para conectar o token e gerenciar downloads.</p>
       </section>`;
     document.body.append(launcher, shell);
 
@@ -350,19 +536,26 @@
     $('pf13CloudEndpoint').value = setting(STORE.cloudEndpoint);
     $('pf13CloudModel').value = setting(STORE.cloudModel, 'auto');
     $('pf13OssEndpoint').value = setting(STORE.ossEndpoint, DEFAULT_OSS_ENDPOINT);
-    $('pf13OssModel').value = setting(STORE.ossModel, 'gpt-oss:20b');
     $('pf13OssGlobal').checked = setting(STORE.ossGlobal, '0') === '1';
+    populateModelControls();
     renderHistory();
 
     const open = () => { shell.classList.remove('hidden'); localStorage.setItem(STORE.open, '1'); setTimeout(() => $('pf13Input')?.focus(), 100); };
     const close = () => { shell.classList.add('hidden'); $('pf13SettingsPanel').classList.remove('open'); localStorage.setItem(STORE.open, '0'); };
     launcher.addEventListener('click', open);
     $('pf13Close').addEventListener('click', close);
-    $('pf13Settings').addEventListener('click', () => $('pf13SettingsPanel').classList.add('open'));
+    $('pf13Settings').addEventListener('click', () => { $('pf13SettingsPanel').classList.add('open'); refreshBridge(); });
     $('pf13SettingsClose').addEventListener('click', () => $('pf13SettingsPanel').classList.remove('open'));
     $('pf13Back').addEventListener('click', () => $('pf13SettingsPanel').classList.remove('open'));
     $('pf13Save').addEventListener('click', saveSettings);
-    $('pf13TestOss').addEventListener('click', testGptOss);
+    $('pf13TestOss').addEventListener('click', testLocalModel);
+    $('pf13ConnectToken').addEventListener('click', connectToken);
+    $('pf13ClearToken').addEventListener('click', clearToken);
+    $('pf13ToggleToken').addEventListener('click', () => { const input = $('pf13ApiToken'); input.type = input.type === 'password' ? 'text' : 'password'; });
+    $('pf13CatalogSelect').addEventListener('change', updateCatalogDetails);
+    $('pf13DownloadModel').addEventListener('click', downloadModel);
+    $('pf13DeleteModel').addEventListener('click', deleteModel);
+    $('pf13RefreshModels').addEventListener('click', refreshBridge);
     $('pf13Reset').addEventListener('click', () => { history = []; saveHistory(); renderHistory(); });
     $('pf13Send').addEventListener('click', () => send($('pf13Input').value));
     $('pf13Input').addEventListener('input', (event) => { event.target.style.height = 'auto'; event.target.style.height = `${Math.min(event.target.scrollHeight, 150)}px`; });
@@ -376,6 +569,7 @@
       const stage = shell.querySelector('.pf13-contextbar b');
       if (stage) stage.textContent = currentView();
     }).observe(document.querySelector('main') || document.body, { subtree:true, attributes:true, attributeFilter:['class'] });
+    refreshBridge();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', createUI, { once:true });

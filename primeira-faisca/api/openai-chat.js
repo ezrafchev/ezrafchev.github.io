@@ -60,6 +60,7 @@ export default async function handler(req, res) {
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 60_000);
+  const enableWeb = String(process.env.OPENAI_ENABLE_WEB || '').toLowerCase() === 'true';
   try {
     const response = await fetch(OPENAI_URL, {
       method:'POST', signal:controller.signal,
@@ -68,6 +69,8 @@ export default async function handler(req, res) {
         model:process.env.OPENAI_MODEL || 'gpt-5-mini',
         instructions:`${SYSTEM}\n\nCONTEXTO OPCIONAL DO SITE:\n${context || 'Nenhum contexto adicional.'}\nUse o contexto somente quando ele ajudar a responder a mensagem mais recente.`,
         input:messages.map((item) => ({ role:item.role, content:[{ type:'input_text', text:item.content }] })),
+        tools:enableWeb ? [{ type:'web_search' }] : undefined,
+        tool_choice:enableWeb ? 'auto' : undefined,
         max_output_tokens:1400,
         store:false
       })

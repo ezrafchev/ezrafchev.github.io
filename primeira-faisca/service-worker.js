@@ -1,5 +1,25 @@
-const CACHE='primeira-faisca-v10-0';
-const ASSETS=['./','./index.html','./manifest.webmanifest','./icon.svg','./style-v8.css?v=8.5','./style-v8-2.css?v=8.5','./visual-v9.css?v=10.0','./assets/spark-orbit.svg?v=9.0','./assets/grain-v9.svg','./data-cards-v3.js?v=8.5','./data-tarot-v3.js?v=8.5','./app-v8.js?v=8.5','./local-ai-v8-5.js?v=8.5','./agent-v10.js?v=10.0'];
-self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);for(const asset of ASSETS){try{const response=await fetch(asset,{cache:'reload'});if(response.ok)await cache.put(asset,response);}catch{}}await self.skipWaiting();})()));
+const CACHE='primeira-faisca-v11-0';
+const ASSETS=[
+  './','./index.html','./manifest.webmanifest','./icon.svg',
+  './style-v8.css?v=8.5','./style-v8-2.css?v=8.5','./visual-v9.css?v=10.0','./design-v11.css?v=11.0',
+  './assets/spark-orbit.svg?v=9.0','./assets/grain-v9.svg',
+  './data-cards-v3.js?v=8.5','./data-tarot-v3.js?v=8.5','./app-v8.js?v=8.5',
+  './local-ai-v8-5.js?v=8.5','./agent-v10.js?v=11.0','./design-v11.js?v=11.0','./floating-agent-v11.js?v=11.0'
+];
+self.addEventListener('install',event=>event.waitUntil((async()=>{
+  const cache=await caches.open(CACHE);
+  for(const asset of ASSETS){
+    try{const response=await fetch(asset,{cache:'reload'});if(response.ok)await cache.put(asset,response);}catch{}
+  }
+  await self.skipWaiting();
+})()));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;const url=new URL(event.request.url);if(url.origin!==location.origin)return;event.respondWith(fetch(event.request,{cache:'no-store'}).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));}return response;}).catch(()=>caches.match(event.request).then(cached=>cached||caches.match('./index.html'))));});
+self.addEventListener('fetch',event=>{
+  if(event.request.method!=='GET')return;
+  const url=new URL(event.request.url);
+  if(url.origin!==location.origin)return;
+  event.respondWith(fetch(event.request,{cache:'no-store'}).then(response=>{
+    if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));}
+    return response;
+  }).catch(()=>caches.match(event.request).then(cached=>cached||caches.match('./index.html'))));
+});

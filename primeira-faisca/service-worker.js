@@ -1,27 +1,40 @@
-const CACHE='primeira-faisca-v14-1';
-const ASSETS=[
+const CACHE='primeira-faisca-v15-0';
+const CORE=[
   './','./index.html','./manifest.webmanifest','./icon.svg',
-  './style-v8.css?v=8.5','./style-v8-2.css?v=8.5','./visual-v9.css?v=10.0','./design-v11.css?v=11.0','./design-v12.css?v=12.0','./design-v13.css?v=14.1','./design-v13-1.css?v=13.1','./design-v14.css?v=14.0','./hotfix-v14-1.css?v=14.1',
-  './assets/spark-orbit.svg?v=9.0','./assets/grain-v9.svg',
+  './style-v8.css?v=8.5','./style-v8-2.css?v=8.5','./style-v15.css?v=15.0',
   './data-cards-v3.js?v=8.5','./data-tarot-v3.js?v=8.5','./app-v8.js?v=8.5',
-  './local-ai-v8-5.js?v=14.1','./agent-v10.js?v=14.1','./design-v11.js?v=14.1','./ai-transport-guard-v11.js?v=14.1','./design-runtime-guard-v11.js?v=14.1',
-  './gpt-oss-engine-v13.js?v=14.1','./design-v13.js?v=14.1','./floating-agent-v13.js?v=14.1','./browser-model-studio-v14.js?v=14.1','./runtime-repair-v14.js?v=14.1','./hotfix-loader-v14-1.js?v=14.1','./hotfix-v14-1.js?v=14.1',
-  './local-gpt-oss/start-faisca-ai.bat'
+  './local-ai-v8-5.js?v=8.5','./app-v15.js?v=15.0'
 ];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const cache=await caches.open(CACHE);
-  for(const asset of ASSETS){
-    try{const response=await fetch(asset,{cache:'reload'});if(response.ok)await cache.put(asset,response);}catch{}
-  }
+  await Promise.allSettled(CORE.map(async asset=>{
+    const response=await fetch(asset,{cache:'reload'});
+    if(response.ok)await cache.put(asset,response);
+  }));
   await self.skipWaiting();
 })()));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener('activate',event=>event.waitUntil((async()=>{
+  const keys=await caches.keys();
+  await Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)));
+  await self.clients.claim();
+})()));
 self.addEventListener('fetch',event=>{
-  if(event.request.method!=='GET')return;
-  const url=new URL(event.request.url);
+  const request=event.request;
+  if(request.method!=='GET')return;
+  const url=new URL(request.url);
   if(url.origin!==location.origin)return;
-  event.respondWith(fetch(event.request,{cache:'no-store'}).then(response=>{
-    if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));}
-    return response;
-  }).catch(()=>caches.match(event.request).then(cached=>cached||caches.match('./index.html'))));
+  if(request.mode==='navigate'){
+    event.respondWith(fetch(request,{cache:'no-store'}).then(response=>{
+      if(response.ok)caches.open(CACHE).then(cache=>cache.put('./index.html',response.clone()));
+      return response;
+    }).catch(()=>caches.match('./index.html')));
+    return;
+  }
+  event.respondWith(caches.match(request).then(cached=>{
+    const network=fetch(request).then(response=>{
+      if(response.ok&&/\.(?:js|css|svg|webmanifest)$/i.test(url.pathname))caches.open(CACHE).then(cache=>cache.put(request,response.clone()));
+      return response;
+    });
+    return cached||network;
+  }));
 });

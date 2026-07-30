@@ -1,10 +1,1 @@
-import './agent-v10.js?v=14.1';
-import './design-v11.js?v=14.1';
-import './ai-transport-guard-v11.js?v=14.1';
-import './design-runtime-guard-v11.js?v=14.1';
-import './gpt-oss-engine-v13.js?v=14.1';
-import './design-v13.js?v=14.1';
-import './floating-agent-v13.js?v=14.1';
-import './browser-model-studio-v14.js?v=14.1';
-import './runtime-repair-v14.js?v=14.1';
-import './hotfix-loader-v14-1.js?v=14.1';
+import './app-v15.js?v=15.0';

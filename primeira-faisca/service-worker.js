@@ -1,4 +1,4 @@
-const CACHE='primeira-faisca-v15-1';
+const CACHE='primeira-faisca-v15-2';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./icon.svg',
   './style-v8.css?v=8.5','./style-v8-2.css?v=8.5','./style-v15.css?v=15.0',
@@ -35,6 +35,7 @@ self.addEventListener('fetch',event=>{
       if(response.ok&&/\.(?:js|css|svg|webmanifest)$/i.test(url.pathname))caches.open(CACHE).then(cache=>cache.put(request,response.clone()));
       return response;
     });
-    return cached||network;
+    if(cached){event.waitUntil(network.then(()=>undefined).catch(()=>undefined));return cached;}
+    return network.catch(()=>caches.match('./index.html'));
   }));
 });

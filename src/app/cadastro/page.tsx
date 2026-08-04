@@ -1,4 +1,4 @@
-import { createClient } from '@/src/lib/supabase-server';
+import { createClient } from '../../lib/supabase-server';
 
 async function cadastrar(formData: FormData) {
   'use server';

@@ -1,43 +1,278 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TRIDRA 3D — Loja, Portfólio e Pedidos</title>
-<meta name="description" content="TRIDRA 3D e TRIDRA Lab: manufatura digital, impressão 3D, portfólio, loja, cadastro, login, carrinho, frete estimado e pedidos." />
-<meta name="theme-color" content="#0d0d0f" />
-<style>
-:root{--g:#0d0d0f;--g2:#17191f;--b:#0057ff;--l:#a6ff00;--t:#8c93a1;--bg:#f6f7f9;--line:#e6e8ee;--txt:#111216;--mut:#626975;--ok:#087f5b;--warn:#b7791f;--bad:#b42318;--r:28px;--sh:0 24px 70px rgba(13,13,15,.12)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--txt);background:linear-gradient(180deg,#fff,#f7f8fb 42%,#fff)}a{text-decoration:none;color:inherit}button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}.hide{display:none!important}header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.045em;font-size:22px}.brand em{font-style:normal;color:var(--b)}.mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,#0d0d0f,#2d3038);position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}.mark:before{content:"";position:absolute;left:8px;right:8px;top:9px;height:7px;border-radius:2px;background:#fff}.mark:after{content:"";position:absolute;left:15px;top:9px;width:8px;height:21px;border-radius:2px;background:#fff;box-shadow:11px 15px 0 -7px var(--b),-11px 15px 0 -7px var(--l)}nav{display:flex;gap:22px;font-size:14px;font-weight:800;color:#30343b}.actions{display:flex;align-items:center;gap:10px}.pill,.btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:12px 16px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s}.btn:hover,.pill:hover{transform:translateY(-2px);box-shadow:0 16px 45px rgba(13,13,15,.1)}.primary{background:var(--g);color:#fff;border-color:var(--g)}.blue{background:var(--b);color:#fff;border-color:var(--b)}.lime{background:var(--l);color:#081000;border-color:var(--l)}.danger{background:#fff5f5;color:var(--bad);border-color:#ffd5d5}.hero{padding:90px 0 70px;overflow:hidden;position:relative}.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 12%,rgba(0,87,255,.16),transparent 26%),radial-gradient(circle at 10% 86%,rgba(166,255,0,.12),transparent 26%);z-index:-1}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}.eyebrow{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--line);background:rgba(255,255,255,.72);padding:8px 12px;border-radius:999px;font-size:13px;font-weight:900;margin-bottom:24px}.dot{width:8px;height:8px;border-radius:50%;background:var(--l);box-shadow:0 0 0 6px rgba(166,255,0,.14)}h1{font-size:clamp(48px,7vw,98px);line-height:.9;letter-spacing:-.085em;margin:0 0 24px;font-weight:950}.grad{background:linear-gradient(100deg,#0d0d0f,#505762 60%,#0057ff);-webkit-background-clip:text;background-clip:text;color:transparent}.lead{font-size:clamp(18px,2.2vw,24px);line-height:1.45;color:#4f5661;margin:0 0 32px}.row{display:flex;gap:13px;flex-wrap:wrap}.hero-card{background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:36px;padding:18px;box-shadow:var(--sh)}.visual{height:530px;border-radius:28px;background:linear-gradient(145deg,#0d0d0f,#23262f);position:relative;overflow:hidden;display:grid;place-items:center;color:#fff}.visual:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(circle,black,transparent 72%)}.cube{width:250px;height:250px;border-radius:42px;background:linear-gradient(135deg,#fff,#9ca3af);transform:rotate(45deg);box-shadow:0 42px 90px rgba(0,0,0,.4);position:relative}.cube:before{content:"";position:absolute;inset:42px;border:18px solid #111216;border-radius:28px}.cube:after{content:"";position:absolute;inset:105px;border:12px solid var(--b);border-radius:24px;box-shadow:0 0 40px rgba(0,87,255,.75)}.float{position:absolute;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(14px);border-radius:20px;padding:14px 16px;font-size:13px}.float strong{display:block;font-size:17px}.f1{left:24px;top:25px}.f2{right:24px;bottom:25px}.f3{left:24px;bottom:32px}.section{padding:78px 0}.soft{background:var(--bg)}.dark{background:#0d0d0f;color:#fff}.head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:34px}.k{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--b);font-weight:950;margin-bottom:10px}.dark .k{color:var(--l)}h2{font-size:clamp(34px,5vw,66px);letter-spacing:-.07em;line-height:.94;margin:0;font-weight:950}.head p{max-width:560px;color:var(--mut);font-size:18px;line-height:1.55}.dark .head p,.dark .small{color:#adb4bf}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:28px;padding:26px;box-shadow:0 1px 0 rgba(0,0,0,.02)}.dark .card{background:#16181e;border-color:rgba(255,255,255,.1);color:#fff}.card h3{margin:0 0 10px;font-size:23px;letter-spacing:-.04em}.card p,.small{color:#626975;line-height:1.58;margin:0}.icon{width:54px;height:54px;border-radius:18px;background:#f1f4f8;display:grid;place-items:center;color:var(--b);font-weight:950;margin-bottom:18px}.dark .icon{background:#242832;color:var(--l)}.product{padding:0;overflow:hidden}.img{height:210px;background:linear-gradient(135deg,#f7f8fb,#dfe3ea);position:relative}.img.dark{background:linear-gradient(135deg,#111216,#303641)}.mini{position:absolute;inset:47px;border-radius:26px;background:linear-gradient(135deg,#fff,#a7a9ac);transform:rotate(18deg)}.mini:before{content:"";position:absolute;inset:28px;border:12px solid #111216;border-radius:18px}.body{padding:22px}.price{font-size:24px;font-weight:950;margin:12px 0;letter-spacing:-.04em}.qty{display:flex;gap:10px;margin-top:16px}.qty input{width:72px;border:1px solid var(--line);border-radius:14px;padding:11px;text-align:center}.qty .btn{flex:1}.tag{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900;background:#fff}.dark .tag{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.08)}.formgrid{display:grid;grid-template-columns:.92fr 1.08fr;gap:18px}.panel{background:#fff;border:1px solid var(--line);border-radius:34px;padding:28px;box-shadow:0 16px 55px rgba(13,13,15,.08)}.field{display:grid;gap:7px;margin-bottom:14px}.field label{font-size:14px;font-weight:850}.field input,.field textarea,.field select{border:1px solid var(--line);border-radius:16px;padding:13px 14px;background:#fff;outline:none}.field textarea{min-height:108px}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--b);box-shadow:0 0 0 4px rgba(0,87,255,.1)}.notice{border:1px dashed #c8ced8;background:#fbfcfd;border-radius:20px;padding:16px;color:#555d68;line-height:1.55}.success{border-color:#b7f4d1;background:#f1fff7;color:#0f6b46}.warning{border-color:#ffe0a3;background:#fffaf0;color:#7a4e10}.bad{border-color:#ffc9c9;background:#fff5f5;color:#9b1c1c}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 16px}.pay{border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;align-items:flex-start;gap:10px;background:#fff;min-width:160px;flex:1}.pay input{margin-top:4px}.pay b{display:block}.pay span{font-size:13px;color:var(--mut)}.pay:has(input:checked){border-color:var(--b);box-shadow:0 0 0 4px rgba(0,87,255,.08)}.cart{display:none;position:fixed;right:18px;top:94px;width:min(440px,calc(100vw - 36px));max-height:calc(100vh - 116px);overflow:auto;z-index:40;background:#fff;border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:var(--sh)}.cart.open{display:block}.cartTop{display:flex;justify-content:space-between;align-items:center}.ci{display:grid;grid-template-columns:1fr auto;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.ci small{color:var(--mut)}.total{display:flex;justify-content:space-between;font-size:23px;font-weight:950;margin:18px 0}.x{border:0;background:#f0f1f4;border-radius:50%;width:36px;height:36px;font-weight:900;cursor:pointer}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:#111216;color:#fff;border-radius:999px;padding:14px 18px;box-shadow:var(--sh);transition:.25s;z-index:60}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.table{width:100%;border-collapse:collapse;font-size:14px}.table th,.table td{text-align:left;border-bottom:1px solid var(--line);padding:12px 8px}.table th{color:#424956}.status{display:inline-flex;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:950;background:#eef2ff;color:#233c9d}.footer{padding:54px 0;background:#fff;border-top:1px solid var(--line)}.foot{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:24px}.links{display:grid;gap:10px;color:#515864;font-size:14px;font-weight:750}@media(max-width:900px){nav{display:none}.hero-grid,.formgrid,.foot{grid-template-columns:1fr}.grid3,.grid4{grid-template-columns:1fr}.head{display:block}.visual{height:420px}h1{font-size:55px}.hero{padding-top:55px}.actions .pill:first-child{display:none}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TRIDRA 3D — Impressão 3D, Portfólio e Loja Oficial</title>
+  <meta name="description" content="TRIDRA 3D: impressão 3D, peças personalizadas, brindes corporativos, protótipos e loja oficial com checkout seguro pela Nuvemshop." />
+  <meta name="theme-color" content="#0D0D0F" />
+  <meta property="og:title" content="TRIDRA 3D — Manufatura Digital Premium" />
+  <meta property="og:description" content="Portfólio, impressão 3D, produtos personalizados e loja oficial TRIDRA 3D." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ezrafchev.github.io/" />
+  <style>
+    :root{
+      --grafite:#0d0d0f;
+      --grafite2:#17191f;
+      --cobalto:#0057ff;
+      --lima:#a6ff00;
+      --titaneo:#a7a9ac;
+      --fundo:#f6f7f9;
+      --linha:#e6e8ee;
+      --texto:#111216;
+      --muted:#626975;
+      --branco:#ffffff;
+      --sombra:0 26px 80px rgba(13,13,15,.14);
+      --raio:30px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--texto);
+      background:linear-gradient(180deg,#fff 0%,#f7f8fb 46%,#fff 100%);
+    }
+    a{text-decoration:none;color:inherit}
+    button,input,textarea{font:inherit}
+    .wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+    .topbar{
+      position:sticky;top:0;z-index:20;
+      background:rgba(255,255,255,.84);
+      backdrop-filter:blur(22px);
+      border-bottom:1px solid var(--linha);
+    }
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:950;letter-spacing:-.045em}
+    .brand em{font-style:normal;color:var(--cobalto)}
+    .mark{
+      width:40px;height:40px;border-radius:14px;
+      background:linear-gradient(135deg,#0d0d0f,#2c3039);
+      position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)
+    }
+    .mark:before{content:"";position:absolute;left:8px;right:8px;top:9px;height:7px;border-radius:2px;background:#fff}
+    .mark:after{content:"";position:absolute;left:16px;top:9px;width:8px;height:22px;border-radius:2px;background:#fff;box-shadow:11px 15px 0 -7px var(--cobalto),-11px 15px 0 -7px var(--lima)}
+    nav{display:flex;gap:24px;font-size:14px;font-weight:850;color:#2f3540}
+    .actions{display:flex;align-items:center;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      border:1px solid var(--linha);background:#fff;border-radius:999px;
+      padding:13px 18px;font-weight:950;letter-spacing:-.02em;
+      transition:.2s ease;cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 16px 45px rgba(13,13,15,.1)}
+    .primary{background:var(--grafite);color:#fff;border-color:var(--grafite)}
+    .blue{background:var(--cobalto);color:#fff;border-color:var(--cobalto)}
+    .lime{background:var(--lima);color:#081000;border-color:var(--lima)}
+    .hero{position:relative;overflow:hidden;padding:90px 0 74px}
+    .hero:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 86% 14%,rgba(0,87,255,.18),transparent 28%),radial-gradient(circle at 12% 88%,rgba(166,255,0,.13),transparent 28%)}
+    .heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--linha);background:rgba(255,255,255,.76);border-radius:999px;padding:8px 12px;font-size:13px;font-weight:950;margin-bottom:24px}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--lima);box-shadow:0 0 0 6px rgba(166,255,0,.15)}
+    h1{font-size:clamp(48px,7vw,96px);line-height:.9;letter-spacing:-.085em;margin:0 0 24px;font-weight:950}
+    .grad{background:linear-gradient(100deg,#0d0d0f,#4f5661 60%,#0057ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:clamp(18px,2.2vw,24px);line-height:1.45;color:#4f5661;margin:0 0 32px;max-width:720px}
+    .row{display:flex;gap:13px;flex-wrap:wrap}
+    .heroCard{background:rgba(255,255,255,.84);border:1px solid var(--linha);border-radius:38px;padding:18px;box-shadow:var(--sombra)}
+    .visual{height:540px;border-radius:30px;background:linear-gradient(145deg,#0d0d0f,#252934);position:relative;overflow:hidden;display:grid;place-items:center;color:#fff}
+    .visual:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(circle,black,transparent 72%)}
+    .cube{width:250px;height:250px;border-radius:42px;background:linear-gradient(135deg,#fff,#9da4af);transform:rotate(45deg);box-shadow:0 42px 90px rgba(0,0,0,.42);position:relative}
+    .cube:before{content:"";position:absolute;inset:42px;border:18px solid #111216;border-radius:28px}
+    .cube:after{content:"";position:absolute;inset:105px;border:12px solid var(--cobalto);border-radius:24px;box-shadow:0 0 42px rgba(0,87,255,.78)}
+    .float{position:absolute;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(15px);border-radius:20px;padding:14px 16px;font-size:13px}
+    .float strong{display:block;font-size:17px}.f1{left:24px;top:25px}.f2{right:24px;bottom:25px}.f3{left:24px;bottom:32px}
+    .section{padding:78px 0}.soft{background:var(--fundo)}.dark{background:#0d0d0f;color:#fff}
+    .head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:34px}.k{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalto);font-weight:950;margin-bottom:10px}.dark .k{color:var(--lima)}
+    h2{font-size:clamp(34px,5vw,64px);letter-spacing:-.07em;line-height:.94;margin:0;font-weight:950}.head p{max-width:560px;color:var(--muted);font-size:18px;line-height:1.55}.dark .head p,.dark .muted{color:#adb4bf}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .card{background:#fff;border:1px solid var(--linha);border-radius:28px;padding:26px;box-shadow:0 1px 0 rgba(0,0,0,.02)}.dark .card{background:#16181e;border-color:rgba(255,255,255,.1);color:#fff}.card h3{margin:0 0 10px;font-size:23px;letter-spacing:-.04em}.card p{color:#626975;line-height:1.58;margin:0}.dark .card p{color:#b6bdc8}.icon{width:54px;height:54px;border-radius:18px;background:#f1f4f8;display:grid;place-items:center;color:var(--cobalto);font-weight:950;margin-bottom:18px}.dark .icon{background:#242832;color:var(--lima)}
+    .product{padding:0;overflow:hidden}.img{height:210px;background:linear-gradient(135deg,#f7f8fb,#dfe3ea);position:relative}.mini{position:absolute;inset:47px;border-radius:26px;background:linear-gradient(135deg,#fff,#a7a9ac);transform:rotate(18deg)}.mini:before{content:"";position:absolute;inset:28px;border:12px solid #111216;border-radius:18px}.body{padding:22px}.price{font-size:24px;font-weight:950;margin:12px 0;letter-spacing:-.04em}.tag{display:inline-flex;border:1px solid var(--linha);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900;background:#fff;color:#333}.notice{border:1px dashed #c8ced8;background:#fbfcfd;border-radius:22px;padding:18px;color:#555d68;line-height:1.58}.cta{border-radius:36px;background:linear-gradient(135deg,#0d0d0f,#242833);color:#fff;padding:42px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;box-shadow:var(--sombra)}.cta h2{color:#fff}.cta p{color:#c4cad4;line-height:1.6;font-size:18px}.check{display:grid;gap:12px;margin-top:20px}.check span{display:flex;gap:10px;align-items:flex-start;color:#cbd2dc}.check b{color:#fff}.formgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}.panel{background:#fff;border:1px solid var(--linha);border-radius:34px;padding:28px;box-shadow:0 16px 55px rgba(13,13,15,.08)}.field{display:grid;gap:7px;margin-bottom:14px}.field label{font-size:14px;font-weight:850}.field input,.field textarea,.field select{border:1px solid var(--linha);border-radius:16px;padding:13px 14px;background:#fff;outline:none}.field textarea{min-height:108px}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--cobalto);box-shadow:0 0 0 4px rgba(0,87,255,.1)}footer{padding:54px 0;background:#fff;border-top:1px solid var(--linha)}.foot{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:24px}.links{display:grid;gap:10px;color:#515864;font-size:14px;font-weight:750}.copy{font-size:13px;color:#747c88;margin-top:20px}.whats{position:fixed;right:18px;bottom:18px;z-index:30}.whats .btn{box-shadow:var(--sombra)}
+    @media(max-width:900px){nav{display:none}.heroGrid,.formgrid,.foot,.cta{grid-template-columns:1fr}.grid3,.grid4{grid-template-columns:1fr}.head{display:block}.visual{height:420px}h1{font-size:55px}.hero{padding-top:55px}.actions .btn:first-child{display:none}}
+  </style>
 </head>
 <body>
-<header><div class="wrap nav"><a class="brand" href="#top"><span class="mark"></span><span>TRIDRA <em>3D</em></span></a><nav><a href="#loja">Loja</a><a href="#checkout">Checkout</a><a href="#conta">Conta</a><a href="#pedidos">Pedidos</a><a href="#orcamento">Orçamento</a></nav><div class="actions"><button class="pill" onclick="scrollToId('conta')" id="userPill">Entrar</button><button class="pill primary" onclick="toggleCart()">Carrinho <span id="count">0</span></button></div></div></header>
-<aside class="cart" id="cartBox"><div class="cartTop"><h3 style="margin:0">Carrinho</h3><button class="x" onclick="toggleCart(false)">×</button></div><div id="cartItems"></div><div class="total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div><div class="row"><a class="btn primary" href="#checkout" onclick="toggleCart(false)">Ir para checkout</a><button class="btn danger" onclick="clearCart()">Limpar</button></div></aside>
-<main id="top">
-<section class="hero"><div class="wrap hero-grid"><div><div class="eyebrow"><span class="dot"></span>Loja, pedidos e portfólio corrigidos</div><h1><span class="grad">Ideias em forma.</span><br>Precisão em cada camada.</h1><p class="lead">A TRIDRA 3D apresenta produtos, recebe pedidos, permite cadastro/login local, calcula frete estimado por CEP e organiza o checkout com Pix, cartão e pedido por WhatsApp.</p><div class="row"><a class="btn primary" href="#loja">Comprar produtos</a><a class="btn blue" href="#checkout">Finalizar pedido</a><a class="btn" href="#conta">Criar conta</a></div></div><div class="hero-card"><div class="visual"><div class="float f1"><strong>Cadastro</strong>Conta local funcional</div><div class="float f2"><strong>Checkout</strong>Pix, cartão e pedido</div><div class="float f3"><strong>Frete</strong>Estimativa por CEP</div><div class="cube"></div></div></div></div></section>
-<section class="section soft"><div class="wrap"><div class="head"><div><div class="k">Serviços</div><h2>Manufatura digital com fluxo comercial.</h2></div><p>A versão hospedada foi corrigida para funcionar sem backend: os dados ficam salvos no navegador do cliente. Pagamento real por cartão deve ser ativado depois em gateway seguro.</p></div><div class="grid4"><article class="card"><div class="icon">3D</div><h3>Impressão 3D</h3><p>Peças úteis, personalizadas, brindes, protótipos e produtos sob demanda.</p></article><article class="card"><div class="icon">PIX</div><h3>Pagamento organizado</h3><p>O checkout coleta a forma escolhida e gera pedido com instruções para confirmação.</p></article><article class="card"><div class="icon">CEP</div><h3>Frete estimado</h3><p>Consulta endereço por CEP e calcula frete estimado por região e peso do carrinho.</p></article><article class="card"><div class="icon">LAB</div><h3>TRIDRA Lab</h3><p>Projetos especiais, peças técnicas, protótipos e desenvolvimento de produto.</p></article></div></div></section>
-<section class="section" id="loja"><div class="wrap"><div class="head"><div><div class="k">Loja</div><h2>Produtos iniciais.</h2></div><p>Adicione ao carrinho, informe CEP, escolha pagamento e gere um pedido completo.</p></div><div class="grid3" id="productGrid"></div></div></section>
-<section class="section soft" id="checkout"><div class="wrap"><div class="head"><div><div class="k">Checkout</div><h2>Pedido, frete e pagamento.</h2></div><p>Preencha os dados para calcular frete estimado e registrar o pedido no navegador.</p></div><div class="formgrid"><div class="panel"><h3>Resumo do carrinho</h3><div id="checkoutItems"></div><div class="field"><label for="cep">CEP de entrega</label><input id="cep" maxlength="9" placeholder="00000-000" oninput="maskCep(this)" /></div><button class="btn blue" onclick="quoteShipping()">Calcular frete automático</button><div id="shippingResult" class="notice" style="margin-top:14px">Informe o CEP para estimar endereço, prazo e valor do frete.</div><div class="total"><span>Total geral</span><span id="grandTotal">R$ 0,00</span></div></div><div class="panel"><h3>Dados e pagamento</h3><div class="field"><label for="buyerName">Nome completo</label><input id="buyerName" placeholder="Esdra Felipe" /></div><div class="field"><label for="buyerEmail">E-mail</label><input id="buyerEmail" type="email" placeholder="cliente@email.com" /></div><div class="field"><label for="buyerPhone">WhatsApp</label><input id="buyerPhone" placeholder="(31) 99999-9999" /></div><div class="field"><label for="buyerAddress">Endereço</label><textarea id="buyerAddress" placeholder="Rua, número, bairro, cidade e observações"></textarea></div><div class="field"><label>Forma de pagamento</label><div class="tabs"><label class="pay"><input type="radio" name="payment" value="pix" checked onchange="setPayment(this.value)"><span><b>Pix</b><span>Confirmação rápida</span></span></label><label class="pay"><input type="radio" name="payment" value="credito" onchange="setPayment(this.value)"><span><b>Cartão de crédito</b><span>Link seguro</span></span></label><label class="pay"><input type="radio" name="payment" value="debito" onchange="setPayment(this.value)"><span><b>Débito</b><span>Link seguro</span></span></label></div></div><div id="paymentInfo" class="notice success">Pix selecionado. O pedido será registrado e a confirmação será enviada via WhatsApp até configurar uma chave Pix real no gateway.</div><div class="row"><button class="btn primary" onclick="createOrder()">Finalizar pedido</button><button class="btn" onclick="downloadOrder()">Baixar pedido</button></div></div></div></div></section>
-<section class="section" id="conta"><div class="wrap"><div class="head"><div><div class="k">Conta</div><h2>Cadastro e login corrigidos.</h2></div><p>Cadastro local funcional para GitHub Pages. Em produção real, isso deve ser trocado por Supabase Auth com confirmação por e-mail.</p></div><div class="formgrid"><div class="panel"><h3>Criar conta</h3><div class="field"><label>Nome</label><input id="signupName" placeholder="Esdra Felipe" /></div><div class="field"><label>E-mail</label><input id="signupEmail" type="email" placeholder="email@exemplo.com" /></div><div class="field"><label>Senha local</label><input id="signupPass" type="password" minlength="6" placeholder="mínimo 6 caracteres" /></div><button class="btn blue" onclick="signup()">Criar conta</button><button class="btn" onclick="confirmEmailLocal()">Confirmar e-mail local</button><div id="signupMsg" class="notice" style="margin-top:14px">Após criar conta, clique em confirmar e-mail local para liberar o login nesta versão estática.</div></div><div class="panel"><h3>Entrar</h3><div class="field"><label>E-mail</label><input id="loginEmail" type="email" placeholder="email@exemplo.com" /></div><div class="field"><label>Senha</label><input id="loginPass" type="password" /></div><div class="row"><button class="btn primary" onclick="login()">Entrar</button><button class="btn danger" onclick="logout()">Sair</button></div><div id="accountBox" class="notice" style="margin-top:14px">Nenhum usuário logado.</div></div></div></div></section>
-<section class="section soft" id="pedidos"><div class="wrap"><div class="head"><div><div class="k">Pedidos</div><h2>Histórico salvo.</h2></div><p>Os pedidos ficam gravados no navegador usado pelo cliente.</p></div><div class="panel"><div id="ordersBox">Nenhum pedido criado ainda.</div></div></div></section>
-<section class="section dark" id="orcamento"><div class="wrap"><div class="head"><div><div class="k">Orçamento personalizado</div><h2>Peça sob medida.</h2></div><p>Para arquivos STL, STEP, 3MF, fotos, medidas e ideias que precisam virar produto real.</p></div><div class="formgrid"><div class="card"><h3>Fluxo profissional</h3><p>1. Cliente envia ideia, foto ou arquivo.<br>2. A TRIDRA avalia material, tempo e acabamento.<br>3. Envia orçamento com prazo, pagamento e entrega.<br>4. Produção inicia após aprovação.</p></div><div class="card"><div class="field"><label>Descrição</label><textarea id="quoteText" placeholder="Descreva sua peça, medidas, quantidade e material desejado"></textarea></div><button class="btn lime" onclick="sendQuote()">Enviar orçamento pelo WhatsApp</button></div></div></div></section>
-</main>
-<footer class="footer"><div class="wrap foot"><div><a class="brand" href="#top"><span class="mark"></span><span>TRIDRA <em>3D</em></span></a><p class="small" style="margin-top:12px">Manufatura digital premium: ideias em forma, precisão em cada camada.</p></div><div class="links"><b>Loja</b><a href="#loja">Produtos</a><a href="#checkout">Checkout</a><a href="#pedidos">Pedidos</a></div><div class="links"><b>Conta</b><a href="#conta">Cadastro</a><a href="#conta">Login</a><a href="#orcamento">Orçamento</a></div><div class="links"><b>Técnico</b><span>GitHub Pages: versão estática</span><span>Produção real: Netlify + Supabase + Mercado Pago</span></div></div></footer>
-<div class="toast" id="toast">Pronto.</div>
-<script>
-const CONFIG={whatsapp:'5531999999999',email:'contato@tridra.com.br',originState:'MG'};
-const products=[{id:'chaveiro-logo',name:'Chaveiro corporativo com logo',price:19.90,weight:.04,desc:'Ideal para marcas, eventos e brindes.'},{id:'suporte-celular',name:'Suporte premium para celular',price:39.90,weight:.12,desc:'Produto útil para mesa, balcão e escritório.'},{id:'porta-qrcode',name:'Porta QR Code / Pix',price:49.90,weight:.16,desc:'Display personalizado para empresas.'},{id:'peca-petg',name:'Peça técnica em PETG',price:69.90,weight:.22,desc:'Suportes, espaçadores e peças funcionais.'},{id:'brindes-lote',name:'Kit de brindes 10 unidades',price:149.90,weight:.55,desc:'Lote inicial para empresas e campanhas.'},{id:'prototipo-lab',name:'Protótipo TRIDRA Lab',price:89.90,weight:.28,desc:'Avaliação inicial para desenvolvimento.'}];
-let cart=load('tridra_cart',[]), user=load('tridra_session',null), shipping=load('tridra_shipping',null), payment=load('tridra_payment','pix'), lastOrder=null;
-function brl(v){return (Number(v)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}function load(k,f){try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}}function save(k,v){localStorage.setItem(k,JSON.stringify(v))}function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}function toggleCart(force){document.getElementById('cartBox').classList.toggle('open',force)}function cartSubtotal(){return cart.reduce((s,i)=>s+i.price*i.qty,0)}function cartWeight(){return cart.reduce((s,i)=>s+(i.weight||.1)*i.qty,0)}
-function renderProducts(){document.getElementById('productGrid').innerHTML=products.map((p,i)=>`<article class="card product"><div class="img ${i%2?'dark':''}"><div class="mini"></div></div><div class="body"><span class="tag">TRIDRA ${i===5?'Lab':'3D'}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price">${brl(p.price)}</div><div class="qty"><input id="q-${p.id}" type="number" min="1" value="1"><button class="btn primary" onclick="addToCart('${p.id}')">Adicionar</button></div></div></article>`).join('')}
-function addToCart(id){const p=products.find(x=>x.id===id);const q=Math.max(1,Number(document.getElementById('q-'+id).value||1));const item=cart.find(x=>x.id===id);if(item)item.qty+=q;else cart.push({...p,qty:q});save('tridra_cart',cart);shipping=null;save('tridra_shipping',shipping);render();toast('Produto adicionado ao carrinho.')}function removeItem(id){cart=cart.filter(i=>i.id!==id);save('tridra_cart',cart);render();toast('Item removido.')}function clearCart(){cart=[];shipping=null;save('tridra_cart',cart);save('tridra_shipping',shipping);render();toast('Carrinho limpo.')}
-function renderCart(){document.getElementById('count').textContent=cart.reduce((s,i)=>s+i.qty,0);const html=cart.length?cart.map(i=>`<div class="ci"><div><b>${i.name}</b><br><small>${i.qty} × ${brl(i.price)}</small></div><div><b>${brl(i.qty*i.price)}</b><br><button class="x" onclick="removeItem('${i.id}')">×</button></div></div>`).join(''):'<p class="small">Carrinho vazio.</p>';document.getElementById('cartItems').innerHTML=html;document.getElementById('checkoutItems').innerHTML=html;document.getElementById('cartTotal').textContent=brl(cartSubtotal());document.getElementById('grandTotal').textContent=brl(cartSubtotal()+(shipping?.price||0))}
-function setPayment(v){payment=v;save('tridra_payment',payment);const map={pix:'Pix selecionado. O pedido será registrado e a confirmação será enviada via WhatsApp até configurar uma chave Pix real no gateway.',credito:'Cartão de crédito selecionado. Por segurança, o site não coleta número de cartão no GitHub Pages; ele gera o pedido para envio de link seguro.',debito:'Débito selecionado. Por segurança, o site gera o pedido para envio de link seguro pelo gateway.'};document.getElementById('paymentInfo').textContent=map[v]||map.pix;document.getElementById('paymentInfo').className='notice '+(v==='pix'?'success':'warning')}
-function maskCep(el){let v=el.value.replace(/\D/g,'').slice(0,8);if(v.length>5)v=v.slice(0,5)+'-'+v.slice(5);el.value=v}
-async function quoteShipping(){if(!cart.length){toast('Adicione produtos antes de calcular o frete.');return}const cep=document.getElementById('cep').value.replace(/\D/g,'');if(cep.length!==8){toast('Digite um CEP válido com 8 números.');return}let addr=null;try{const r=await fetch('https://viacep.com.br/ws/'+cep+'/json/');addr=await r.json();if(addr.erro)addr=null}catch(e){}const first=Number(cep[0]);const weight=Math.max(.3,cartWeight());let region='Brasil',base=48,prazo='7 a 12 dias úteis';if(first===3){region='Minas Gerais';base=18;prazo='2 a 5 dias úteis'}else if([0,1,2].includes(first)){region='Sudeste';base=29;prazo='3 a 7 dias úteis'}else if([8,9].includes(first)){region='Sul';base=39;prazo='5 a 9 dias úteis'}else if(first===7){region='Centro-Oeste';base=42;prazo='5 a 10 dias úteis'}else if([4,5].includes(first)){region='Nordeste';base=48;prazo='7 a 12 dias úteis'}else if(first===6){region='Norte';base=58;prazo='8 a 15 dias úteis'}const price=Number((base+(Math.ceil(weight*10)/10)*7).toFixed(2));shipping={cep,price,prazo,region,address:addr?`${addr.logradouro||''} ${addr.bairro||''} — ${addr.localidade||''}/${addr.uf||''}`:'Endereço não confirmado'};save('tridra_shipping',shipping);document.getElementById('buyerAddress').value=shipping.address;render();document.getElementById('shippingResult').className='notice success';document.getElementById('shippingResult').innerHTML=`<b>Frete estimado:</b> ${brl(price)}<br><b>Prazo:</b> ${prazo}<br><b>Região:</b> ${region}<br><b>Endereço:</b> ${shipping.address}<br><small>Valor estimado para orçamento. Frete real deve ser confirmado antes da produção/envio.</small>`;toast('Frete calculado.')}
-function getUsers(){return load('tridra_users',{})}function setUsers(u){save('tridra_users',u)}function signup(){const name=document.getElementById('signupName').value.trim();const email=document.getElementById('signupEmail').value.trim().toLowerCase();const pass=document.getElementById('signupPass').value;if(!name||!email||pass.length<6){toast('Preencha nome, e-mail e senha com mínimo de 6 caracteres.');return}const users=getUsers();users[email]={name,email,pass,confirmed:false,createdAt:new Date().toISOString()};setUsers(users);document.getElementById('signupMsg').className='notice warning';document.getElementById('signupMsg').innerHTML=`Conta criada para <b>${name}</b>. Clique em “Confirmar e-mail local” para liberar o login nesta versão estática.`;toast('Conta criada. Confirme o e-mail local.')}function confirmEmailLocal(){const email=(document.getElementById('signupEmail').value||document.getElementById('loginEmail').value).trim().toLowerCase();const users=getUsers();if(!users[email]){toast('Digite o e-mail cadastrado.');return}users[email].confirmed=true;setUsers(users);document.getElementById('signupMsg').className='notice success';document.getElementById('signupMsg').textContent='E-mail confirmado localmente. Agora faça login.';toast('E-mail confirmado.')}function login(){const email=document.getElementById('loginEmail').value.trim().toLowerCase();const pass=document.getElementById('loginPass').value;const users=getUsers();if(!users[email]||users[email].pass!==pass){toast('E-mail ou senha incorretos.');return}if(!users[email].confirmed){toast('Confirme o e-mail local antes de entrar.');return}user={name:users[email].name,email};save('tridra_session',user);render();toast('Login realizado.')}function logout(){user=null;save('tridra_session',null);render();toast('Sessão encerrada.')}function renderAccount(){document.getElementById('userPill').textContent=user?user.name.split(' ')[0]:'Entrar';document.getElementById('accountBox').className='notice '+(user?'success':'');document.getElementById('accountBox').innerHTML=user?`Logado como <b>${user.name}</b><br>${user.email}`:'Nenhum usuário logado.';if(user){document.getElementById('buyerName').value ||= user.name;document.getElementById('buyerEmail').value ||= user.email}}
-function orderSummary(id){return cart.map(i=>`- ${i.qty}x ${i.name}: ${brl(i.qty*i.price)}`).join('\n')+`\nSubtotal: ${brl(cartSubtotal())}\nFrete: ${brl(shipping?.price||0)}\nTotal: ${brl(cartSubtotal()+(shipping?.price||0))}\nPagamento: ${payment.toUpperCase()}\nPedido: ${id}`}
-function createOrder(){if(!user){toast('Entre ou crie uma conta antes de finalizar.');scrollToId('conta');return}if(!cart.length){toast('Carrinho vazio.');return}if(!shipping){toast('Calcule o frete antes de finalizar.');return}const name=document.getElementById('buyerName').value.trim();const email=document.getElementById('buyerEmail').value.trim();const phone=document.getElementById('buyerPhone').value.trim();const address=document.getElementById('buyerAddress').value.trim();if(!name||!email||!phone||!address){toast('Preencha nome, e-mail, WhatsApp e endereço.');return}const id='TRD-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,7).toUpperCase();const order={id,date:new Date().toLocaleString('pt-BR'),user,email,phone,address,items:cart,shipping,payment,total:cartSubtotal()+(shipping.price||0),status:'Pedido criado'};const orders=load('tridra_orders',[]);orders.unshift(order);save('tridra_orders',orders);lastOrder=order;renderOrders();const msg=`Olá, TRIDRA 3D! Quero finalizar este pedido:%0A%0A${encodeURIComponent(orderSummary(id)+'\n\nCliente: '+name+'\nE-mail: '+email+'\nWhatsApp: '+phone+'\nEndereço: '+address)}`;document.getElementById('paymentInfo').className='notice success';document.getElementById('paymentInfo').innerHTML=`<b>Pedido criado:</b> ${id}<br>Total: <b>${brl(order.total)}</b><br>Forma: <b>${payment.toUpperCase()}</b><br><a class="btn blue" target="_blank" rel="noopener" href="https://wa.me/${CONFIG.whatsapp}?text=${msg}">Enviar pedido pelo WhatsApp</a>`;toast('Pedido criado com sucesso.');clearCartAfterOrder()}function clearCartAfterOrder(){cart=[];shipping=null;save('tridra_cart',cart);save('tridra_shipping',shipping);render()}function downloadOrder(){const orders=load('tridra_orders',[]);const o=lastOrder||orders[0];if(!o){toast('Nenhum pedido para baixar.');return}const txt=`TRIDRA 3D - Pedido ${o.id}\nData: ${o.date}\nCliente: ${o.user.name}\nE-mail: ${o.email}\nTelefone: ${o.phone}\nEndereço: ${o.address}\n\nItens:\n${o.items.map(i=>`${i.qty}x ${i.name} - ${brl(i.qty*i.price)}`).join('\n')}\n\nFrete: ${brl(o.shipping.price)} (${o.shipping.prazo})\nPagamento: ${o.payment}\nTotal: ${brl(o.total)}\nStatus: ${o.status}`;const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=o.id+'.txt';a.click();URL.revokeObjectURL(a.href)}function renderOrders(){const orders=load('tridra_orders',[]);if(!orders.length){document.getElementById('ordersBox').textContent='Nenhum pedido criado ainda.';return}document.getElementById('ordersBox').innerHTML=`<table class="table"><thead><tr><th>Pedido</th><th>Data</th><th>Total</th><th>Pagamento</th><th>Status</th></tr></thead><tbody>${orders.map(o=>`<tr><td><b>${o.id}</b></td><td>${o.date}</td><td>${brl(o.total)}</td><td>${o.payment.toUpperCase()}</td><td><span class="status">${o.status}</span></td></tr>`).join('')}</tbody></table>`}function sendQuote(){const text=document.getElementById('quoteText').value.trim();if(!text){toast('Descreva o orçamento.');return}const msg=encodeURIComponent('Olá, TRIDRA 3D! Quero solicitar um orçamento personalizado:\n\n'+text);window.open('https://wa.me/'+CONFIG.whatsapp+'?text='+msg,'_blank','noopener');toast('Abrindo WhatsApp.')}function render(){renderCart();renderAccount();renderOrders();setPayment(payment)}renderProducts();render();
-</script>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="TRIDRA 3D"><span class="mark"></span><span>TRIDRA <em>3D</em></span></a>
+      <nav aria-label="Navegação principal">
+        <a href="#servicos">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#loja">Loja oficial</a>
+        <a href="#orcamento">Orçamento</a>
+      </nav>
+      <div class="actions">
+        <a class="btn" href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Entrar na loja</a>
+        <a class="btn primary" href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Comprar</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap heroGrid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>Loja oficial conectada à Nuvemshop</div>
+          <h1><span class="grad">Ideias em forma.</span><br>Precisão em cada camada.</h1>
+          <p class="lead">A TRIDRA 3D cria peças personalizadas, brindes corporativos, produtos úteis, protótipos e soluções sob demanda em impressão 3D. As compras agora acontecem na loja oficial, com checkout próprio de plataforma de vendas.</p>
+          <div class="row">
+            <a class="btn primary" href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Abrir loja oficial</a>
+            <a class="btn blue" href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Ver produtos</a>
+            <a class="btn" href="#orcamento">Pedir orçamento</a>
+          </div>
+        </div>
+        <div class="heroCard">
+          <div class="visual" aria-label="Ilustração abstrata de manufatura digital">
+            <div class="float f1"><strong>Impressão 3D</strong>Produtos e personalizados</div>
+            <div class="float f2"><strong>Loja oficial</strong>Checkout Nuvemshop</div>
+            <div class="float f3"><strong>TRIDRA Lab</strong>Protótipos sob demanda</div>
+            <div class="cube"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicos">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <div class="k">Serviços</div>
+            <h2>Manufatura digital com apresentação profissional.</h2>
+          </div>
+          <p>O site institucional apresenta a marca e direciona as vendas para a loja oficial, onde o cliente pode comprar com fluxo adequado de e-commerce.</p>
+        </div>
+        <div class="grid4">
+          <article class="card"><div class="icon">3D</div><h3>Impressão 3D</h3><p>Produção de peças personalizadas, funcionais, decorativas e comerciais.</p></article>
+          <article class="card"><div class="icon">B2B</div><h3>Brindes corporativos</h3><p>Chaveiros, displays, logotipos, peças promocionais e lotes para empresas.</p></article>
+          <article class="card"><div class="icon">CAD</div><h3>Modelagem</h3><p>Criação e adaptação de arquivos com base em medidas, referências e objetivos.</p></article>
+          <article class="card"><div class="icon">LAB</div><h3>Protótipos</h3><p>Desenvolvimento de soluções, encaixes, conceitos e peças técnicas sob análise.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="portfolio">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <div class="k">Portfólio</div>
+            <h2>Uma marca para vender confiança.</h2>
+          </div>
+          <p>O foco da TRIDRA é unir estética, utilidade e precisão de fabricação para produtos personalizados e peças sob demanda.</p>
+        </div>
+        <div class="grid3">
+          <article class="card"><span class="tag">Personalizados</span><h3>Produtos com nome, logo e cor.</h3><p>Itens criados para presentes, eventos, lembranças, empresas e uso diário.</p></article>
+          <article class="card"><span class="tag">Empresas</span><h3>Brindes e peças de marca.</h3><p>Soluções para prospecção, atendimento, exposição de produto e campanhas.</p></article>
+          <article class="card"><span class="tag">TRIDRA Lab</span><h3>Protótipos e testes.</h3><p>Desenvolvimento de ideias com análise de medidas, aplicação e acabamento.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="produtos">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <div class="k">Produtos</div>
+            <h2>Compre pela loja oficial.</h2>
+          </div>
+          <p>Os botões abaixo direcionam para a Nuvemshop oficial da TRIDRA 3D, onde o fluxo de compra deve ser configurado com pagamento, frete e pedidos.</p>
+        </div>
+        <div class="grid3">
+          <article class="card product">
+            <div class="img"><div class="mini"></div></div>
+            <div class="body"><span class="tag">Chaveiros</span><h3>Chaveiro personalizado 3D</h3><p>Ideal para nomes, marcas, brindes e eventos.</p><div class="price">Loja oficial</div><a class="btn primary" href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Comprar na Nuvemshop</a></div>
+          </article>
+          <article class="card product">
+            <div class="img"><div class="mini"></div></div>
+            <div class="body"><span class="tag">Peças úteis</span><h3>Suportes e organizadores</h3><p>Produtos funcionais para casa, escritório e rotina.</p><div class="price">Loja oficial</div><a class="btn primary" href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Ver produtos</a></div>
+          </article>
+          <article class="card product">
+            <div class="img"><div class="mini"></div></div>
+            <div class="body"><span class="tag">Sob medida</span><h3>Peça ou protótipo especial</h3><p>Projetos avaliados por tamanho, material, tempo e complexidade.</p><div class="price">Sob análise</div><a class="btn primary" href="#orcamento">Pedir orçamento</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="loja">
+      <div class="wrap">
+        <div class="cta">
+          <div>
+            <div class="k">Loja oficial</div>
+            <h2>Checkout real fica na Nuvemshop.</h2>
+            <p>O site institucional da TRIDRA agora funciona como vitrine premium. A compra deve ser concluída na loja oficial, onde ficam catálogo, carrinho, pagamento, frete e pedidos.</p>
+            <div class="check">
+              <span><b>✓</b> Site institucional profissional no GitHub Pages.</span>
+              <span><b>✓</b> Botões de compra direcionados para a loja oficial.</span>
+              <span><b>✓</b> Fluxo de venda concentrado em plataforma própria de e-commerce.</span>
+            </div>
+          </div>
+          <div>
+            <a class="btn lime" style="width:100%;margin-bottom:12px" href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Abrir loja TRIDRA 3D</a>
+            <a class="btn" style="width:100%;background:#fff;color:#0d0d0f" href="#orcamento">Solicitar peça sob medida</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="orcamento">
+      <div class="wrap">
+        <div class="head">
+          <div>
+            <div class="k">Orçamento</div>
+            <h2>Peças sob medida precisam de análise.</h2>
+          </div>
+          <p>Para peças personalizadas, protótipos ou itens com medidas específicas, envie as informações para atendimento antes da compra.</p>
+        </div>
+        <div class="formgrid">
+          <div class="panel">
+            <h3 style="margin-top:0">Pedido personalizado</h3>
+            <p class="notice">Descreva peça, medidas, quantidade, material desejado e prazo. O botão gera uma mensagem para WhatsApp Business.</p>
+            <div class="field"><label for="nome">Nome</label><input id="nome" placeholder="Seu nome" /></div>
+            <div class="field"><label for="produto">O que deseja produzir?</label><input id="produto" placeholder="Ex.: chaveiro com logo, suporte, protótipo..." /></div>
+            <div class="field"><label for="detalhes">Detalhes técnicos</label><textarea id="detalhes" placeholder="Medidas, quantidade, cor, uso da peça, prazo e observações."></textarea></div>
+            <button class="btn primary" onclick="enviarOrcamento()">Enviar orçamento pelo WhatsApp</button>
+          </div>
+          <div class="panel">
+            <h3 style="margin-top:0">Como comprar</h3>
+            <div class="notice">
+              <strong>Produtos de catálogo:</strong> compre diretamente na loja oficial da TRIDRA 3D.<br><br>
+              <strong>Produtos sob medida:</strong> peça análise pelo WhatsApp e, depois da aprovação, finalize pela loja ou por link de pagamento seguro.
+            </div>
+            <div class="row" style="margin-top:16px">
+              <a class="btn blue" href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Ir para loja</a>
+              <a class="btn" href="#produtos">Ver linhas de produto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="whats"><button class="btn lime" onclick="enviarOrcamento()">WhatsApp TRIDRA</button></div>
+
+  <footer>
+    <div class="wrap foot">
+      <div>
+        <a class="brand" href="#top"><span class="mark"></span><span>TRIDRA <em>3D</em></span></a>
+        <p class="copy">Manufatura digital, impressão 3D, personalizados, brindes e prototipagem.</p>
+      </div>
+      <div class="links"><strong>Comprar</strong><a href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Loja oficial</a><a href="#produtos">Produtos</a><a href="#orcamento">Orçamento</a></div>
+      <div class="links"><strong>Marca</strong><a href="#servicos">Serviços</a><a href="#portfolio">Portfólio</a><a href="#loja">TRIDRA Lab</a></div>
+      <div class="links"><strong>Atendimento</strong><a href="#orcamento">WhatsApp</a><a href="https://tridra3d.lojavirtualnuvem.com.br/" target="_blank" rel="noopener">Nuvemshop</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const LOJA_TRIDRA = 'https://tridra3d.lojavirtualnuvem.com.br/';
+    const WHATSAPP_TRIDRA = '5531999999999';
+
+    function enviarOrcamento(){
+      const nome = document.getElementById('nome')?.value?.trim() || 'Cliente';
+      const produto = document.getElementById('produto')?.value?.trim() || 'produto personalizado em impressão 3D';
+      const detalhes = document.getElementById('detalhes')?.value?.trim() || 'Ainda vou enviar medidas, quantidade e referências.';
+      const texto = `Olá, sou ${nome}. Quero solicitar orçamento TRIDRA 3D para: ${produto}. Detalhes: ${detalhes}`;
+      window.open(`https://wa.me/${WHATSAPP_TRIDRA}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+    }
+  </script>
 </body>
 </html>

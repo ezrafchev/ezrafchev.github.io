@@ -1,0 +1,3 @@
+export default function Conta() {
+  return <main className="wrap section"><a className="brand" href="/">TRIDRA <span>3D</span></a><h1 className="h1">Minha conta.</h1><div className="grid"><div className="card"><h3>Cadastro confirmado</h3><p className="muted">Depois da confirmação por e-mail, o cliente acessa esta área para acompanhar pedidos, orçamentos e compras.</p></div><div className="card"><h3>Pedidos</h3><p className="muted">A integração com Supabase salva pedidos vinculados ao usuário autenticado.</p><a className="btn" href="/pedidos">Ver pedidos</a></div><div className="card"><h3>Orçamentos</h3><p className="muted">Ideal para peças personalizadas, lotes empresariais e projetos TRIDRA Lab.</p></div></div></main>;
+}

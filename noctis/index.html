@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#090e1b">
 <meta name="description" content="NOCTIS REALM — ponto de acesso estável para o portal e as atualizações de conexão Origins S6.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self' wss://*.trycloudflare.com; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'">
 <title>NOCTIS REALM | Portal de acesso</title>
 <style>
 :root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -45,6 +45,11 @@ footer{padding:34px 28px;border-top:1px solid #293a4b;text-align:center;font-siz
 <a class="button" href="https://signal-ada-concerts-flight.trycloudflare.com/baixar" id="download">ATUALIZAR O ORIGINS ↗</a>
 </div>
 <div id="message" role="status" aria-live="polite">Consultando o endereço atualmente publicado...</div>
+<div style="margin-top:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<span id="gameProbe" role="status" aria-live="polite" class="status"><span class="dot"></span> Verificando a conexão do Origins...</span>
+<button type="button" id="retryGame" style="font:inherit;font-size:12px;cursor:pointer;background:#18283b;color:#e9f1f9;border:1px solid #536a84;border-radius:9px;padding:10px 14px">Testar conexão novamente</button>
+</div>
+<p class="note">O teste verifica a comunicação com as quatro portas do Origins; não comprova login ou entrada no mapa.</p>
 <section>
 <article><small>01 · SITE</small><h2>Portal de jogadores</h2><p>Página de downloads, ranking e demais serviços do NOCTIS. O endereço de acesso pode mudar quando o túnel temporário reiniciar.</p></article>
 <article><small>02 · ORIGINS S6</small><h2>Jogar sem VPN</h2><p>Para clientes Origins existentes. A atualização de rede é independente do .NET, Node.js e Tailscale no computador do jogador. Gameplay remoto ainda não homologado.</p></article>
@@ -57,6 +62,39 @@ footer{padding:34px 28px;border-top:1px solid #293a4b;text-align:center;font-siz
 <script>
 (async()=>{
  const message=document.getElementById("message");
+ const gameProbe=document.getElementById("gameProbe");
+ const retry=document.getElementById("retryGame");
+ let gameUrl=null;
+ async function probe(){
+  if(!gameUrl){gameProbe.textContent="Gateway não configurado";return}
+  gameProbe.textContent="Verificando quatro portas do Origins...";
+  retry.disabled=true;
+  let ws=null;
+  await new Promise(resolve=>{
+   let done=false;
+   const finish=(message)=>{
+    if(done)return;done=true;
+    clearTimeout(timeout);
+    gameProbe.textContent=message;
+    retry.disabled=false;
+    try{ws?.close()}catch{}
+    resolve();
+   };
+   const timeout=setTimeout(()=>finish("Conexão indisponível ou lenta; tente novamente"),9000);
+   try{
+    ws=new WebSocket(gameUrl);
+    ws.binaryType="arraybuffer";
+    ws.onopen=()=>ws.send(new Uint8Array([72]));
+    ws.onmessage=e=>{
+      const msg=typeof e.data==="string"?e.data:new TextDecoder().decode(e.data);
+      finish(msg==="NOCTIS_RELAY_READY"?"Gateway Origins: quatro portas respondendo":"Resposta inesperada do gateway");
+    };
+    ws.onerror=()=>finish("Gateway Origins indisponível");
+    ws.onclose=()=>finish("Gateway Origins não respondeu");
+   }catch{finish("Não foi possível testar o gateway")}
+  });
+ }
+ retry.addEventListener("click",()=>{void probe()});
  try{
   const res=await fetch("./network.json",{cache:"no-store"});
   if(!res.ok)throw Error("Manifesto indisponível");
@@ -71,8 +109,16 @@ footer{padding:34px 28px;border-top:1px solid #293a4b;text-align:center;font-siz
   document.getElementById("download").href=safe(data.downloadPage);
   document.getElementById("sha").textContent=data.patchSha256||"Consulte a página de downloads";
   message.textContent="Manifesto publicado · "+(data.patchVersion||"Origins")+". Atenção: túnel temporário, disponibilidade não garantida.";
+  const wss=new URL(data.originsWss);
+  const siteHost=new URL(data.siteUrl).hostname;
+  if(wss.protocol!=="wss:"||wss.hostname!==siteHost||wss.pathname!=="/v3/game"||wss.port!==""||wss.search||wss.username||wss.password){
+    throw Error("Gateway inválido");
+  }
+  gameUrl=wss.href;
+  await probe();
  }catch(e){
   message.textContent="Não foi possível atualizar automaticamente os links. O túnel pode estar indisponível.";
+  gameProbe.textContent="Gateway não configurado";
   document.getElementById("site").removeAttribute("href");
   document.getElementById("download").removeAttribute("href");
  }

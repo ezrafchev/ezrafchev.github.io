@@ -6,12 +6,12 @@
   "siteUrl": "https://signal-ada-concerts-flight.trycloudflare.com/",
   "downloadPage": "https://signal-ada-concerts-flight.trycloudflare.com/baixar",
   "originsWss": "wss://signal-ada-concerts-flight.trycloudflare.com/v3/game",
-  "patchUrl": "https://signal-ada-concerts-flight.trycloudflare.com/downloads/noctis-origins-v4-unified.zip",
-  "patchVersion": "Origins V4.1",
-  "patchBytes": 77786900,
-  "patchSha256": "F1CE973518DB4A2066728E60947A58592162B9ECEFFB430ABB94CD89BD7DAF81",
+  "patchUrl": "https://signal-ada-concerts-flight.trycloudflare.com/downloads/noctis-origins-v5-dynamic.zip",
+  "patchVersion": "Origins V5",
+  "patchBytes": 77788454,
+  "patchSha256": "ABBA9C4159C2095096E03494906361EAC542ABB2BADF3E1775D20EA38ABBDC43",
   "originsStatus": "protocol-verified-gameplay-unverified",
   "ascensionStatus": "offline",
   "temporaryTunnel": true,
-  "note": "The landing page is permanent on GitHub Pages, while the game and website currently use a temporary Cloudflare Quick Tunnel. Live gameplay in a second PC is not yet verified."
+  "note": "A pagina do GitHub Pages tem endereco estavel, mas o site operacional e o jogo ainda dependem de um Cloudflare Quick Tunnel temporario. O cliente V5 consulta este manifesto a cada inicializacao."
 }

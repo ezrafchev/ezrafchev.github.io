@@ -1,0 +1,17 @@
+{
+  "project": "NOCTIS REALM",
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-23",
+  "state": "public-test",
+  "siteUrl": "https://signal-ada-concerts-flight.trycloudflare.com/",
+  "downloadPage": "https://signal-ada-concerts-flight.trycloudflare.com/baixar",
+  "originsWss": "wss://signal-ada-concerts-flight.trycloudflare.com/v3/game",
+  "patchUrl": "https://signal-ada-concerts-flight.trycloudflare.com/downloads/noctis-origins-v4-unified.zip",
+  "patchVersion": "Origins V4.1",
+  "patchBytes": 77786900,
+  "patchSha256": "F1CE973518DB4A2066728E60947A58592162B9ECEFFB430ABB94CD89BD7DAF81",
+  "originsStatus": "protocol-verified-gameplay-unverified",
+  "ascensionStatus": "offline",
+  "temporaryTunnel": true,
+  "note": "The landing page is permanent on GitHub Pages, while the game and website currently use a temporary Cloudflare Quick Tunnel. Live gameplay in a second PC is not yet verified."
+}

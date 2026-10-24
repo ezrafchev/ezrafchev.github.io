@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090e1b">
+<meta name="description" content="NOCTIS REALM — ponto de acesso estável para o portal e as atualizações de conexão Origins S6.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self' wss:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>NOCTIS REALM | Portal de acesso</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1000px 470px at 70% -10%,#172c47 0,transparent 70%),linear-gradient(140deg,#070c15,#0d1523 60%,#0a1019);color:#edf4fc;min-height:100vh}
+main{max-width:1030px;margin:auto;padding:64px 28px 42px}
+.brand{font-weight:900;letter-spacing:.24em;font-size:15px;color:#a9bed4}.brand span{color:#d6ae74}
+.status{display:inline-flex;gap:9px;align-items:center;padding:9px 13px;border:1px solid #35465a;border-radius:999px;color:#c9d3df;font-size:12px}
+.dot{width:7px;height:7px;border-radius:100%;background:#d6ae74}
+h1{font-size:clamp(52px,10vw,104px);line-height:.93;letter-spacing:-.08em;margin:35px 0 20px}
+h1 em{font-style:normal;color:#d4ad79}
+p{color:#b2c2d2;line-height:1.7;font-size:17px;max-width:690px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin:35px 0 20px}
+a.button{display:inline-flex;align-items:center;gap:10px;text-decoration:none;border-radius:10px;padding:15px 20px;font-weight:700;font-size:14px;border:1px solid #52627a;color:#f2f5f9;background:#131e2d}
+a.button.primary{background:#d3ab72;color:#101522;border-color:#d3ab72}
+a.button:hover{filter:brightness(1.12)}
+section{margin-top:65px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+article{padding:24px 21px;border:1px solid #304153;border-radius:15px;background:#101b2a}
+article small{color:#cba777;font-weight:800;letter-spacing:.13em}
+article h2{font-size:18px;margin:12px 0 8px}
+article p{font-size:13px;margin:0}
+.note{font-size:12px;color:#8296aa}
+code{font-size:12px;overflow-wrap:anywhere;color:#c5dae9}
+footer{padding:34px 28px;border-top:1px solid #293a4b;text-align:center;font-size:12px;color:#879bb0}
+#message{font-size:13px;color:#bdd0df;margin-top:14px}
+@media(max-width:650px){main{padding:35px 18px 30px}section{grid-template-columns:1fr;margin-top:35px}h1{font-size:58px}p{font-size:15px}}
+</style>
+</head>
+<body>
+<main>
+<div class="brand">NOCTIS <span>REALM</span></div>
+<div style="margin-top:32px"><span class="status"><span class="dot"></span> ORIGINS S6 · TESTE PÚBLICO DE CONECTIVIDADE</span></div>
+<h1>O mundo<br><em>espera.</em></h1>
+<p>Este é o endereço fixo de entrada do NOCTIS REALM. O site e a conexão do jogo estão em fase de testes e usam um túnel HTTPS temporário. Consulte sempre esta página para encontrar o endereço publicado e a versão mais recente da ponte do Origins.</p>
+<div class="actions">
+<a class="button primary" href="https://signal-ada-concerts-flight.trycloudflare.com/" id="site">ACESSAR O SITE ↗</a>
+<a class="button" href="https://signal-ada-concerts-flight.trycloudflare.com/baixar" id="download">ATUALIZAR O ORIGINS ↗</a>
+</div>
+<div id="message" role="status" aria-live="polite">Consultando o endereço atualmente publicado...</div>
+<div style="margin-top:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<span id="gameProbe" role="status" aria-live="polite" class="status"><span class="dot"></span> Verificando a conexão do Origins...</span>
+<button type="button" id="retryGame" style="font:inherit;font-size:12px;cursor:pointer;background:#18283b;color:#e9f1f9;border:1px solid #536a84;border-radius:9px;padding:10px 14px">Testar conexão novamente</button>
+</div>
+<p class="note">O teste verifica a comunicação com as quatro portas do Origins; não comprova login ou entrada no mapa.</p>
+<section>
+<article><small>01 · SITE</small><h2>Portal de jogadores</h2><p>Página de downloads, ranking e demais serviços do NOCTIS. O endereço de acesso pode mudar quando o túnel temporário reiniciar.</p></article>
+<article><small>02 · ORIGINS S6</small><h2>Jogar sem VPN</h2><p>Para clientes Origins existentes. A atualização de rede é independente do .NET, Node.js e Tailscale no computador do jogador. Gameplay remoto ainda não homologado.</p></article>
+<article><small>03 · ASCENSION S20</small><h2>Em preparação</h2><p>Season 20 ainda não liberada. O servidor SQL e a estabilidade do cliente precisam ser validados antes de novos downloads.</p></article>
+</section>
+<p class="note">Este endereço é permanente na hospedagem GitHub Pages, mas não garante que o servidor Windows ou o túnel de jogo estejam online. Nenhum arquivo proprietário de MU Online é hospedado aqui.</p>
+<p class="note">Verificação de integridade da atualização: <code id="sha">ABBA9C4159C2095096E03494906361EAC542ABB2BADF3E1775D20EA38ABBDC43</code></p>
+</main>
+<footer>NOCTIS REALM © 2026 · Página de acesso estático · Sem autenticação ou pagamentos nesta página</footer>
+<script>
+(async()=>{
+ const message=document.getElementById("message");
+ const gameProbe=document.getElementById("gameProbe");
+ const retry=document.getElementById("retryGame");
+ let gameUrl=null;
+ async function probe(){
+  if(!gameUrl){gameProbe.textContent="Gateway não configurado";return}
+  gameProbe.textContent="Verificando quatro portas do Origins...";
+  retry.disabled=true;
+  let ws=null;
+  await new Promise(resolve=>{
+   let done=false;
+   const finish=(message)=>{
+    if(done)return;done=true;
+    clearTimeout(timeout);
+    gameProbe.textContent=message;
+    retry.disabled=false;
+    try{ws?.close()}catch{}
+    resolve();
+   };
+   const timeout=setTimeout(()=>finish("Conexão indisponível ou lenta; tente novamente"),9000);
+   try{
+    ws=new WebSocket(gameUrl);
+    ws.binaryType="arraybuffer";
+    ws.onopen=()=>ws.send(new Uint8Array([72]));
+    ws.onmessage=e=>{
+      const msg=typeof e.data==="string"?e.data:new TextDecoder().decode(e.data);
+      finish(msg==="NOCTIS_RELAY_READY"?"Gateway Origins: quatro portas respondendo":"Resposta inesperada do gateway");
+    };
+    ws.onerror=()=>finish("Gateway Origins indisponível");
+    ws.onclose=()=>finish("Gateway Origins não respondeu");
+   }catch{finish("Não foi possível testar o gateway")}
+  });
+ }
+ retry.addEventListener("click",()=>{void probe()});
+ try{
+  const res=await fetch("./network.json",{cache:"no-store"});
+  if(!res.ok)throw Error("Manifesto indisponível");
+  const data=await res.json();
+  // The GitHub-hosted manifest is the trusted source of the current hostname.
+  // Require all published site/download/WSS URLs to share exactly one HTTPS host.
+  const siteOrigin=new URL(data.siteUrl);
+  if(siteOrigin.protocol!=="https:"||siteOrigin.username||siteOrigin.password||
+     siteOrigin.port||!siteOrigin.hostname.includes("."))throw Error("Origem pública inválida");
+  const safe=(raw)=>{
+   const u=new URL(raw);
+   if(u.protocol!=="https:"||u.username||u.password||u.port||
+      u.hash||u.hostname!==siteOrigin.hostname)throw Error("Endereço divergente");
+   return u.href;
+  };
+  document.getElementById("site").href=safe(data.siteUrl);
+  document.getElementById("download").href=safe(data.downloadPage);
+  document.getElementById("sha").textContent=data.patchSha256||"Consulte a página de downloads";
+  message.textContent="Manifesto publicado · "+(data.patchVersion||"Origins")+
+   (data.temporaryTunnel?". Túnel de teste temporário: disponibilidade não garantida.":". Hostname configurado: verifique o status de conexão.");
+  const wss=new URL(data.originsWss);
+  const siteHost=new URL(data.siteUrl).hostname;
+  if(wss.protocol!=="wss:"||wss.hostname!==siteHost||wss.pathname!=="/v3/game"||wss.port!==""||wss.search||wss.username||wss.password){
+    throw Error("Gateway inválido");
+  }
+  gameUrl=wss.href;
+  await probe();
+ }catch(e){
+  message.textContent="Não foi possível atualizar automaticamente os links. O túnel pode estar indisponível.";
+  gameProbe.textContent="Gateway não configurado";
+  document.getElementById("site").removeAttribute("href");
+  document.getElementById("download").removeAttribute("href");
+ }
+})();
+</script>
+</body>
+</html>

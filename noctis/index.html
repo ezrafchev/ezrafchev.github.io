@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#090e1b">
 <meta name="description" content="NOCTIS REALM — ponto de acesso estável para o portal e as atualizações de conexão Origins S6.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self' wss://*.trycloudflare.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self' wss:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>NOCTIS REALM | Portal de acesso</title>
 <style>
 :root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -99,16 +99,22 @@ footer{padding:34px 28px;border-top:1px solid #293a4b;text-align:center;font-siz
   const res=await fetch("./network.json",{cache:"no-store"});
   if(!res.ok)throw Error("Manifesto indisponível");
   const data=await res.json();
+  // The GitHub-hosted manifest is the trusted source of the current hostname.
+  // Require all published site/download/WSS URLs to share exactly one HTTPS host.
+  const siteOrigin=new URL(data.siteUrl);
+  if(siteOrigin.protocol!=="https:"||siteOrigin.username||siteOrigin.password||
+     siteOrigin.port||!siteOrigin.hostname.includes("."))throw Error("Origem pública inválida");
   const safe=(raw)=>{
    const u=new URL(raw);
-   if(u.protocol!=="https:"||u.username||u.password)throw Error("Endereço inválido");
-   if(!u.hostname.endsWith(".trycloudflare.com"))throw Error("Domínio do túnel inesperado");
+   if(u.protocol!=="https:"||u.username||u.password||u.port||
+      u.hash||u.hostname!==siteOrigin.hostname)throw Error("Endereço divergente");
    return u.href;
   };
   document.getElementById("site").href=safe(data.siteUrl);
   document.getElementById("download").href=safe(data.downloadPage);
   document.getElementById("sha").textContent=data.patchSha256||"Consulte a página de downloads";
-  message.textContent="Manifesto publicado · "+(data.patchVersion||"Origins")+". Atenção: túnel temporário, disponibilidade não garantida.";
+  message.textContent="Manifesto publicado · "+(data.patchVersion||"Origins")+
+   (data.temporaryTunnel?". Túnel de teste temporário: disponibilidade não garantida.":". Hostname configurado: verifique o status de conexão.");
   const wss=new URL(data.originsWss);
   const siteHost=new URL(data.siteUrl).hostname;
   if(wss.protocol!=="wss:"||wss.hostname!==siteHost||wss.pathname!=="/v3/game"||wss.port!==""||wss.search||wss.username||wss.password){

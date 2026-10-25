@@ -1,17 +1,17 @@
 {
   "project": "NOCTIS REALM",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-23",
+  "updatedAt": "2026-10-25",
   "state": "public-test",
   "siteUrl": "https://signal-ada-concerts-flight.trycloudflare.com/",
   "downloadPage": "https://signal-ada-concerts-flight.trycloudflare.com/baixar",
   "originsWss": "wss://signal-ada-concerts-flight.trycloudflare.com/v3/game",
-  "patchUrl": "https://signal-ada-concerts-flight.trycloudflare.com/downloads/noctis-origins-v5-dynamic.zip",
-  "patchVersion": "Origins V5",
-  "patchBytes": 77788454,
-  "patchSha256": "ABBA9C4159C2095096E03494906361EAC542ABB2BADF3E1775D20EA38ABBDC43",
+  "patchUrl": "https://signal-ada-concerts-flight.trycloudflare.com/downloads/noctis-origins-v51-dynamic.zip",
+  "patchVersion": "Origins V5.1",
+  "patchBytes": 77788804,
+  "patchSha256": "C0A562647FDDF9E1C4F3143A778A45C7D723D037EB46B560DDAA60D1A8E6DCBF",
   "originsStatus": "protocol-verified-gameplay-unverified",
   "ascensionStatus": "offline",
   "temporaryTunnel": true,
-  "note": "A pagina do GitHub Pages tem endereco estavel, mas o site operacional e o jogo ainda dependem de um Cloudflare Quick Tunnel temporario. O cliente V5 consulta este manifesto a cada inicializacao."
+  "note": "A entrada do GitHub Pages e estavel, mas o site dinamico e o jogo ainda dependem de um Cloudflare Quick Tunnel temporario. Clientes Origins V5/V5.1 descobrem o gateway WSS atual neste manifesto; V5.1 e a atualizacao de conexao recomendada. Nao contem o jogo completo."
 }

@@ -1,3 +1,3 @@
 User-agent: *
 Disallow: /
-# Remover o bloqueio somente apos o lancamento confirmado.
+# O dominio definitivo e a autorizacao de indexacao ainda estao pendentes.

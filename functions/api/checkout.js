@@ -6,10 +6,13 @@
  */
 const JSON_HEADERS={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'};
 const reply=(data,status)=>new Response(JSON.stringify(data),{status,headers:JSON_HEADERS});
+// Hard release gate: never create a real payment preference before D1 persistence,
+// verified asynchronous webhooks and operational processes receive a signed review.
+const PAYMENT_ENGINE_APPROVED_FOR_LIVE=false;
 const SKU=/^[a-z0-9][a-z0-9-]{1,63}$/;
 export async function onRequestPost({request,env}) {
   // A safety gate: payment remains disabled until the merchant configures both payments and fulfillment.
-  if(env.CHECKOUT_ENABLED!=='true'||env.WEBHOOK_VERIFIED!=='true'||!env.MP_ACCESS_TOKEN||!env.TRIDRALAB_CATALOG_JSON){
+  if(!PAYMENT_ENGINE_APPROVED_FOR_LIVE||env.CHECKOUT_ENABLED!=='true'||env.WEBHOOK_VERIFIED!=='true'||!env.MP_ACCESS_TOKEN||!env.TRIDRALAB_CATALOG_JSON){
     return reply({ok:false,code:'CHECKOUT_NOT_CONFIGURED',message:'Pagamento online ainda não habilitado. A lista de projetos não constitui compra.'},503);
   }
   const origin=new URL(request.url).origin;

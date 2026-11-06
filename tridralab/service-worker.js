@@ -1,5 +1,5 @@
 /* Offline support for non-sensitive static pages and reference tools. */
-const CACHE='tridralab-static-v2.1';
+const CACHE='tridralab-static-v2.2';
 const SHELL=['/','/index.html','/styles.css','/catalog.js','/lab.js','/app.js','/assets/favicon.svg','/privacidade.html','/termos.html'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('tridralab-static-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});

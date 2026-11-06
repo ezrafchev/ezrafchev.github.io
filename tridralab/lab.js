@@ -5,6 +5,8 @@ const samples = Object.freeze({PETG:95, PLA:80, TPU:150, ASA:120, OUTRO:100});
 const brl = value => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2,maximumFractionDigits:2}).format(value);
 const number = (v, min=0, max=1e9) => {const n=Number(v);return Number.isFinite(n)&&n>=min&&n<=max?n:NaN};
 function calculate(x){
+ const quantity=number(x.quantity,1,5000),setup=number(x.setup,0,1000000);
+ if(!Number.isInteger(quantity)||!Number.isFinite(setup))throw Error('Quantidade do lote e preparação devem estar dentro dos limites indicados.');
  const kg=number(x.kg,0,10000), grams=number(x.grams,1,100000), hours=number(x.hours,.1,1000), watts=number(x.watts,0,5000), energy=number(x.energy,0,100), machine=number(x.machine,0,1000), minutes=number(x.minutes,0,10000),labor=number(x.labor,0,10000),extras=number(x.extras,0,100000),failure=number(x.failure,0,90)/100,overhead=number(x.overhead,0,500)/100,margin=number(x.margin,0,90)/100,tax=number(x.tax,0,90)/100;
  const all=[kg,grams,hours,watts,energy,machine,minutes,labor,extras,failure,overhead,margin,tax];
  if(all.some(v=>!Number.isFinite(v)))throw Error('Revise os campos: todos os valores devem estar dentro dos limites indicados.');
@@ -17,27 +19,33 @@ function calculate(x){
  // Expected-value risk: if failure p, expected print attempts per successful part = 1/(1-p).
  const riskAdjusted=direct/(1-failure);
  const indirect=riskAdjusted*overhead;
- const cost=riskAdjusted+indirect;
+ const unitPrintCost=riskAdjusted+indirect;
+ // Fixed project setup is amortized by batch size, independent of the failure model.
+ const setupAllocated=setup/quantity;
+ const cost=unitPrintCost+setupAllocated;
+ const totalCost=unitPrintCost*quantity+setup;
  // Margin and fees are fractions of REVENUE, not multipliers of cost.
  const price=cost/(1-margin-tax);
+ const totalPrice=price*quantity;
  if(!Number.isFinite(price)||price>1e12)throw Error('O resultado ficou fora do intervalo suportado.');
- const result={material,electricity,machineWear,activeLabor,extras,riskLoss:riskAdjusted-direct,indirect,cost,price,profitBeforeTax:price*(margin),taxes:price*tax,percentMargin:margin*100,percentTax:tax*100,inputs:{...x}};
+ const result={material,electricity,machineWear,activeLabor,extras,riskLoss:riskAdjusted-direct,indirect,setupAllocated,totalCost,totalPrice,quantity,cost,price,profitBeforeTax:price*(margin),taxes:price*tax,percentMargin:margin*100,percentTax:tax*100,inputs:{...x}};
  return result;
 }
 function formatSummary(r){return [
 'TRIDRALAB — Simulação de custos (estimativa não vinculante)',
 `Material: ${r.inputs.material || 'a definir'}`,
-`Massa: ${r.inputs.grams} g | Impressão: ${r.inputs.hours} h`,
+`Massa: ${r.inputs.grams} g/peça | Impressão: ${r.inputs.hours} h/peça`,
+`Lote: ${r.quantity} unidade(s) | Preparação fixa: ${brl(r.inputs.setup)}`,
 `Filamento: ${brl(r.material)} | Energia: ${brl(r.electricity)}`,
 `Máquina: ${brl(r.machineWear)} | Mão de obra: ${brl(r.activeLabor)}`,
 `Acabamento/embalagem: ${brl(r.extras)}`,
 `Provisão de falhas: ${brl(r.riskLoss)} | Indiretos: ${brl(r.indirect)}`,
-`Custo estimado: ${brl(r.cost)}`,
+`Custo estimado por peça: ${brl(r.cost)} | Total do lote: ${brl(r.totalCost)}`,
 `Margem-alvo: ${r.percentMargin.toFixed(1)}% | Tributos/taxas na venda: ${r.percentTax.toFixed(1)}%`,
-`Preço de referência: ${brl(r.price)}`,
+`Preço de referência por peça: ${brl(r.price)} | Total do lote: ${brl(r.totalPrice)}`,
 'NOTA: valores informados pelo usuário; frete e validação técnica não inclusos. Não constitui oferta comercial.'
 ].join('\n');}
-function csv(r){return 'Componente;Valor (BRL)\n'+[['Filamento',r.material],['Energia',r.electricity],['Máquina',r.machineWear],['Mão de obra',r.activeLabor],['Acabamento e embalagem',r.extras],['Provisão por falhas',r.riskLoss],['Despesas indiretas',r.indirect],['Custo total',r.cost],['Margem alvo (%)',r.percentMargin],['Tributos e taxas (%)',r.percentTax],['Preço de referência',r.price]].map(([k,v])=>`"${k}";${v.toFixed(2).replace('.',',')}`).join('\n')+'\n';}
+function csv(r){return 'Componente;Valor (BRL)\n'+[['Filamento',r.material],['Energia',r.electricity],['Máquina',r.machineWear],['Mão de obra',r.activeLabor],['Acabamento e embalagem',r.extras],['Provisão por falhas',r.riskLoss],['Despesas indiretas',r.indirect],['Preparação rateada por peça',r.setupAllocated],['Custo total por peça',r.cost],['Custo total do lote',r.totalCost],['Margem alvo (%)',r.percentMargin],['Tributos e taxas (%)',r.percentTax],['Preço de referência por peça',r.price],['Preço de referência do lote',r.totalPrice]].map(([k,v])=>`"${k}";${v.toFixed(2).replace('.',',')}`).join('\n')+'\n';}
 const maxSize=25*1024*1024;
 const allExt=['stl','obj','3mf'];
 const fmtSize=b=>b<1024*1024?`${(b/1024).toFixed(1)} KB`:`${(b/1048576).toFixed(2)} MB`;

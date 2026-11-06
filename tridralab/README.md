@@ -1,57 +1,65 @@
-# TridraLab — Plataforma digital v2.1
+# TridraLab Studio 3.0 — plataforma de fabricação digital
 
-Ambiente de produção: <https://tridralab-site.pages.dev/>
+**Ambiente publicado:** [tridralab-site.pages.dev](https://tridralab-site.pages.dev/) · Hospedagem Cloudflare Pages gratuita, com GitHub conectado na branch `tridralab-bootstrap` e saída em `tridralab/`.
 
-**Status:** vitrine e laboratório técnico operantes. O domínio `.com.br`, o e-mail e o fluxo de cobrança ainda não estão ativos.
+## Escopo real implementado
 
-## Entregas
+| Módulo | Estado |
+|---|---|
+| Vitrine editorial premium, responsiva e com modo claro/escuro | Funcional |
+| Catálogo de nove **projetos conceituais** para orçamento, filtros e personalização | Funcional; **sem estoque ou preço de venda** |
+| Lista local de solicitações com exportação TXT | Funcional; **não envia pedidos** |
+| **Brief Builder**: ficha imprimível HTML, JSON e cópia de resumo | Funcional, cliente preenche localmente; **não envia nem armazena dados em servidor** |
+| **Material Intelligence**: orientação PETG, PLA, TPU, ASA | Funcional; regras heurísticas, não certificação de material |
+| **PrintFit Lab**: custos, energia, risco, impostos, taxas, margem, lotes e preparação fixa | Funcional; estimativas a partir de parâmetros editáveis |
+| **Batch Intelligence**: gráfico comparativo de custos por quantidade | Funcional; **não é proposta comercial** |
+| STL/OBJ: leitura local de dimensões básicas, triângulos e volume condicional | Funcional; **não certifica malha** |
+| **Model Viewer**: prévia 3D STL/OBJ, zoom, giro, arestas | Funcional; decimação de triângulos, representação aproximada |
+| 3MF | Apenas identificação; **não há reconstrução de geometria 3MF** |
+| PWA/Service Worker | Disponível, sujeito à compatibilidade do navegador |
+| API pública `/api/status` | Funcional, com indicação de serviços indisponíveis |
+| Endpoint de checkout | **Permanentemente bloqueado por chave de segurança no código até implementação e aprovação do backend** |
 
-- Interface editorial premium, adaptável a dispositivos móveis, com tema claro/escuro, navegação por teclado e busca rápida (Ctrl/⌘ + K).
-- Catálogo **conceitual**, 9 coleções/possibilidades, filtros, busca, favoritos persistentes e modal de configuração de material/cor/quantidade.
-- Lista de solicitações local, exportação TXT e botão copiar. **Não é checkout nem pedido confirmado**.
-- PrintFit Lab: lote de peças com preparação fixa rateada por unidade; custo de filamento, energia, hora-máquina, mão de obra ativa, acabamento/embalagem, provisão de falhas, custos indiretos, margem-alvo e tributos/taxas incidentes sobre a receita. Exportação CSV e resumo.
-- Leitura local de STL binário, STL ASCII e OBJ; metadados básicos de 3MF. Medidas presumem milímetros. Não é auditoria de geometria nem validador de impressão.
-- PWA (manifest + service-worker), páginas de privacidade/termos, favicon e OG, segurança básica e proteção contra indexação antes do domínio próprio.
-- Cloudflare Pages Functions em `/functions/api/status.js` e `/functions/api/checkout.js`, este último **deliberadamente bloqueado** até implantação de comércio real auditado.
+## Limitações e compromissos
 
-## Fórmulas do simulador
+1. **Não há checkout real, emissão de pedidos, pagamentos Pix/cartão ou conta de cliente nesta versão**. Qualquer pedido, valor ou prazo exige proposta comercial com validação técnica.
+2. **Nenhum dado pessoal do Brief Builder ou modelo 3D é enviado ao servidor**. Lista de projetos fica em `localStorage` no dispositivo do usuário. Nome, e-mail, cidade e observações do Brief Builder não são persistidos e entram no arquivo apenas se o usuário mandar exportar.
+3. A tabela de materiais é uma **heurística orientativa**, não ensaio de resistência ou garantia de aplicação. PETG/PLA/TPU/ASA são simulações, não inventário confirmado.
+4. O visualizador 3D decima a geometria para desempenho; pode não representar todos os detalhes. A inspeção técnica requer ferramentas próprias para geometria, tolerâncias, fatiamento e fabricação.
+5. O site contém `noindex,nofollow` intencionalmente até o registro e a confirmação do domínio próprio. Não remover antes de homologar o lançamento.
 
-```text
-Filamento = massa (g) / 1000 × preço/kg
-Energia = potência média (W) / 1000 × horas × tarifa/kWh
-Máquina = custo horário da máquina × horas
-Mão de obra = minutos ativos / 60 × custo horário de operador
-Diretos = filamento + energia + máquina + mão de obra + acabamento/embalagem
-Custo ajustado = (diretos / (1 - probabilidade de falha)) × (1 + indiretos %)
-Custo por unidade no lote = custo ajustado por peça + preparação fixa do projeto / quantidade
-Preço de referência por unidade = custo por unidade no lote / (1 - margem % - taxas de venda %)
-Preço total do lote = preço por unidade × quantidade
+## Estrutura
+
+- `tridralab/index.html`: landing page, catálogo, materiais, laboratório, preview, brief e FAQ.
+- `tridralab/styles.css` e `tridralab/studio.css`: sistema visual responsivo e refinamento premium.
+- `tridralab/catalog.js`: lista de modelos conceituais (dados sintéticos ilustrativos).
+- `tridralab/lab.js`: motor determinístico de custos, inspecionador local de arquivos.
+- `tridralab/model-viewer.js`: pré-visualizador 3D local STL/OBJ sem CDN.
+- `tridralab/app.js`: catálogo, favoritos, cálculos, exportações e navegação.
+- `tridralab/studio.js`: recomendador de materiais, cenários de lotes, ficha de projeto.
+- `tridralab/service-worker.js`: cache da aplicação; recursos dinâmicos `/api/` excluídos.
+- `functions/api/status.js`: verificação de recursos, sem expor segredos.
+- `functions/api/checkout.js`: integração futura **fechada por padrão**.
+- `tests/test_browser.py`: testes funcionais com Playwright sem dependências de frontend.
+- `tests/validate_logic.mjs`, `tests/validate_checkout.mjs`, `tests/validate_release.py`: auditoria da lógica e dos arquivos.
+
+## Testes
+
+```bash
+node tests/validate_logic.mjs
+node tests/validate_checkout.mjs
+python tests/validate_release.py
+python tests/test_browser.py
 ```
 
-Premissa: taxa de falha atua sobre o custo total de cada tentativa e o denominador modela tentativas independentes até obter uma peça boa. Para erros com recuperação parcial, estimar custos reais. A fórmula é conservadora em diversos casos, mas não é previsão de mercado. Inserir dados contábeis reais para tomar decisões.
+Para o último teste, instale o Playwright e um Chromium compatível; o script define caminho do Chromium neste ambiente e injeta assets em `about:blank`, sem solicitar rede. Os testes automatizados verificam funcionalidades específicas, não substituem auditoria completa de acessibilidade, performance e segurança.
 
 ## Publicação
 
-- Fonte: repo `ezrafchev/ezrafchev.github.io`, branch `tridralab-bootstrap`.
-- Pages: build command vazio, framework None, output `tridralab`, root padrão.
-- O código de Functions fica em `functions/` na raiz do repositório e NÃO no diretório público `tridralab/`.
-- Mantenha a ramificação `main` e os demais projetos intactos.
+A Cloudflare Pages está conectada ao repositório `ezrafchev/ezrafchev.github.io`, branch `tridralab-bootstrap`, framework `None`, build command vazio, output `tridralab`. A publicação deve ocorrer após o commit. **Não alterar `main` nem projetos relacionados à RendaForge**.
 
-## Pendências para comércio real
+O registro `tridralab.com.br` e a caixa postal `esdra@tridralab.com.br` dependem de domínio adquirido e validação de DNS; até sua ativação, usar `tridralab-site.pages.dev`.
 
-1. Registrar `tridralab.com.br` em nome do titular correto e configurar nameservers fornecidos para a zona Cloudflare (não incluir senha em repositório).
-2. Vincular domínio no Pages, validar HTTPS e alterar robots/meta noindex; atualizar Schema/OG URL.
-3. Ativar caixa postal `esdra@tridralab.com.br` e DNS MX, SPF, DKIM, DMARC.
-4. Definir SKUs reais, especificação da peça, estoque/capacidade, preços e tributação aprovados pelo proprietário. Não vender itens ilustrativos.
-5. Configurar `MP_ACCESS_TOKEN` como segredo de ambiente no Cloudflare; nunca em Git ou JS cliente. Precisa integração de preferências Checkout Pro no servidor, webhook assinado, tabelas D1 para pedidos e eventos, idempotência, antifraude, gerenciamento de envios, atualização de status e política comercial completa.
-6. **Não ativar** `CHECKOUT_ENABLED=true` ou `WEBHOOK_VERIFIED=true` antes de testar webhook, D1 e atendimento reais. Variáveis são gates, não substituem controles de backend. Existe ainda uma trava no código (`PAYMENT_ENGINE_APPROVED_FOR_LIVE=false`) que impede cobranças até revisão e liberação explícitas.
-7. Publicar contato validado, CNPJ/CPF conforme exigências, política de entrega, devolução e suporte ao consumidor; LGPD e termos legais revisados.
-8. Upload persistente de modelos requer Cloudflare R2 (ou armazenamento equivalente), autenticação, restrições de arquivo, consentimento e antivírus/validação; nesta v2 o upload NÃO sai do navegador.
+## Próxima etapa empresarial
 
-## Auditoria e testes
-
-O diretório de testes inclui validação de HTML e segurança estática, cálculo de custos com lote, inspeção de modelos e teste de bloqueio do checkout. Os testes do navegador exigem ambiente separado com Chromium sem políticas corporativas restritivas. Não afirmar acessibilidade WCAG ou testes E2E completos sem executar.
-
-## Testes de aceitação
-
-Use `python -m http.server 8000` dentro de `tridralab` e abra `http://localhost:8000`; Functions exigem ambiente Pages/Wrangler. Testes automatizados estão em `tests/` no pacote de entrega. Execute testes e confira console, acessibilidade e responsividade antes de publicar.
+Separar projeto para repositório próprio, criar plataforma de pedidos com Cloudflare D1/objetos sob autenticação, política LGPD, painel interno com controle de papéis, catálogo e preços aprovados, emissão de ordens de produção, armazenamento seguro, limites de upload, geração real de orçamentos, pagamento com webhook verificado e idempotência. **Não habilitar comercialização nem cobrar clientes enquanto não estiver implementado e homologado.**

@@ -1,45 +1,51 @@
-# TridraLab — plano de publicação auditável
+# TridraLab — Plataforma digital v2
 
-## Estado confirmado em 06/11/2026
-- O domínio `tridralab.com.br` teve disponibilidade confirmada no Registro.br, a R$ 40 no primeiro ano, mas **NÃO foi registrado**.
-- Consultas NS/MX retornaram `NXDOMAIN`; ainda não há DNS nem caixa postal ativa.
-- Esta ramificação **não está publicada** no domínio oficial.
-- Site estático inicial isolado em `tridralab/`, incluindo 404, favicon, robots e headers.
-- A sessão Registro.br de navegador não permaneceu autenticada após salvar; depende de novo login do titular.
+Ambiente de produção: <https://tridralab-site.pages.dev/>
 
-## Publicar agora em Cloudflare Pages (sem domínio próprio inicialmente)
+**Status:** vitrine e laboratório técnico operantes. O domínio `.com.br`, o e-mail e o fluxo de cobrança ainda não estão ativos.
 
-O plano de menor risco reutiliza o código **sem alterar a ramificação main**, pois este repositório já serve a outros projetos. Após entrar no painel Cloudflare:
+## Entregas
 
-1. **Workers & Pages → Create application → Pages → Connect to Git**.
-2. Autorize acesso ao repositório **ezrafchev/ezrafchev.github.io** (apenas este repositório, se possível).
-3. Crie um projeto novo chamado **tridralab-site**.
-4. Escolha a ramificação de produção **tridralab-bootstrap**.
-5. Framework preset: **None**; Build command: **vazio**; Build output directory: **tridralab**; Root directory (advanced): **deixar vazio/padrão**.
-6. Confira o endereço `https://tridralab-site.pages.dev` apenas **se Cloudflare de fato atribuir esse endereço**. A URL final deve ser copiada do projeto, não presumida.
-7. Depois do registro do domínio, adicione `tridralab.com.br` e `www.tridralab.com.br` em **Custom domains** do projeto.
-8. No painel Cloudflare, cadastre `tridralab.com.br` como zona DNS gratuita. No Registro.br, altere os **nameservers somente para os valores exatos exibidos na sua zona Cloudflare**. Não copie nameservers genéricos.
-9. Espere a validação do DNS/HTTPS. Defina a versão canônica, preferencialmente o domínio sem `www`.
+- Interface editorial premium, adaptável a dispositivos móveis, com tema claro/escuro, navegação por teclado e busca rápida (Ctrl/⌘ + K).
+- Catálogo **conceitual**, 9 coleções/possibilidades, filtros, busca, favoritos persistentes e modal de configuração de material/cor/quantidade.
+- Lista de solicitações local, exportação TXT e botão copiar. **Não é checkout nem pedido confirmado**.
+- PrintFit Lab: custo de filamento, energia, hora-máquina, mão de obra ativa, acabamento/embalagem, provisão de falhas, custos indiretos, margem-alvo e tributos/taxas incidentes sobre a receita. Exportação CSV e resumo.
+- Leitura local de STL binário, STL ASCII e OBJ; metadados básicos de 3MF. Medidas presumem milímetros. Não é auditoria de geometria nem validador de impressão.
+- PWA (manifest + service-worker), páginas de privacidade/termos, favicon e OG, segurança básica e proteção contra indexação antes do domínio próprio.
+- Cloudflare Pages Functions em `/functions/api/status.js` e `/functions/api/checkout.js`, este último **deliberadamente bloqueado** até implantação de comércio real auditado.
 
-**Atenção:** como se trata de um repositório com outros projetos, um repositório dedicado `tridralab-site` seria uma melhoria de isolamento no futuro. Não criar integração com o branch `main` existente e não modificar outro projeto.
+## Fórmulas do simulador
 
-## Caixa postal profissional: esdra@tridralab.com.br
+```text
+Filamento = massa (g) / 1000 × preço/kg
+Energia = potência média (W) / 1000 × horas × tarifa/kWh
+Máquina = custo horário da máquina × horas
+Mão de obra = minutos ativos / 60 × custo horário de operador
+Diretos = filamento + energia + máquina + mão de obra + acabamento/embalagem
+Custo ajustado = (diretos / (1 - probabilidade de falha)) × (1 + indiretos %)
+Preço de referência = custo ajustado / (1 - margem % - taxas de venda %)
+```
 
-1. Após comprovar a titularidade do domínio, abrir Zoho Mail e conferir se o plano gratuito com domínio próprio está disponível na sua região.
-2. Configurar a organização, adicionar/verificar o domínio e criar o usuário `esdra` na organização.
-3. Copiar os registros reais de verificação, **MX**, **SPF** e **DKIM** fornecidos pelo Zoho para **Cloudflare DNS**. Não inventar destinos nem selectors.
-4. Publicar um único registro SPF que cubra os remetentes autorizados.
-5. Configurar DMARC inicialmente com `p=none` e relatório, caso exista caixa adequada para receber o relatório; depois avaliar `quarantine` / `reject` com base em testes.
-6. Enviar e receber mensagens de teste e verificar SPF/DKIM/DMARC via cabeçalhos.
-7. Não misturar os MX do Zoho com o Cloudflare Email Routing.
+Premissa: taxa de falha atua sobre o custo total de cada tentativa e o denominador modela tentativas independentes até obter uma peça boa. Para erros com recuperação parcial, estimar custos reais. A fórmula é conservadora em diversos casos, mas não é previsão de mercado. Inserir dados contábeis reais para tomar decisões.
 
-## Checklist de lançamento
-- [ ] Registro pago e domínio em titularidade correta
-- [ ] Cloudflare Pages criado e publicado
-- [ ] DNS e HTTPS válidos em domínio raiz e `www`
-- [ ] Caixa postal criada e validada para envio/recebimento
-- [ ] SPF, DKIM e DMARC confirmados
-- [ ] Substituir no `index.html` a meta `noindex,nofollow` por política pública adequada
-- [ ] Remover o `Disallow: /` do robots.txt depois do lançamento
+## Publicação
 
-**Não há API keys, senhas, CPF/CNPJ ou dados privados neste repositório.**
+- Fonte: repo `ezrafchev/ezrafchev.github.io`, branch `tridralab-bootstrap`.
+- Pages: build command vazio, framework None, output `tridralab`, root padrão.
+- O código de Functions fica em `functions/` na raiz do repositório e NÃO no diretório público `tridralab/`.
+- Mantenha a ramificação `main` e os demais projetos intactos.
+
+## Pendências para comércio real
+
+1. Registrar `tridralab.com.br` em nome do titular correto e configurar nameservers fornecidos para a zona Cloudflare (não incluir senha em repositório).
+2. Vincular domínio no Pages, validar HTTPS e alterar robots/meta noindex; atualizar Schema/OG URL.
+3. Ativar caixa postal `esdra@tridralab.com.br` e DNS MX, SPF, DKIM, DMARC.
+4. Definir SKUs reais, especificação da peça, estoque/capacidade, preços e tributação aprovados pelo proprietário. Não vender itens ilustrativos.
+5. Configurar `MP_ACCESS_TOKEN` como segredo de ambiente no Cloudflare; nunca em Git ou JS cliente. Precisa integração de preferências Checkout Pro no servidor, webhook assinado, tabelas D1 para pedidos e eventos, idempotência, antifraude, gerenciamento de envios, atualização de status e política comercial completa.
+6. **Não ativar** `CHECKOUT_ENABLED=true` ou `WEBHOOK_VERIFIED=true` antes de testar webhook, D1 e atendimento reais. Variáveis são gates, não substituem controles de backend.
+7. Publicar contato validado, CNPJ/CPF conforme exigências, política de entrega, devolução e suporte ao consumidor; LGPD e termos legais revisados.
+8. Upload persistente de modelos requer Cloudflare R2 (ou armazenamento equivalente), autenticação, restrições de arquivo, consentimento e antivírus/validação; nesta v2 o upload NÃO sai do navegador.
+
+## Testes de aceitação
+
+Use `python -m http.server 8000` dentro de `tridralab` e abra `http://localhost:8000`; Functions exigem ambiente Pages/Wrangler. Testes automatizados estão em `tests/` no pacote de entrega. Execute testes e confira console, acessibilidade e responsividade antes de publicar.
